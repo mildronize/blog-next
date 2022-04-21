@@ -2,7 +2,6 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-const markdownExt = /\.md$/;
 
 // https://advancedweb.hu/how-to-use-async-functions-with-array-filter-in-javascript/
 export const asyncFilter = async (arr: any, predicate: any) => {
@@ -11,18 +10,19 @@ export const asyncFilter = async (arr: any, predicate: any) => {
 };
 
 async function getDirsRecursive(
+  regex: RegExp,
   targetPath: string,
   currentDir: string,
-  markdownPaths: string[]
+  paths: string[]
 ) {
   const currentPath = path.join(targetPath, currentDir);
   const files = (await fs.readdir(path.resolve(currentPath))) || [];
   if (files.length === 0) return [];
 
-  // Add found markdown files
-  markdownPaths.push(
+  // Add found all files which matches with Regex
+  paths.push(
     ...files
-      .filter((file) => markdownExt.test(file))
+      .filter((file) => regex.test(file))
       .map((file) => path.join(currentDir, file))
   );
 
@@ -35,18 +35,19 @@ async function getDirsRecursive(
   // Find in deep each directory
   for (const dir of dirs) {
     await getDirsRecursive(
+      regex,
       targetPath,
       path.join(currentDir, dir),
-      markdownPaths
+      paths
     );
   }
 
-  return markdownPaths;
+  return paths;
 }
 
-export async function getAllMarkdownPaths(targetPath: string) {
+export async function getAllNestedPaths(targetPath: string, regex: RegExp) {
   try {
-    return await getDirsRecursive(targetPath, '', []);
+    return await getDirsRecursive(regex, targetPath, '', []);
   } catch (err) {
     console.log('Unable to scan directory: ' + err);
   }

@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
-import { getAllMarkdownPaths } from './markdownUtils';
+import { getAllNestedPaths } from './pathUtils';
 
+const markdownExt = /\.md$/;
 const postsDirectory = join(process.cwd(), '_posts');
 
 export function getPostBySlug(slug: string, fields = []) {
@@ -31,7 +32,7 @@ export function getPostBySlug(slug: string, fields = []) {
 }
 
 export async function getAllPosts(fields = []) {
-  const mdPaths = await getAllMarkdownPaths(postsDirectory);
+  const mdPaths = await getAllNestedPaths(postsDirectory, markdownExt);
   // const slugs = getPostSlugs();
   console.log(mdPaths);
   const posts = mdPaths
