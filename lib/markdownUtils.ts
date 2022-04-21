@@ -1,11 +1,7 @@
 // Ref: https://github.com/mildronize/mildronize.github.io/blob/main/scripts/utils.ts
 
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
-import { promisify } from 'util';
-
-const readdir = promisify(fs.readdir);
-const lstat = promisify(fs.lstat);
 const markdownExt = /\.md$/;
 
 // https://advancedweb.hu/how-to-use-async-functions-with-array-filter-in-javascript/
@@ -14,22 +10,13 @@ export const asyncFilter = async (arr: any, predicate: any) => {
   return arr.filter((_v: any, index: any) => results[index]);
 };
 
-async function getAllDirs(directoryAbsolutePath: string, ignoreDirs: RegExp[]) {
-  let files = (await readdir(directoryAbsolutePath)) || [];
-  // Ignore dirs following regex pattern
-  ignoreDirs.forEach((ignoreDir) => {
-    files = files.filter((file) => !ignoreDir.test(file));
-  });
-  return files;
-}
-
 async function getDirsRecursive(
   targetPath: string,
   currentDir: string,
   markdownPaths: string[]
 ) {
   const currentPath = path.join(targetPath, currentDir);
-  const files = (await readdir(path.resolve(currentPath))) || [];
+  const files = (await fs.readdir(path.resolve(currentPath))) || [];
   if (files.length === 0) return [];
 
   // Add found markdown files
@@ -41,7 +28,7 @@ async function getDirsRecursive(
 
   const dirs = await asyncFilter(files, async (file: any) => {
     const absolutePath = path.resolve(currentPath, file);
-    const stat = await lstat(absolutePath);
+    const stat = await fs.lstat(absolutePath);
     return stat.isDirectory();
   });
 

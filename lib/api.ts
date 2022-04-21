@@ -1,14 +1,11 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+import { getAllMarkdownPaths } from './markdownUtils';
 
 const postsDirectory = join(process.cwd(), '_posts');
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory);
-}
-
-export function getPostBySlug(slug: any, fields = []) {
+export function getPostBySlug(slug: string, fields = []) {
   const realSlug = slug.replace(/\.md$/, '');
   const fullPath = join(postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
@@ -33,10 +30,11 @@ export function getPostBySlug(slug: any, fields = []) {
   return items;
 }
 
-export function getAllPosts(fields = []) {
-  const slugs = getPostSlugs();
-  console.log(slugs);
-  const posts = slugs
+export async function getAllPosts(fields = []) {
+  const mdPaths = await getAllMarkdownPaths(postsDirectory);
+  // const slugs = getPostSlugs();
+  console.log(mdPaths);
+  const posts = mdPaths
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
