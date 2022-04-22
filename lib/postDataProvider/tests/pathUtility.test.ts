@@ -2,7 +2,7 @@ import {
   getActualFilename,
   extractDate,
   extractFilenameSlug,
-} from '@/lib/postDataProvider/utils';
+} from '@/lib/postDataProvider/pathUtility';
 
 describe('getActualFilename', () => {
   const cases = [

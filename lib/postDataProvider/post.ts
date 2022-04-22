@@ -5,7 +5,7 @@ import { promisify } from 'util';
 import _glob from 'glob';
 
 import siteMetadata from '@/data/siteMetadata';
-import { getActualFilename } from './utils';
+import { getActualFilename } from './pathUtility';
 
 const glob = promisify(_glob);
 
