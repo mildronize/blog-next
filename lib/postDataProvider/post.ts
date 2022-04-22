@@ -10,7 +10,7 @@ import { getActualFilename } from './utils';
 const glob = promisify(_glob);
 
 export function getPostBySlug(slug: string, fields: string[] = []) {
-  const fullPath = path.resolve(siteMetadata.postsDirectory, `${slug}.md`);
+  const fullPath = path.resolve(siteMetadata.posts.directory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
@@ -34,12 +34,12 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export async function getAllPosts(fields: string[] = []) {
-  const { postsDirectory } = siteMetadata;
-  const mdPaths = await glob(path.join(postsDirectory, '**/*.md'));
+  const { directory } = siteMetadata.posts;
+  const mdPaths = await glob(path.join(directory, '**/*.md'));
   console.log(mdPaths);
   const posts = mdPaths
     // convert path to slug
-    .map((contentPath) => getActualFilename(postsDirectory, contentPath))
+    .map((contentPath) => getActualFilename(directory, contentPath))
     // Get Post Data by Slug
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order

@@ -2,7 +2,10 @@ import { ISiteMetadata } from './interfaces/ISiteMetadata';
 
 const siteMetadata: ISiteMetadata = {
   title: 'Blog. Next',
-  postsDirectory: '_posts',
+  posts: {
+    directory: '_posts',
+    assetsPublicPath: '/assets/posts/',
+  },
 };
 
 export default siteMetadata;

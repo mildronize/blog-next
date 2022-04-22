@@ -1,4 +1,7 @@
 export interface ISiteMetadata {
   title: string;
-  postsDirectory: string;
+  posts: {
+    directory: string;
+    assetsPublicPath: string;
+  };
 }
