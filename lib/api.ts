@@ -10,8 +10,7 @@ const glob = promisify(_glob);
 const markdownExt = /\.md$/;
 
 export function getPostBySlug(slug: string, fields = []) {
-  const realSlug = slug.replace(markdownExt, '');
-  const fullPath = path.resolve(siteMetadata.postsDirectory, `${realSlug}.md`);
+  const fullPath = path.resolve(siteMetadata.postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
@@ -20,7 +19,7 @@ export function getPostBySlug(slug: string, fields = []) {
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === 'slug') {
-      items[field] = realSlug;
+      items[field] = slug;
     }
     if (field === 'content') {
       items[field] = content;
@@ -34,15 +33,23 @@ export function getPostBySlug(slug: string, fields = []) {
   return items;
 }
 
+function generateSlug(prefixPath: string, contentPath: string){
+  return contentPath
+    .replace(new RegExp(`${prefixPath}/*`), '')
+    .replace(markdownExt, '');
+}
+
 export async function getAllPosts(fields = []) {
   const { postsDirectory } = siteMetadata;
   const mdPaths = await glob(path.join(postsDirectory, '**/*.md'));
+  console.log(mdPaths)
   const posts = mdPaths
-    // remove parent dir
-    .map((path) => path.replace(new RegExp(`${postsDirectory}/*`), ''))
     // convert path to slug
-    .map((path) => getPostBySlug(path, fields))
+    .map((contentPath) => generateSlug(postsDirectory, contentPath))
+    // Get Post Data by Slug
+    .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  // console.log(posts)
   return posts;
 }
