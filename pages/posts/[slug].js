@@ -5,11 +5,11 @@ import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
+import { getPostBySlug, getAllPosts } from '../../lib/postDataProvider'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
+import MarkdownParser from '../../lib/MarkdownParser'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
@@ -56,7 +56,8 @@ export async function getStaticProps({ params }) {
     'ogImage',
     'coverImage',
   ])
-  const content = await markdownToHtml(post.content || '')
+  
+  const content = await (new MarkdownParser(post.content || '')).toHtml()
 
   return {
     props: {

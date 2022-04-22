@@ -5,11 +5,11 @@ import { promisify } from 'util';
 import _glob from 'glob';
 
 import siteMetadata from '@/data/siteMetadata';
+import { generateSlug } from './utils';
 
 const glob = promisify(_glob);
-const markdownExt = /\.md$/;
 
-export function getPostBySlug(slug: string, fields : string[] = []) {
+export function getPostBySlug(slug: string, fields: string[] = []) {
   const fullPath = path.resolve(siteMetadata.postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
@@ -33,16 +33,10 @@ export function getPostBySlug(slug: string, fields : string[] = []) {
   return items;
 }
 
-export function generateSlug(prefixPath: string, contentPath: string){
-  return contentPath
-    .replace(new RegExp(`${prefixPath}/*`), '')
-    .replace(markdownExt, '');
-}
-
-export async function getAllPosts(fields : string[] = []) {
+export async function getAllPosts(fields: string[] = []) {
   const { postsDirectory } = siteMetadata;
   const mdPaths = await glob(path.join(postsDirectory, '**/*.md'));
-  console.log(mdPaths)
+  console.log(mdPaths);
   const posts = mdPaths
     // convert path to slug
     .map((contentPath) => generateSlug(postsDirectory, contentPath))
