@@ -9,7 +9,7 @@ import siteMetadata from '@/data/siteMetadata';
 const glob = promisify(_glob);
 const markdownExt = /\.md$/;
 
-export function getPostBySlug(slug: string, fields = []) {
+export function getPostBySlug(slug: string, fields : string[] = []) {
   const fullPath = path.resolve(siteMetadata.postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
@@ -33,13 +33,13 @@ export function getPostBySlug(slug: string, fields = []) {
   return items;
 }
 
-function generateSlug(prefixPath: string, contentPath: string){
+export function generateSlug(prefixPath: string, contentPath: string){
   return contentPath
     .replace(new RegExp(`${prefixPath}/*`), '')
     .replace(markdownExt, '');
 }
 
-export async function getAllPosts(fields = []) {
+export async function getAllPosts(fields : string[] = []) {
   const { postsDirectory } = siteMetadata;
   const mdPaths = await glob(path.join(postsDirectory, '**/*.md'));
   console.log(mdPaths)
