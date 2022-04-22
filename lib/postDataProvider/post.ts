@@ -5,7 +5,7 @@ import { promisify } from 'util';
 import _glob from 'glob';
 
 import siteMetadata from '@/data/siteMetadata';
-import { generateSlug } from './utils';
+import { getActualFilename } from './utils';
 
 const glob = promisify(_glob);
 
@@ -39,7 +39,7 @@ export async function getAllPosts(fields: string[] = []) {
   console.log(mdPaths);
   const posts = mdPaths
     // convert path to slug
-    .map((contentPath) => generateSlug(postsDirectory, contentPath))
+    .map((contentPath) => getActualFilename(postsDirectory, contentPath))
     // Get Post Data by Slug
     .map((slug) => getPostBySlug(slug, fields))
     // sort posts by date in descending order
