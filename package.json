@@ -6,11 +6,12 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export",
-    "format": "prettier --config .prettierrc '**/*.ts' --write"
+    "format": "prettier --config .prettierrc '**/*.+(ts|tsx)' --write"
   },
   "dependencies": {
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
+    "glob": "^8.0.1",
     "gray-matter": "4.0.3",
     "next": "^12.1.5",
     "react": "^17.0.2",
@@ -19,6 +20,7 @@
     "remark-html": "15.0.1"
   },
   "devDependencies": {
+    "@types/glob": "^7.2.0",
     "@types/node": "^17.0.25",
     "@types/react": "^18.0.5",
     "autoprefixer": "^10.4.2",

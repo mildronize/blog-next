@@ -1,14 +1,17 @@
 import fs from 'fs';
-import { join } from 'path';
+import path from 'path';
 import matter from 'gray-matter';
-import { getAllNestedPaths } from './pathUtils';
+import { promisify } from 'util';
+import _glob from 'glob';
 
+import siteMetadata from '@/data/siteMetadata';
+
+const glob = promisify(_glob);
 const markdownExt = /\.md$/;
-const postsDirectory = join(process.cwd(), '_posts');
 
 export function getPostBySlug(slug: string, fields = []) {
-  const realSlug = slug.replace(/\.md$/, '');
-  const fullPath = join(postsDirectory, `${realSlug}.md`);
+  const realSlug = slug.replace(markdownExt, '');
+  const fullPath = path.resolve(siteMetadata.postsDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
@@ -32,11 +35,13 @@ export function getPostBySlug(slug: string, fields = []) {
 }
 
 export async function getAllPosts(fields = []) {
-  const mdPaths = await getAllNestedPaths(postsDirectory, markdownExt);
-  // const slugs = getPostSlugs();
-  console.log(mdPaths);
+  const { postsDirectory } = siteMetadata;
+  const mdPaths = await glob(path.join(postsDirectory, '**/*.md'));
   const posts = mdPaths
-    .map((slug) => getPostBySlug(slug, fields))
+    // remove parent dir
+    .map((path) => path.replace(new RegExp(`${postsDirectory}/*`), ''))
+    // convert path to slug
+    .map((path) => getPostBySlug(path, fields))
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
