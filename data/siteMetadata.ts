@@ -6,6 +6,7 @@ const siteMetadata: ISiteMetadata = {
     directory: '_posts',
     assetsPublicPath: '/assets/posts/',
   },
+  tmpPath: '.tmp',
 };
 
 export default siteMetadata;

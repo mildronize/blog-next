@@ -1,5 +1,7 @@
 # My Next Version of my site
 
+[![.github/workflows/test.yaml](https://github.com/mildronize/blog-next/actions/workflows/test.yaml/badge.svg)](https://github.com/mildronize/blog-next/actions/workflows/test.yaml)
+
 Current Version (V.5): <https://thadaw.com> (Gatsby)
 
 ## Philosophy

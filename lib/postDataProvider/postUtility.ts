@@ -8,7 +8,8 @@ import PostData from './PostData';
 
 const glob = promisify(_glob);
 
-const postMetadataPath = path.join('.tmp', '.posts.metadata.json');
+const tmpPath = siteMetadata.tmpPath;
+const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
 export interface ISlugData {
   path: string;
@@ -80,6 +81,10 @@ async function generatePostSlugMapper() {
       path: mdPath,
       postData,
     };
+  }
+
+  if (!fs.existsSync(tmpPath)) {
+    fs.mkdirSync(tmpPath, { recursive: true });
   }
   fs.writeFileSync(postMetadataPath, JSON.stringify(exportSlug), 'utf8');
   return slugData;

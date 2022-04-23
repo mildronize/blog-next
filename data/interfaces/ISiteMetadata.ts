@@ -4,4 +4,5 @@ export interface ISiteMetadata {
     directory: string;
     assetsPublicPath: string;
   };
+  tmpPath: string;
 }
