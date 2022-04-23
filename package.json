@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "run-s clean && node server.js",
+    "dev": "run-s clean && node ./scripts/server.js",
     "build": "run-s clean && next build",
     "lint": "next lint",
     "export:next": "next export",
@@ -13,11 +13,10 @@
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
     "clean": "rm -rf .tmp",
-    "prepare:dev": "run-s clean build:PostDataProvider",
-    "build:PostDataProvider": "tsc --project ./tsconfig.build.json && ncc build -m ./build/lib/postDataProvider -o scripts/lib/postDataProvider"
+    "prepare": "run-s clean build:PostDataProvider",
+    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/lib/postDataProvider -o scripts/lib/postDataProvider"
   },
   "dependencies": {
-    "@pondorasti/remark-img-links": "^1.0.8",
     "classnames": "2.3.1",
     "date-fns": "2.28.0",
     "glob": "^8.0.1",
