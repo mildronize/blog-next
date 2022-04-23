@@ -1,3 +1,5 @@
+// Ported from https://github.com/mildronize/mildronize.github.io/blob/9f071e49d779e2db1c17482040ce8c4696db5a20/scripts/utils.ts
+
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
