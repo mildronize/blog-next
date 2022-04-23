@@ -1,18 +1,40 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { promisify } from 'util';
 import _glob from 'glob';
 
 import siteMetadata from '@/data/siteMetadata';
-import { getActualFilename } from './pathUtility';
+import PostData from './PostData';
 
 const glob = promisify(_glob);
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
-  const fullPath = path.resolve(siteMetadata.posts.directory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
+const postMetadataPath = path.join('.tmp', '.posts.metadata.json');
+
+export interface ISlugData {
+  path: string;
+  postData?: PostData;
+}
+
+export type PostMetada = Record<string, string>;
+
+export function getPostBySlug(
+  slug: string,
+  fields: string[] = [],
+  postData?: PostData
+) {
+  // Reuse postData
+  let _postData = postData;
+  if (!postData) {
+    // TODO: validate JSON format
+    const postMetadata: PostMetada = JSON.parse(
+      fs.readFileSync(postMetadataPath, 'utf8')
+    );
+    const contentPath = postMetadata[slug];
+    const fileContent = fs.readFileSync(contentPath, 'utf8');
+    _postData = new PostData(contentPath, fileContent);
+  }
+
+  if (!_postData) throw new Error(`postData should be assigned.`);
 
   const items: Record<string, any> = {};
 
@@ -20,30 +42,45 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   fields.forEach((field) => {
     if (field === 'slug') {
       items[field] = slug;
-    }
-    if (field === 'content') {
-      items[field] = content;
-    }
-
-    if (typeof data[field] !== 'undefined') {
-      items[field] = data[field];
+    } else if (field === 'content') {
+      items[field] = _postData?.content;
+    } else if (field === 'date') {
+      items[field] = _postData?.date?.toISOString();
+    } else if (typeof _postData?.frontmatter[field] !== 'undefined') {
+      items[field] = _postData?.frontmatter[field];
     }
   });
 
   return items;
 }
 
-export async function getAllPosts(fields: string[] = []) {
+export async function getAllPosts(fields: string[] = []): Promise<any[]> {
+  const slugData = await generatePostSlugMapper();
+  const posts: any[] = [];
+  Object.keys(slugData).forEach((slug) => {
+    const data = slugData[slug];
+    const post = getPostBySlug(slug, fields, data.postData);
+    posts.push(post);
+  });
+  return posts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+}
+
+async function generatePostSlugMapper() {
   const { directory } = siteMetadata.posts;
   const mdPaths = await glob(path.join(directory, '**/*.md'));
-  console.log(mdPaths);
-  const posts = mdPaths
-    // convert path to slug
-    .map((contentPath) => getActualFilename(directory, contentPath))
-    // Get Post Data by Slug
-    .map((slug) => getPostBySlug(slug, fields))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
-  // console.log(posts)
-  return posts;
+  const exportSlug: PostMetada = {};
+  const slugData: Record<string, ISlugData> = {};
+  for (const mdPath of mdPaths) {
+    // TODO: use Async
+    const fileContents = fs.readFileSync(mdPath, 'utf8');
+    const postData = new PostData(mdPath, fileContents);
+    const slug = postData.slug;
+    exportSlug[slug] = mdPath;
+    slugData[slug] = {
+      path: mdPath,
+      postData,
+    };
+  }
+  fs.writeFileSync(postMetadataPath, JSON.stringify(exportSlug), 'utf8');
+  return slugData;
 }

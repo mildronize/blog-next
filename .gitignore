@@ -30,9 +30,13 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+tsconfig.tsbuildinfo
+
 # vercel
 .vercel
 
 # Image
 # Copy this path to /out
 public/assets/posts
+
+.tmp
