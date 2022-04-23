@@ -1,7 +1,19 @@
 name: Test
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+    paths:
+      - _posts/**
+      - data/**
+      - components/**
+      - pages/**
+      - lib/**
+      - public/**
+      - tests/**
+      - styles/**
+
+  pull_request:
 
 jobs:
   test:

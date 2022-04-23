@@ -30,3 +30,11 @@ using `next-mdx-remote`
 ## Optimization
 
 https://github.com/cyrilwanner/next-optimized-images
+
+## Write Test for I/O
+
+- [Testing a TypeScript File Read / Write operations app using Jest JS, Mocks, Unit Tests](https://www.youtube.com/watch?v=SRVH0Mcakj0)
+- [Testing a TypeScript Cache operations app using Jest JS, Mocks, Unit Tests](https://www.youtube.com/watch?v=8NjWq-xHOOw)
+- [Testing a TypeScript Logger operations app using Jest JS, Mocks, Unit Tests](https://www.youtube.com/watch?v=BfA7MosIgik)
+- [SOLID Principles Playlist](https://www.youtube.com/watch?v=boEi4SVC45k&list=PLkqz4ywkYlzeAylfC4h_ugGiua554Z7vB)
+  - Repo: https://github.com/devbootstrap/SOLID-Principles-Examples-using-Typescript
