@@ -1,6 +1,6 @@
 # My Next Version of my site
 
-[![.github/workflows/test.yaml](https://github.com/mildronize/blog-next/actions/workflows/test.yaml/badge.svg)](https://github.com/mildronize/blog-next/actions/workflows/test.yaml)
+[![.github/workflows/test.yaml](https://github.com/mildronize/blog-next/actions/workflows/test.yaml/badge.svg)](https://github.com/mildronize/blog-next/actions/workflows/test.yaml) [![Coverage Status](https://coveralls.io/repos/github/mildronize/blog-next/badge.svg?branch=main)](https://coveralls.io/github/mildronize/blog-next?branch=main)
 
 Current Version (V.5): <https://thadaw.com> (Gatsby)
 

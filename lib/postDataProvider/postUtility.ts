@@ -11,26 +11,20 @@ const glob = promisify(_glob);
 const tmpPath = siteMetadata.tmpPath;
 const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
-export interface ISlugData {
+export interface IPostMetadata {
   path: string;
   postData?: PostData;
 }
 
-export type PostMetada = Record<string, string>;
+// export type PostMetadata = Record<string, string>;
 
-export function getPostBySlug(
-  slug: string,
-  fields: string[] = [],
-  postData?: PostData
-) {
+export function getPostBySlug(slug: string, fields: string[] = [], postData?: PostData) {
   // Reuse postData
   let _postData = postData;
   if (!postData) {
     // TODO: validate JSON format
-    const postMetadata: PostMetada = JSON.parse(
-      fs.readFileSync(postMetadataPath, 'utf8')
-    );
-    const contentPath = postMetadata[slug];
+    const postMetadataMap: Record<string, IPostMetadata> = JSON.parse(fs.readFileSync(postMetadataPath, 'utf8'));
+    const contentPath = postMetadataMap[slug].path;
     const fileContent = fs.readFileSync(contentPath, 'utf8');
     _postData = new PostData(contentPath, fileContent);
   }
@@ -40,7 +34,7 @@ export function getPostBySlug(
   const items: Record<string, any> = {};
 
   // Ensure only the minimal needed data is exposed
-  fields.forEach((field) => {
+  fields.forEach(field => {
     if (field === 'slug') {
       items[field] = slug;
     } else if (field === 'content') {
@@ -58,7 +52,7 @@ export function getPostBySlug(
 export async function getAllPosts(fields: string[] = []): Promise<any[]> {
   const slugData = await generatePostSlugMapper();
   const posts: any[] = [];
-  Object.keys(slugData).forEach((slug) => {
+  Object.keys(slugData).forEach(slug => {
     const data = slugData[slug];
     const post = getPostBySlug(slug, fields, data.postData);
     posts.push(post);
@@ -69,15 +63,20 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
 async function generatePostSlugMapper() {
   const { directory } = siteMetadata.posts;
   const mdPaths = await glob(path.join(directory, '**/*.md'));
-  const exportSlug: PostMetada = {};
-  const slugData: Record<string, ISlugData> = {};
+  let postMetadataMap: Record<string, IPostMetadata> = {};
+  try {
+    // Make dev mode work when the slug name is changed 
+    // Load the old slug.
+    postMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, 'utf8'));
+  } catch (e) {
+    console.warn(e);
+  }
   for (const mdPath of mdPaths) {
     // TODO: use Async
     const fileContents = fs.readFileSync(mdPath, 'utf8');
     const postData = new PostData(mdPath, fileContents);
     const slug = postData.slug;
-    exportSlug[slug] = mdPath;
-    slugData[slug] = {
+    postMetadataMap[slug] = {
       path: mdPath,
       postData,
     };
@@ -86,6 +85,13 @@ async function generatePostSlugMapper() {
   if (!fs.existsSync(tmpPath)) {
     fs.mkdirSync(tmpPath, { recursive: true });
   }
-  fs.writeFileSync(postMetadataPath, JSON.stringify(exportSlug), 'utf8');
-  return slugData;
+
+  const minifiedPostMetadataMap: Record<string, IPostMetadata> = {};
+  for (const [slug, postMetadata] of Object.entries(postMetadataMap)) {
+    minifiedPostMetadataMap[slug] = {
+      path: postMetadata.path,
+    };
+  }
+  fs.writeFileSync(postMetadataPath, JSON.stringify(minifiedPostMetadataMap, null, 2), 'utf8');
+  return postMetadataMap;
 }

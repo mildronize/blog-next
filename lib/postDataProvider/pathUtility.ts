@@ -20,10 +20,7 @@ import * as date from 'date-fns';
 export function getActualFilename(prefixPath: string, contentPath: string) {
   const parsedPrefixPath = prefixPath.replace(/^\/*/, '');
   const removedExtensionPath = contentPath.split('.')[0];
-  const parsedPath = removedExtensionPath.replace(
-    new RegExp(`${parsedPrefixPath}/*`),
-    ''
-  );
+  const parsedPath = removedExtensionPath.replace(new RegExp(`${parsedPrefixPath}/*`), '');
   const split = parsedPath.split('/');
   if (split.length >= 2) return split[split.length - 2];
   return parsedPath;
@@ -51,9 +48,7 @@ export function extractFilenameSlug(filename: string): string {
 
 function checkValidFilename(filename: string) {
   if (filename.search('/') > 0) {
-    throw new Error(
-      `Unexpected char '/', Invalid filename please call "getActualFilename" first`
-    );
+    throw new Error(`Unexpected char '/', Invalid filename please call "getActualFilename" first`);
   }
 }
 

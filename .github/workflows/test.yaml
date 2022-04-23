@@ -22,5 +22,17 @@ jobs:
           version: 6.0.2
           run_install: true
 
-      - run: |
-          pnpm test:ci
+      - name: Test
+        run: pnpm test:ci
+
+      - name: Export Next.js 
+        run: pnpm export
+
+      - name: Test Coverage
+        run: pnpm run test:coverage
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          

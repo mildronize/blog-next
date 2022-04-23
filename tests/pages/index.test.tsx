@@ -5,14 +5,7 @@ import { getAllPosts } from '@/lib/postDataProvider';
 
 describe('Home', () => {
   it('renders a heading', async () => {
-    const allPosts = await getAllPosts([
-      'title',
-      'date',
-      'slug',
-      'author',
-      'coverImage',
-      'excerpt',
-    ]);
+    const allPosts = await getAllPosts(['title', 'date', 'slug', 'author', 'coverImage', 'excerpt']);
 
     render(<Index allPosts={allPosts} />);
 

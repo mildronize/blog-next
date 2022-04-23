@@ -1,9 +1,5 @@
 import matter from 'gray-matter';
-import {
-  getActualFilename,
-  extractDate,
-  extractFilenameSlug,
-} from './pathUtility';
+import { getActualFilename, extractDate, extractFilenameSlug } from './pathUtility';
 import siteMetadata from '@/data/siteMetadata';
 import _ from 'lodash';
 const { posts } = siteMetadata;
@@ -23,6 +19,7 @@ export default class PostData {
     this.date = extractDate(filename);
     this.filenameSlug = extractFilenameSlug(filename);
     this.slug = _.kebabCase(data.title);
+    // TODO: Validate object when load from string
     this.frontmatter = data as Frontmatter;
     this.content = content;
   }

@@ -1,8 +1,4 @@
-import {
-  getActualFilename,
-  extractDate,
-  extractFilenameSlug,
-} from '@/lib/postDataProvider/pathUtility';
+import { getActualFilename, extractDate, extractFilenameSlug } from '@/lib/postDataProvider/pathUtility';
 
 describe('getActualFilename', () => {
   const cases = [
@@ -20,12 +16,9 @@ describe('getActualFilename', () => {
     ['_posts', '_posts/2022-04-22-preview.md', '2022-04-22-preview'],
   ];
 
-  test.each(cases)(
-    `getActualFilename(%s,%s) should be %s`,
-    (prefixPath, contentPath, expected) => {
-      expect(getActualFilename(prefixPath, contentPath)).toEqual(expected);
-    }
-  );
+  test.each(cases)(`getActualFilename(%s,%s) should be %s`, (prefixPath, contentPath, expected) => {
+    expect(getActualFilename(prefixPath, contentPath)).toEqual(expected);
+  });
 });
 
 describe('extractDate', () => {
@@ -64,12 +57,9 @@ describe('extractFilenameSlug', () => {
     { filename: '2022-04-2-preview-111', expected: '2022-04-2-preview-111' },
   ];
 
-  test.each(cases)(
-    `extractFilenameSlug(%s) should be %s`,
-    ({ filename, expected }) => {
-      expect(extractFilenameSlug(filename)).toEqual(expected);
-    }
-  );
+  test.each(cases)(`extractFilenameSlug(%s) should be %s`, ({ filename, expected }) => {
+    expect(extractFilenameSlug(filename)).toEqual(expected);
+  });
 
   test('Check throw error', () => {
     expect(() => extractFilenameSlug('_posts/preview')).toThrow(
