@@ -1,8 +1,8 @@
 # Todo
 
-- [ ] Resolve image locally not from static path
-  - [ ] When dev mode, copy img to public
-  - [ ] Convert markdown replace to currect path in public folder
+- [X] Resolve image locally not from static path
+  - [X] When dev mode, serve static `_posts` 
+  - [X] Convert markdown replace to currect path in public folder
 - [ ] Auto-refresh when markdown content changed [ref](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/scripts/next-remote-watch.js)
 - [ ] Migrate content markdown
 - [ ] Migrate to TypeScript

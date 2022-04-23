@@ -4,7 +4,7 @@ const siteMetadata: ISiteMetadata = {
   title: 'Blog. Next',
   posts: {
     directory: '_posts',
-    assetsPublicPath: '/assets/posts/',
+    assetsPublicPath: '/',
   },
   tmpPath: '.tmp',
 };

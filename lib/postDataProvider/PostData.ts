@@ -12,9 +12,11 @@ export default class PostData {
   public date?: Date;
   public filenameSlug: string;
   public slug: string;
+  public path: string;
 
   constructor(relativePath: string, markdown: string) {
     const { data, content } = matter(markdown);
+    this.path = relativePath;
     const filename = getActualFilename(posts.directory, relativePath);
     this.date = extractDate(filename);
     this.filenameSlug = extractFilenameSlug(filename);

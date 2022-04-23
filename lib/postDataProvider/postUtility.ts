@@ -41,6 +41,8 @@ export function getPostBySlug(slug: string, fields: string[] = [], postData?: Po
       items[field] = _postData?.content;
     } else if (field === 'date') {
       items[field] = _postData?.date?.toISOString();
+    } else if (field === 'path') {
+      items[field] = _postData?.path;
     } else if (typeof _postData?.frontmatter[field] !== 'undefined') {
       items[field] = _postData?.frontmatter[field];
     }
@@ -65,11 +67,11 @@ async function generatePostSlugMapper() {
   const mdPaths = await glob(path.join(directory, '**/*.md'));
   let postMetadataMap: Record<string, IPostMetadata> = {};
   try {
-    // Make dev mode work when the slug name is changed 
+    // Make dev mode work when the slug name is changed
     // Load the old slug.
     postMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, 'utf8'));
   } catch (e) {
-    console.warn(e);
+    console.warn(`No exisitng "${postMetadataPath}" file.`);
   }
   for (const mdPath of mdPaths) {
     // TODO: use Async

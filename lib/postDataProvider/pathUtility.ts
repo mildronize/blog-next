@@ -12,8 +12,8 @@ import * as date from 'date-fns';
  *     └── readme.md (any file, use info from parent)
  *  ```
  *
- * @param {string} prefixPath - prefix of path which exclude from result.
- * @param {string} contentPath - A number of milliseconds to delay resolution of the Promise.
+ * @param {string} prefixPath -
+ * @param {string} contentPath -
  * @returns {string}
  */
 
@@ -24,6 +24,14 @@ export function getActualFilename(prefixPath: string, contentPath: string) {
   const split = parsedPath.split('/');
   if (split.length >= 2) return split[split.length - 2];
   return parsedPath;
+}
+
+export function getPostDirectory(prefixPath: string, contentPath: string = '') {
+  const parsedPrefixPath = prefixPath.replace(/^\/*/, '');
+  const parsedPath = contentPath.replace(new RegExp(`${parsedPrefixPath}/*`), '');
+  const split = parsedPath.split('/');
+  const paths = split.slice(0, split.length - 1);
+  return paths.join('/');
 }
 
 export function extractDate(filename: string): Date | undefined {

@@ -51,13 +51,18 @@ export async function getStaticProps({ params }) {
     'title',
     'date',
     'slug',
+    'path',
     // 'author',
     'content',
     // 'ogImage',
     // 'coverImage',
   ])
+
+  const markdownParserOption = {
+    relativePath: post.path
+  }
   
-  const content = await (new MarkdownParser(post.content || '')).toHtml()
+  const content = await (new MarkdownParser(post.content || '', markdownParserOption)).toHtml()
 
   return {
     props: {

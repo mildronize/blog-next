@@ -1,4 +1,9 @@
-import { getActualFilename, extractDate, extractFilenameSlug } from '@/lib/postDataProvider/pathUtility';
+import {
+  getActualFilename,
+  extractDate,
+  extractFilenameSlug,
+  getPostDirectory,
+} from '@/lib/postDataProvider/pathUtility';
 
 describe('getActualFilename', () => {
   const cases = [
@@ -65,5 +70,23 @@ describe('extractFilenameSlug', () => {
     expect(() => extractFilenameSlug('_posts/preview')).toThrow(
       `Unexpected char '/', Invalid filename please call "getActualFilename" first`
     );
+  });
+});
+
+describe('getPostDirectory', () => {
+  type Case = {
+    prefixPath: string;
+    contentPath: string;
+    expected: string;
+  };
+
+  const cases: Case[] = [
+    { prefixPath: '_post', contentPath: '_post/preview/test/my-post/readme.md', expected: 'preview/test/my-post' },
+    { prefixPath: '_post', contentPath: '_post/preview/test.md', expected: 'preview' },
+    { prefixPath: '_post', contentPath: '_post/preview.md', expected: '' },
+  ];
+
+  test.each(cases)(`getPostDirectory(%s, %s) should be %s`, ({ prefixPath, contentPath, expected }) => {
+    expect(getPostDirectory(prefixPath, contentPath)).toEqual(expected);
   });
 });
