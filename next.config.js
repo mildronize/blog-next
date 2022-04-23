@@ -1,21 +1,45 @@
+const fs = require('fs/promises');
+const path = require('path');
+const siteMetadata = require('./data/siteMetadata');
+const { generatePostMetadata } = require('./scripts/lib/postDataProvider');
+
+async function generateShortUrlRedirects() {
+  await generatePostMetadata();
+  const postMetadataPath = path.join(siteMetadata.tmpPath, siteMetadata.posts.postMetadataPath);
+  /**
+   * @type import('./lib/postDataProvider').PostMetadataMap
+   */
+  const postMetadataMap = JSON.parse(await fs.readFile(postMetadataPath, 'utf8'));
+  const redirects = [];
+  for (const [slug, postMetadata] of Object.entries(postMetadataMap)) {
+    redirects.push({
+      destination: `/posts/${slug}`,
+      source: `/s/${postMetadata.uuid}`,
+      permanent: true,
+    });
+  }
+
+  return redirects;
+}
+
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
+  exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
       //   "/": { page: "/" },
     };
+  },
+  redirects: async function () {
+    return generateShortUrlRedirects();
   },
   // When error like this: https://stackoverflow.com/questions/64926174/module-not-found-cant-resolve-fs-in-next-js-application
   //
   // webpack5: true,
   // webpack: (config) => {
-  //   config.resolve.fallback = { 
-  //     fs: false, 
+  //   config.resolve.fallback = {
+  //     fs: false,
   //     path: false,
   //     process: false,
   //     util: false,

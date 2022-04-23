@@ -3,6 +3,8 @@
 - [X] Resolve image locally not from static path
   - [X] When dev mode, serve static `_posts` 
   - [X] Convert markdown replace to currect path in public folder
+- [X] Auto Generate UUID (in dev mode)
+- [X] Short URL Mapping
 - [ ] Auto-refresh when markdown content changed [ref](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/scripts/next-remote-watch.js)
 - [ ] Migrate content markdown
 - [ ] Migrate to TypeScript

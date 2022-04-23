@@ -1,5 +1,6 @@
 ---
 title: เพิ่งเริ่ม Next.js 101
+uuid: bdfpwa5
 ---
 
 ![](cover.jpg)

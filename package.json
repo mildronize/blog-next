@@ -12,7 +12,9 @@
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
-    "clean": "rm -rf .tmp"
+    "clean": "rm -rf .tmp",
+    "prepare:dev": "run-s clean build:PostDataProvider",
+    "build:PostDataProvider": "tsc --project ./tsconfig.build.json && ncc build -m ./build/lib/postDataProvider -o scripts/lib/postDataProvider"
   },
   "dependencies": {
     "@pondorasti/remark-img-links": "^1.0.8",

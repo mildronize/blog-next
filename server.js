@@ -13,7 +13,7 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
   const server = express()
 
-  // Serve assets relative with posts path.
+  // Serve assets relative with posts 
   server.use(express.static('_posts'))
 
   server.all('*', (req, res) => {

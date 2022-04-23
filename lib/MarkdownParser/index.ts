@@ -23,7 +23,6 @@ export default class MarkdownParser {
 
   public async toHtml() {
     const postDirectory = getPostDirectory(directory, this.options?.relativePath);
-    console.log('postDirectory', this.options?.relativePath);
     const result = await remark()
       .use(imageLink, { path: path.join(assetsPublicPath, postDirectory) })
       .use(html)
