@@ -8,14 +8,10 @@ import siteMetadata from '@/data/siteMetadata';
 import _ from 'lodash';
 const { posts } = siteMetadata;
 
-export interface IFrontmatter {
-  title: string;
-  date: Date;
-  tags?: string[];
-}
+export type Frontmatter = Record<string, any>;
 
 export default class PostData {
-  public frontmatter: any;
+  public frontmatter: Frontmatter;
   public content: string;
   public date?: Date;
   public filenameSlug: string;
@@ -27,7 +23,7 @@ export default class PostData {
     this.date = extractDate(filename);
     this.filenameSlug = extractFilenameSlug(filename);
     this.slug = _.kebabCase(data.title);
-    this.frontmatter = data as IFrontmatter;
+    this.frontmatter = data as Frontmatter;
     this.content = content;
   }
 }

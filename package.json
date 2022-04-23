@@ -8,7 +8,8 @@
     "export": "next build && next export",
     "format": "prettier --config .prettierrc '**/*.+(ts|tsx)' --write",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@pondorasti/remark-img-links": "^1.0.8",
