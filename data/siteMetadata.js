@@ -6,6 +6,7 @@
 
 const siteMetadata = {
   title: 'Blog. Next',
+  theme: 'system',
   posts: {
     directory: '_posts',
     assetsPublicPath: '/',

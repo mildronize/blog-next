@@ -19,7 +19,7 @@ export default function Index({allPosts}) {
         </Head>
        
           {/* <Intro /> */}
-          <Topbar />
+          {/* <Topbar /> */}
           <Container>
             <MoreStories posts={allPosts} />
         </Container>
