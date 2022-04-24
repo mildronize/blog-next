@@ -69,7 +69,6 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
     const data = slugData[slug];
     // TODO: Make it non-blocking IO
     const post = await getPostBySlug(slug, fields, data.postData);
-    console.log(">>> ",post.slug, post.date)
     posts.push(post);
   }
 

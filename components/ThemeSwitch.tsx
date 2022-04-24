@@ -32,7 +32,7 @@ const ThemeSwitch = () => {
 export default ThemeSwitch;
 
 interface IIconProps {
-  className: string; 
+  className: string;
 }
 
 // Icon from https://feathericons.com, The MIT License (MIT), Copyright (c) 2013-2017 Cole Bemis
