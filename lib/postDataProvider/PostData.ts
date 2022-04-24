@@ -13,7 +13,7 @@ const defaultUnicode = 'utf8';
 export default class PostData {
   public frontmatter: Frontmatter;
   public content: string;
-  public date?: Date;
+  public date: Date | null;
   public filenameSlug: string;
   public slug: string;
   public path: string;

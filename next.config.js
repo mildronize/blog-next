@@ -31,9 +31,10 @@ const nextConfig = {
       //   "/": { page: "/" },
     };
   },
-  redirects: async function () {
-    return generateShortUrlRedirects();
-  },
+  // Note == rewrites, redirects, and headers are not applied when exporting your application, detected (redirects). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes
+  // redirects: async function () {
+  //   return generateShortUrlRedirects();
+  // },
   // When error like this: https://stackoverflow.com/questions/64926174/module-not-found-cant-resolve-fs-in-next-js-application
   //
   // webpack5: true,

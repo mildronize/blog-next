@@ -29,13 +29,13 @@ describe('getActualFilename', () => {
 describe('extractDate', () => {
   type Case = {
     filename: string;
-    expected?: Date;
+    expected: Date | null;
   };
   const cases: Case[] = [
-    { filename: 'preview', expected: undefined },
+    { filename: 'preview', expected: null },
     { filename: '2022-04-22', expected: new Date('2022-04-22') },
     { filename: '2022-04-22-22', expected: new Date('2022-04-22') },
-    { filename: '2022-04-222', expected: undefined },
+    { filename: '2022-04-222', expected: null },
   ];
 
   test.each(cases)(`extractDate(%s) should be %p`, ({ filename, expected }) => {

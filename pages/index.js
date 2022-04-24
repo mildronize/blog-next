@@ -35,7 +35,7 @@ export async function getStaticProps() {
     'slug',
   ])
 
-  // console.log(allPosts);
+  console.log(allPosts);
 
   return {
     props: { allPosts },

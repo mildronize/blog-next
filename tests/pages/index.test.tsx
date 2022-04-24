@@ -10,7 +10,7 @@ describe('Home', () => {
     render(<Index allPosts={allPosts} />);
 
     const heading = screen.getByRole('heading', {
-      name: /Blog. Next/i,
+      name: /More Stories/i,
     });
 
     expect(heading).toBeInTheDocument();

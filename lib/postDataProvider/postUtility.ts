@@ -47,7 +47,10 @@ export async function getPostBySlug(slug: string, fields: string[] = [], postDat
     } else if (field === 'content') {
       items[field] = _postData?.content;
     } else if (field === 'date') {
-      items[field] = _postData?.date?.toISOString();
+      // error - Error: Error serializing `.allPosts[5].date` returned from `getStaticProps` in "/".
+      // Reason: `undefined` cannot be serialized as JSON. Please use `null` or omit this value.
+      // JSON cannot be undefined !!
+      items[field] = _postData?.date ? _postData?.date?.toISOString() : null;
     } else if (field === 'path') {
       items[field] = _postData?.path;
     } else if (typeof _postData?.frontmatter[field] !== 'undefined') {
@@ -66,6 +69,7 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
     const data = slugData[slug];
     // TODO: Make it non-blocking IO
     const post = await getPostBySlug(slug, fields, data.postData);
+    console.log(">>> ",post.slug, post.date)
     posts.push(post);
   }
 

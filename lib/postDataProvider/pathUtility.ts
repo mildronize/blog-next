@@ -34,11 +34,11 @@ export function getPostDirectory(prefixPath: string, contentPath: string = '') {
   return paths.join('/');
 }
 
-export function extractDate(filename: string): Date | undefined {
+export function extractDate(filename: string): Date | null {
   checkValidFilename(filename);
   const nodeDate = filename.split('-').slice(0, 3).join('-');
   const postDate = new Date(nodeDate);
-  if (!date.isValid(postDate)) return undefined;
+  if (!date.isValid(postDate)) return null;
   return postDate;
 }
 
