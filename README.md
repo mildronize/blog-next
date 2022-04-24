@@ -11,6 +11,14 @@ Current Version (V.5): <https://thadaw.com> (Gatsby)
 - lightweight
 - using `markdown` is enough. no need `MDX`
 
+## Feature
+- Resolve image locally not from static path
+  - When dev mode, serve static `_posts` 
+  - Remap image location with post directory
+- Auto Generate UUID (in dev mode)
+- Short URL Mapping
+- Auto-refresh when markdown content changed 
+
 ## My Next version trial
 
 - Hugo theme with [mildronize.github.io (next branch)](https://github.com/mildronize/mildronize.github.io/tree/next)

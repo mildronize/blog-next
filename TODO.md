@@ -6,6 +6,7 @@
 - [X] Auto Generate UUID (in dev mode)
 - [X] Short URL Mapping
 - [X] Auto-refresh when markdown content changed [ref](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/scripts/next-remote-watch.js)
+- [ ] Theme Switch [Ref](https://github.com/timlrx/tailwind-nextjs-starter-blog/blob/master/components/ThemeSwitch.js)
 - [ ] Migrate Theme from my Gatsby [Ref](https://github.com/mildronize/mildronize.github.io)
 - [ ] Migrate content markdown
 - [ ] Migrate to TypeScript
