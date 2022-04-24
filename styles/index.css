@@ -5,6 +5,6 @@
 
 @layer base {
     body{
-        @apply transition-colors duration-300 ease-in
+        @apply transition-colors duration-200 ease-linear
     }
 }
