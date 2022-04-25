@@ -6,7 +6,7 @@ import siteMetadata from '@/data/siteMetadata';
 const imageLink = require('./remarkPlugins/remarkImageLinks');
 import { getPostDirectory } from '../postDataProvider';
 
-const { assetsPublicPath, directory } = siteMetadata.posts;
+const { assetsPublicPath, contentDirectory } = siteMetadata.posts;
 
 export interface IOption {
   relativePath?: string;
@@ -22,9 +22,9 @@ export default class MarkdownParser {
   }
 
   public async toHtml() {
-    const postDirectory = getPostDirectory(directory, this.options?.relativePath);
+    const _postDirectory = getPostDirectory(contentDirectory, this.options?.relativePath);
     const result = await remark()
-      .use(imageLink, { path: path.join(assetsPublicPath, postDirectory) })
+      .use(imageLink, { path: path.join(assetsPublicPath, _postDirectory) })
       .use(html)
       .process(this.markdown);
     return result.toString();

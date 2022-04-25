@@ -18,6 +18,7 @@ const next = require('next')
 const path = require('path')
 const { parse } = require('url')
 
+const siteMetadata = require('../data/siteMetadata');
 const pkg = require('../package.json')
 
 const defaultWatchEvent = 'change'
@@ -110,7 +111,7 @@ app.prepare().then(() => {
   })
 
   // Serve assets relative with posts 
-  expressApp.use(express.static('_posts'))
+  expressApp.use(express.static(siteMetadata.posts.contentDirectory))
 
   expressApp.use('/__next_reload', reloadRoute)
 

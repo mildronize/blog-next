@@ -76,40 +76,5 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
 }
 
 export async function getAllMarkdownPaths() {
-  return glob(path.join(siteMetadata.posts.directory, '**/*.md'));
-}
-
-async function generatePostSlugMapper() {
-  const mdPaths = await getAllMarkdownPaths();
-  let postMetadataMap: PostMetadataMap = {};
-  try {
-    // Make dev mode work when the slug name is changed
-    // Load the old slug.
-    postMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, defaultUnicode));
-  } catch (e) {
-    console.warn(`No exisitng "${postMetadataPath}" file.`);
-  }
-  for (const mdPath of mdPaths) {
-    // TODO: use Async
-    const fileContents = fs.readFileSync(mdPath, defaultUnicode);
-    const postData = new PostData(mdPath, fileContents);
-    const slug = postData.slug;
-    postMetadataMap[slug] = {
-      path: mdPath,
-      postData,
-    };
-  }
-
-  if (!fs.existsSync(tmpPath)) {
-    fs.mkdirSync(tmpPath, { recursive: true });
-  }
-
-  const minifiedPostMetadataMap: PostMetadataMap = {};
-  for (const [slug, postMetadata] of Object.entries(postMetadataMap)) {
-    minifiedPostMetadataMap[slug] = {
-      path: postMetadata.path,
-    };
-  }
-  fs.writeFileSync(postMetadataPath, JSON.stringify(minifiedPostMetadataMap, null, 2), defaultUnicode);
-  return postMetadataMap;
+  return glob(path.join(siteMetadata.posts.postDirectory, '**/*.md'));
 }

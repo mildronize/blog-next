@@ -21,7 +21,7 @@ export default class PostData {
   constructor(relativePath: string, markdown: string) {
     const { data, content } = matter(markdown);
     this.path = relativePath;
-    const filename = getActualFilename(posts.directory, relativePath);
+    const filename = getActualFilename(posts.postDirectory, relativePath);
     this.date = extractDate(filename);
     this.filenameSlug = extractFilenameSlug(filename);
     // TODO: Validate object when load from string

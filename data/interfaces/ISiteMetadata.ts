@@ -1,8 +1,14 @@
 export interface ISiteMetadata {
   title: string;
+  /**
+   Default theme when web loaded
+   */
   theme: 'system' | 'dark' | 'light';
   posts: {
-    directory: string;
+    /** the root of content directory, it can contains various type of contents e.g. 
+    posts, pages */ 
+    contentDirectory: string;
+    postDirectory: string;
     assetsPublicPath: string;
     postMetadataPath: string;
   };

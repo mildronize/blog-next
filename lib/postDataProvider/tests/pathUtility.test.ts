@@ -17,6 +17,7 @@ describe('getActualFilename', () => {
     ['_posts/', '_posts/preview', 'preview'],
     ['/_posts/', '_posts/preview', 'preview'],
     ['_posts', 'preview.md', 'preview'],
+    ['_contents/posts', '_contents/posts/title-article/preview.md', 'title-article'],
     // With Date
     ['_posts', '_posts/2022-04-22-preview.md', '2022-04-22-preview'],
   ];
@@ -84,6 +85,7 @@ describe('getPostDirectory', () => {
     { prefixPath: '_post', contentPath: '_post/preview/test/my-post/readme.md', expected: 'preview/test/my-post' },
     { prefixPath: '_post', contentPath: '_post/preview/test.md', expected: 'preview' },
     { prefixPath: '_post', contentPath: '_post/preview.md', expected: '' },
+    { prefixPath: '_contents', contentPath: '_contents/post/preview.md', expected: 'post' },
   ];
 
   test.each(cases)(`getPostDirectory(%s, %s) should be %s`, ({ prefixPath, contentPath, expected }) => {

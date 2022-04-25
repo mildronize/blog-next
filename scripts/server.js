@@ -1,7 +1,7 @@
 
 // https://github.com/vercel/next.js/blob/canary/examples/custom-server-express
 // Use in Dev only, production use next export
-
+const siteMetadata = require('../data/siteMetadata');
 const express = require('express')
 const next = require('next')
 
@@ -14,7 +14,7 @@ app.prepare().then(() => {
   const server = express()
 
   // Serve assets relative with posts 
-  server.use(express.static('_posts'))
+  server.use(express.static(siteMetadata.posts.contentDirectory))
 
   server.all('*', (req, res) => {
     return handle(req, res)
