@@ -9,7 +9,7 @@ const siteMetadata = {
   theme: 'system',
   posts: {
     contentDirectory: '_contents',
-    directory: '_contents/posts',
+    postDirectory: '_contents/posts',
     assetsPublicPath: '/',
     postMetadataPath: '.posts.metadata.json'
   },

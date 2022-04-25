@@ -8,7 +8,7 @@ export interface ISiteMetadata {
     /** the root of content directory, it can contains various type of contents e.g. 
     posts, pages */ 
     contentDirectory: string;
-    directory: string;
+    postDirectory: string;
     assetsPublicPath: string;
     postMetadataPath: string;
   };

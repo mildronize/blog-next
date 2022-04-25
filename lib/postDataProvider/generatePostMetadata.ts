@@ -14,7 +14,7 @@ const tmpPath = siteMetadata.tmpPath;
 const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
 export async function getAllMarkdownPaths() {
-  return glob(path.join(siteMetadata.posts.directory, '**/*.md'));
+  return glob(path.join(siteMetadata.posts.postDirectory, '**/*.md'));
 }
 
 async function generatePostMetadata() {

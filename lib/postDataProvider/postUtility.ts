@@ -76,7 +76,7 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
 }
 
 export async function getAllMarkdownPaths() {
-  return glob(path.join(siteMetadata.posts.directory, '**/*.md'));
+  return glob(path.join(siteMetadata.posts.postDirectory, '**/*.md'));
 }
 
 async function generatePostSlugMapper() {
