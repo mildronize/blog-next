@@ -5,7 +5,7 @@ import _glob from 'glob';
 
 import siteMetadata from '@/data/siteMetadata';
 import PostData from './PostData';
-import { PostMetadataMap } from './postUtility';
+import { PostMetadataMap, getAllMarkdownPaths } from './postUtility';
 
 const glob = promisify(_glob);
 const defaultUnicode = 'utf8';
@@ -13,9 +13,7 @@ const defaultUnicode = 'utf8';
 const tmpPath = siteMetadata.tmpPath;
 const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
-export async function getAllMarkdownPaths() {
-  return glob(path.join(siteMetadata.posts.postDirectory, '**/*.md'));
-}
+
 
 async function generatePostMetadata() {
   const mdPaths = await getAllMarkdownPaths();

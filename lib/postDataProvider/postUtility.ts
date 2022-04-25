@@ -74,3 +74,7 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
 
   return posts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 }
+
+export async function getAllMarkdownPaths() {
+  return glob(path.join(siteMetadata.posts.postDirectory, '**/*.md'));
+}
