@@ -1,4 +1,5 @@
 const copy = require('recursive-copy');
+const siteMetadata = require('../data/siteMetadata');
 
 const option = {
   overwrite: true,
@@ -7,7 +8,7 @@ const option = {
 
 async function main() {
   try {
-    const results = await copy('_posts', 'out', option);
+    const results = await copy(siteMetadata.posts.contentDirectory, 'out', option);
     for(const result of results){
         console.info(`Copied "${result.dest}"`);
     }

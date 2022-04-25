@@ -8,7 +8,8 @@ const siteMetadata = {
   title: 'Blog. Next',
   theme: 'system',
   posts: {
-    directory: '_posts',
+    contentDirectory: '_contents',
+    directory: '_contents/posts',
     assetsPublicPath: '/',
     postMetadataPath: '.posts.metadata.json'
   },
