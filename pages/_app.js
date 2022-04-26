@@ -1,4 +1,5 @@
 import '../styles/index.css';
+import '../styles/prism-template.css'
 import { ClientReload } from '@/components/ClientReload';
 import { ThemeProvider } from 'next-themes';
 import siteMetadata from '@/data/siteMetadata';
