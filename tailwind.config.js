@@ -25,7 +25,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
-        // heading: [ 'Poppins', 'IBM Plex Sans Thai Looped', ...defaultTheme.fontFamily.sans]
+        thai: [ 'IBM Plex Sans Thai', ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: colors.blue,
@@ -57,6 +57,7 @@ module.exports = {
               color: theme('colors.gray.900'),
             },
             'h4,h5,h6': {
+              fontFamily: 'IBM Plex Sans Thai',
               color: theme('colors.gray.900'),
             },
             pre: {
@@ -113,7 +114,6 @@ module.exports = {
               code: { color: theme('colors.primary.400') },
             },
             h1: {
-              fontFamily: 'IBM Plex Sans Thai Looped',
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
               color: theme('colors.gray.100'),

@@ -5,14 +5,17 @@
 
 @layer base {
     body{
-        @apply transition-colors duration-200 ease-linear;
+        @apply transition-colors duration-200 ease-linear  font-thai font-light;
+    }
+
+    h1,h2,h3 {
+        /* @apply font-heading; */
+        @apply font-bold
     }
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@400&display=swap'); */
-
-:root {
-     /* Pallate: https://blog.maximeheckel.com/ */
+/* :root {
+      Pallate: https://blog.maximeheckel.com/ 
      --base-hue: 222;
      --base-saturation: 89;
      --base-gray: var(--base-hue), 8%;
@@ -60,3 +63,4 @@ html.dark{
     --colors-hover-1: hsla(var(--palette-gray-80), 70%);
     --colors-border-details: #0085b9;
 }
+ */
