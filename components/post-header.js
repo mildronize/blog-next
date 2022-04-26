@@ -27,7 +27,7 @@ export default function PostHeader({ title, coverImage, date, author }) {
 function PostTitle({ children }) {
   return (
         // <h1 className="text-3xl leading-snug md:text-2xl md:leading-snug  lg:text-5xl lg:text-5xl:leading-12">  
-    <h1 className="text-3xl lg:text-5xl leading-tight lg:leading-14 mb-12  font-bold tracking-tighter text-left">
+    <h1 className="text-3xl lg:text-5xl leading-tight lg:leading-14 mb-12  font-bold tracking-tighter md:tracking-tight text-left">
 
       {children}
     </h1>
