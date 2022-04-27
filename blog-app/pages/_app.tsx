@@ -7,7 +7,7 @@ import siteMetadata from '@thadaw.com/data/siteMetadata';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isSocket = process.env.SOCKET;
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: any) {
   return (
     <>
       <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>

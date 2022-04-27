@@ -2,20 +2,23 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Container from '../../components/Container'
 import PostBody from '../../components/post-body'
-import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../libs/content-service'
 import Head from 'next/head'
 import MarkdownParser from '../../libs/markdown-parser'
 
-export default function Post({ post, morePosts, preview }) {
+interface IPostProps {
+  post: any;
+}
+
+export default function Post({ post }: IPostProps) {
   const router = useRouter()
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
         {/* <Header /> */}
         {router.isFallback ? (
@@ -25,7 +28,7 @@ export default function Post({ post, morePosts, preview }) {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with 
+                  {post.title} | Next.js Blog Example with
                 </title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
@@ -33,7 +36,7 @@ export default function Post({ post, morePosts, preview }) {
                 title={post.title}
                 // coverImage={post.coverImage}
                 date={post.date}
-                // author={post.author}
+              // author={post.author}
               />
               <PostBody content={post.content} />
             </article>
@@ -44,22 +47,19 @@ export default function Post({ post, morePosts, preview }) {
   )
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: any) {
   const post = await getPostBySlug(params.slug, [
     'title',
     'date',
     'slug',
     'path',
-    // 'author',
     'content',
-    // 'ogImage',
-    // 'coverImage',
   ])
 
   const markdownParserOption = {
     relativePath: post.path
   }
-  
+
   const content = await (new MarkdownParser(post.content || '', markdownParserOption)).toHtml()
 
   return {

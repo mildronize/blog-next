@@ -1,25 +1,20 @@
 import Container from '../components/Container'
 import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPosts } from '../libs/content-service'
 import Head from 'next/head'
-import Topbar from '@thadaw.com/components/Topbar'
 
+interface IIndexProps {
+  allPosts: any[]
+}
 
-export default function Index({allPosts}) {
-  // const heroPost = allPosts[0]
-  // const morePosts = allPosts.slice(1)
+export default function Index({allPosts}: IIndexProps) {
   return (
     <>
       <Layout>
         <Head>
           <title>Next.js Blog Example with</title>
         </Head>
-       
-          {/* <Intro /> */}
-          {/* <Topbar /> */}
           <Container>
             <MoreStories posts={allPosts} />
         </Container>
@@ -34,9 +29,7 @@ export async function getStaticProps() {
     'date',
     'slug',
   ])
-
-  // console.log(allPosts);
-
+  
   return {
     props: { allPosts },
   }
