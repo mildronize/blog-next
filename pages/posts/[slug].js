@@ -6,7 +6,6 @@ import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/postDataProvider'
-import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import MarkdownParser from '../../lib/MarkdownParser'
@@ -21,7 +20,7 @@ export default function Post({ post, morePosts, preview }) {
       <Container>
         {/* <Header /> */}
         {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
+          <p>Loading…</p>
         ) : (
           <>
             <article className="mb-32">
