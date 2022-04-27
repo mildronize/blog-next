@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm'
 import path from 'path';
 
 import siteMetadata from '@/data/siteMetadata';
-const imageLink = require('./remarkPlugins/remarkImageLinks');
+const imageLink = require('./remark-plugins/remark-image-links');
 import { getPostDirectory } from '../content-service';
 
 const { assetsPublicPath, contentDirectory } = siteMetadata.posts;
