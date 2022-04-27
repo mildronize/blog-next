@@ -5,13 +5,13 @@ on:
       - main
     paths:
       - _contents/**
-      - data/**
-      - components/**
-      - pages/**
-      - lib/**
-      - public/**
-      - tests/**
-      - styles/**
+      - blog-app/data/**
+      - blog-app/components/**
+      - blog-app/pages/**
+      - blog-app/libs/**
+      - blog-app/public/**
+      - blog-app/tests/**
+      - blog-app/styles/**
 
   pull_request:
 

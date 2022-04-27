@@ -20,6 +20,8 @@ describe('getActualFilename', () => {
     ['_contents/posts', '_contents/posts/title-article/preview.md', 'title-article'],
     // With Date
     ['_posts', '_posts/2022-04-22-preview.md', '2022-04-22-preview'],
+    ['../_contents/posts','../_contents/posts/examples/2022-04-20-hello-world/2022-04-20-hello-world.md','2022-04-20-hello-world'],
+    ['../../_contents/posts', '../../_contents/posts/2022-04-22-preview/index.md', '2022-04-22-preview'],
   ];
 
   test.each(cases)(`getActualFilename(%s,%s) should be %s`, (prefixPath, contentPath, expected) => {

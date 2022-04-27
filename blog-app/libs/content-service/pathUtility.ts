@@ -1,4 +1,5 @@
 import * as date from 'date-fns';
+import path from 'path';
 
 /**
  * Returns a string that resolve actual filename
@@ -19,9 +20,11 @@ import * as date from 'date-fns';
 
 export function getActualFilename(prefixPath: string, contentPath: string) {
   const parsedPrefixPath = prefixPath.replace(/^\/*/, '');
-  const removedExtensionPath = contentPath.split('.')[0];
+  const removedExtensionPath = contentPath.replace(/\.[^/.]+$/, "");
   const parsedPath = removedExtensionPath.replace(new RegExp(`${parsedPrefixPath}/*`), '');
+  
   const split = parsedPath.split('/');
+
   if (split.length >= 2) return split[split.length - 2];
   return parsedPath;
 }
