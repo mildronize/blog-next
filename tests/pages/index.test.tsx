@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 // Solved by https://github.com/testing-library/jest-dom/issues/45#issuecomment-593561878
 import '@testing-library/jest-dom/extend-expect';
 import Index from '@/pages/index';
-import { getAllPosts } from '@/lib/postDataProvider';
+import { getAllPosts } from '@/lib/content-service';
 
 describe('Home', () => {
   it('renders a heading', async () => {

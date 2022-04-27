@@ -13,8 +13,6 @@ const defaultUnicode = 'utf8';
 const tmpPath = siteMetadata.tmpPath;
 const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
-
-
 async function generatePostMetadata() {
   const mdPaths = await getAllMarkdownPaths();
   let postMetadataMap: PostMetadataMap = {};
@@ -23,7 +21,7 @@ async function generatePostMetadata() {
     // Load the old slug.
     postMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, defaultUnicode));
   } catch (e) {
-    console.warn(`No exisitng "${postMetadataPath}" file.`);
+    console.debug(`No exisitng "${postMetadataPath}" file.`);
   }
   for (const mdPath of mdPaths) {
     // TODO: use Async
@@ -49,6 +47,7 @@ async function generatePostMetadata() {
     };
   }
   fs.writeFileSync(postMetadataPath, JSON.stringify(minifiedPostMetadataMap, null, 2), defaultUnicode);
+  console.debug(`Writing... "${postMetadataPath}" file.`);
   return postMetadataMap;
 }
 

@@ -10,13 +10,13 @@
     "export:posts-assets": "node scripts/copy-assets.js",
     "export": "run-s build export:next export:posts-assets",
     "format": "prettier --config .prettierrc '**/*.+(ts|tsx)' --write",
-    "test": "jest --watch",
+    "test": "jest  --watch",
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
     "clean": "rm -rf .tmp",
     "prepare:dev": "run-s clean build:PostDataProvider",
-    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/lib/postDataProvider -o scripts/lib/postDataProvider"
+    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/lib/content-service -o scripts/lib/content-service"
   },
   "dependencies": {
     "classnames": "2.3.1",
@@ -28,11 +28,11 @@
     "next-themes": "^0.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remark": "14.0.2",
-    "remark-gfm": "^3.0.1",
+    "remark": "13.0.0",
+    "remark-gfm": "1.0.0",
     "remark-html": "15.0.1",
     "remark-prism": "^1.3.6",
-    "unist-util-visit": "^1.4.0"
+    "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.4.0",

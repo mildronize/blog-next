@@ -12,5 +12,5 @@ export default function PostBody({ content }: IPostBodyProps) {
         dangerouslySetInnerHTML={{ __html: content }}
       />
     </div>
-  )
+  );
 }

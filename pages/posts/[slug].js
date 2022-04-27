@@ -5,10 +5,10 @@ import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/postDataProvider'
+import { getPostBySlug, getAllPosts } from '../../lib/content-service'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import MarkdownParser from '../../lib/MarkdownParser'
+import MarkdownParser from '../../lib/markdown-parser'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
