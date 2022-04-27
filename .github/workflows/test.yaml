@@ -4,6 +4,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/test.yaml
       - _contents/**
       - blog-app/data/**
       - blog-app/components/**
@@ -53,5 +54,6 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          base-path: ${{ env.working-directory }}
           path-to-lcov: ${{ env.working-directory }}/coverage/lcov.info
           

@@ -13,7 +13,7 @@
     "test": "jest  --watch",
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
-    "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
+    "coveralls": "npm run test:coverage && coveralls < ./coverage/lcov.info",
     "clean": "rm -rf .tmp",
     "typecheck": "tsc",
     "prepare:dev": "run-s clean build:content-service",
