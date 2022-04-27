@@ -3,7 +3,7 @@ import MoreStories from '../components/more-stories'
 import HeroPost from '../components/hero-post'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
-import { getAllPosts } from '../lib/postDataProvider'
+import { getAllPosts } from '../lib/content-service'
 import Head from 'next/head'
 import Topbar from '@/components/Topbar'
 
@@ -35,7 +35,7 @@ export async function getStaticProps() {
     'slug',
   ])
 
-  console.log(allPosts);
+  // console.log(allPosts);
 
   return {
     props: { allPosts },

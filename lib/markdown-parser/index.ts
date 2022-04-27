@@ -6,7 +6,7 @@ import path from 'path';
 
 import siteMetadata from '@/data/siteMetadata';
 const imageLink = require('./remarkPlugins/remarkImageLinks');
-import { getPostDirectory } from '../postDataProvider';
+import { getPostDirectory } from '../content-service';
 
 const { assetsPublicPath, contentDirectory } = siteMetadata.posts;
 

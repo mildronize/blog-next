@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 const siteMetadata = require('./data/siteMetadata');
-const { generatePostMetadata } = require('./scripts/lib/postDataProvider');
+const { generatePostMetadata } = require('./scripts/lib/content-service');
 
 async function generateShortUrlRedirects() {
   await generatePostMetadata();
