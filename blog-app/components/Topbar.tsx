@@ -1,4 +1,4 @@
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@thadaw.com/data/siteMetadata';
 import Container from './Container';
 import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';

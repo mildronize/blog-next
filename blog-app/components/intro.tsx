@@ -1,4 +1,4 @@
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@thadaw.com/data/siteMetadata';
 
 export default function Intro() {
   return (

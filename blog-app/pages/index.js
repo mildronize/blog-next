@@ -5,7 +5,7 @@ import Intro from '../components/intro'
 import Layout from '../components/layout'
 import { getAllPosts } from '../libs/content-service'
 import Head from 'next/head'
-import Topbar from '@/components/Topbar'
+import Topbar from '@thadaw.com/components/Topbar'
 
 
 export default function Index({allPosts}) {

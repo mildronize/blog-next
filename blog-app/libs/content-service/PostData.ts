@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 import { getActualFilename, extractDate, extractFilenameSlug } from './pathUtility';
 import { retryNewUuid, getUuidStore, generateUUID } from './Uuid';
 import { getAllMarkdownPaths } from './postUtility';
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@thadaw.com/data/siteMetadata';
 import _ from 'lodash';
 const { posts } = siteMetadata;
 

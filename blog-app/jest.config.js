@@ -16,10 +16,11 @@ const customJestConfig = {
 //   moduleDirectories: ['node_modules', '<rootDir>/'],
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^@/data/(.*)$': '<rootDir>/data/$1',
-    '^@/libs/(.*)$': '<rootDir>/libs/$1',
-    '^@/pages/(.*)$': '<rootDir>/pages/$1',
+    '^@thadaw.com/(.*)$': '<rootDir>/$1',
+    // '^@/components/(.*)$': '<rootDir>/components/$1',
+    // '^@/data/(.*)$': '<rootDir>/data/$1',
+    // '^@/libs/(.*)$': '<rootDir>/libs/$1',
+    // '^@/pages/(.*)$': '<rootDir>/pages/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
 }

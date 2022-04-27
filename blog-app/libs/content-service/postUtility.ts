@@ -3,7 +3,7 @@ import path from 'path';
 import { promisify } from 'util';
 import _glob from 'glob';
 
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData from './PostData';
 import generatePostMetadata from './generatePostMetadata';
 

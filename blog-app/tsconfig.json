@@ -20,11 +20,12 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/libs/*": ["libs/*"],
-      "@/data/*": ["data/*"],
-      "@/components/*": ["components/*"],
-      "@/pages/*": ["pages/*"],
-      "@/styles/*": ["styles/*"]
+      "@thadaw.com/*": ["*"]
+      // "@/libs/*": ["libs/*"],
+      // "@/data/*": ["data/*"],
+      // "@/components/*": ["components/*"],
+      // "@/pages/*": ["pages/*"],
+      // "@/styles/*": ["styles/*"]
     }
   },
   "include": [

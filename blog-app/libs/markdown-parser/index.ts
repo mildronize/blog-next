@@ -6,7 +6,7 @@ import html from 'remark-html';
 import prism from 'remark-prism';
 import path from 'path';
 
-import siteMetadata from '@/data/siteMetadata';
+import siteMetadata from '@thadaw.com/data/siteMetadata';
 import remarkImageLink from './remark-plugins/remark-image-links';
 import { getPostDirectory } from '../content-service';
 

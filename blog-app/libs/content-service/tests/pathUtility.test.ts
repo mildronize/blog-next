@@ -3,7 +3,7 @@ import {
   extractDate,
   extractFilenameSlug,
   getPostDirectory,
-} from '@/libs/content-service/pathUtility';
+} from '@thadaw.com/libs/content-service/pathUtility';
 
 describe('getActualFilename', () => {
   const cases = [
