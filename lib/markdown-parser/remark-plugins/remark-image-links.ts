@@ -1,6 +1,6 @@
 // Adapted from original: https://github.com/Pondorasti/remark-img-links
 
-import visit from 'unist-util-visit'; // Downgrade to v2.0.3 for supporting common js 
+import visit from 'unist-util-visit'; // Downgrade to v2.0.3 for supporting common js
 import path from 'path';
 
 interface IRemarkImageLinkOption {
@@ -15,9 +15,21 @@ export default function remarkImageLink(options: IRemarkImageLinkOption) {
       'image',
       (node: any) => {
         // Sanitize URL by removing leading `/`
-        const relativeUrl = node.url.replace(/^\//, '');
-        node.url = path.join(options.path, relativeUrl);
+        const imageURL = node.url.replace(/^\//, '');
+        if (!isAbsoluteURL(imageURL)) node.url = path.join(options.path, imageURL);
       }
     );
   };
+}
+
+export function isAbsoluteURL(url: string): boolean {
+  try {
+    new URL('', url);
+  } catch (error: any) {
+    if ((error.message as string).search('Invalid base URL') >= 0) return false;
+    else {
+      throw Error(`Can't validate absolute URL: ${error.message}`);
+    }
+  }
+  return true;
 }

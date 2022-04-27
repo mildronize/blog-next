@@ -1,5 +1,5 @@
-// For support common js 
-import remark from 'remark';  // Downgrade to v13.0.0
+// For support common js
+import remark from 'remark'; // Downgrade to v13.0.0
 import remarkGfm from 'remark-gfm'; // Downgrade to v1.0.0
 
 import html from 'remark-html';
