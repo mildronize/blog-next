@@ -1,9 +1,9 @@
-import React from 'react'
-import Footer from './footer'
-import Meta from './meta'
-import Topbar from './Topbar'
+import React from 'react';
+import Footer from './footer';
+import Meta from './meta';
+import Topbar from './Topbar';
 
-export default function Layout({ children }: { children: React.ReactNode}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Meta />
@@ -13,5 +13,5 @@ export default function Layout({ children }: { children: React.ReactNode}) {
       </div>
       <Footer />
     </>
-  )
+  );
 }

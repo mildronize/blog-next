@@ -20,9 +20,9 @@ import path from 'path';
 
 export function getActualFilename(prefixPath: string, contentPath: string) {
   const parsedPrefixPath = prefixPath.replace(/^\/*/, '');
-  const removedExtensionPath = contentPath.replace(/\.[^/.]+$/, "");
+  const removedExtensionPath = contentPath.replace(/\.[^/.]+$/, '');
   const parsedPath = removedExtensionPath.replace(new RegExp(`${parsedPrefixPath}/*`), '');
-  
+
   const split = parsedPath.split('/');
 
   if (split.length >= 2) return split[split.length - 2];

@@ -1,5 +1,5 @@
-import DateFormatter from './date-formatter'
-import Link from 'next/link'
+import DateFormatter from './date-formatter';
+import Link from 'next/link';
 
 interface IPostPreviewProps {
   title: string;
@@ -7,15 +7,10 @@ interface IPostPreviewProps {
   slug: string;
 }
 
-export default function PostPreview({
-  title,
-  date,
-  slug,
-}: IPostPreviewProps) {
+export default function PostPreview({ title, date, slug }: IPostPreviewProps) {
   return (
     <div>
-      <div className="mb-10">
-      </div>
+      <div className="mb-10"></div>
       <h3 className="text-xl mb-3 leading-snug  tracking-tighter md:tracking-normal">
         <Link href={`/posts/${slug}`}>
           <a className="hover:underline">{title}</a>
@@ -25,5 +20,5 @@ export default function PostPreview({
         <DateFormatter dateString={date} />
       </div>
     </div>
-  )
+  );
 }

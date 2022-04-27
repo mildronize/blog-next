@@ -1,5 +1,5 @@
-import DateFormatter from './date-formatter'
-import Link from 'next/link'
+import DateFormatter from './date-formatter';
+import Link from 'next/link';
 
 interface IHeroPostProps {
   title: string;
@@ -7,11 +7,7 @@ interface IHeroPostProps {
   slug: string;
 }
 
-export default function HeroPost({
-  title,
-  date,
-  slug,
-}: IHeroPostProps) {
+export default function HeroPost({ title, date, slug }: IHeroPostProps) {
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -29,5 +25,5 @@ export default function HeroPost({
         </div>
       </div>
     </section>
-  )
+  );
 }
