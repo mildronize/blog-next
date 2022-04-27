@@ -26,9 +26,10 @@ export function isAbsoluteURL(url: string): boolean {
   try {
     new URL('', url);
   } catch (error: any) {
-    if ((error.message as string).search('Invalid base URL') >= 0) return false;
+    const msg : string = error.message;
+    if (msg.search('Invalid base URL') >= 0 || msg.search('Invalid URL') >= 0) return false;
     else {
-      throw Error(`Can't validate absolute URL: ${error.message}`);
+      throw Error(`Can't validate absolute URL (${url}): ${error.message}`);
     }
   }
   return true;

@@ -3,6 +3,7 @@ import remarkImageLink from '../remark-image-links';
 
 describe('remarkImageLink', () => {
   const cases = [
+    ['![](cover.jpg)', '/posts/slug-id/', '![](/posts/slug-id/cover.jpg)'],
     ['![](error-sample.png)', '/posts/slug-id/', '![](/posts/slug-id/error-sample.png)'],
     // Not parse abs URL
     ['![](https://test.com/img.jpg)', '/posts/slug-id/', '![](https://test.com/img.jpg)'],
