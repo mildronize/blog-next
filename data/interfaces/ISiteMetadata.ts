@@ -6,7 +6,7 @@ export interface ISiteMetadata {
   theme: 'system' | 'dark' | 'light';
   posts: {
     /** the root of content directory, it can contains various type of contents e.g. 
-    posts, pages */ 
+    posts, pages */
     contentDirectory: string;
     postDirectory: string;
     assetsPublicPath: string;

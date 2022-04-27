@@ -13,8 +13,6 @@ const defaultUnicode = 'utf8';
 const tmpPath = siteMetadata.tmpPath;
 const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
 
-
-
 async function generatePostMetadata() {
   const mdPaths = await getAllMarkdownPaths();
   let postMetadataMap: PostMetadataMap = {};
