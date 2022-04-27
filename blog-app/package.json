@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "run-s clean && cross-env SOCKET=true node ./scripts/next-watch.js ../_contents",
+    "dev": "run-s clean && cross-env SOCKET=true node ./scripts/next-watch.js ../contents",
     "start": "run-s clean && node ./scripts/server.js",
     "build": "run-s clean && next build",
     "lint": "next lint",
@@ -15,8 +15,8 @@
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
     "clean": "rm -rf .tmp",
-    "prepare:dev": "run-s clean build:PostDataProvider",
-    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/lib/content-service"
+    "prepare:dev": "run-s clean build:content-service",
+    "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service"
   },
   "dependencies": {
     "classnames": "2.3.1",

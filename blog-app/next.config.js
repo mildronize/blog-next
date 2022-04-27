@@ -1,26 +1,26 @@
-const fs = require('fs/promises');
-const path = require('path');
-const siteMetadata = require('./data/siteMetadata');
-const { generatePostMetadata } = require('./scripts/lib/content-service');
+// const fs = require('fs/promises');
+// const path = require('path');
+// const siteMetadata = require('./data/siteMetadata');
+// const { generatePostMetadata } = require('./scripts/libs/content-service');
 
-async function generateShortUrlRedirects() {
-  await generatePostMetadata();
-  const postMetadataPath = path.join(siteMetadata.tmpPath, siteMetadata.posts.postMetadataPath);
-  /**
-   * @type import('./libs/postDataProvider').PostMetadataMap
-   */
-  const postMetadataMap = JSON.parse(await fs.readFile(postMetadataPath, 'utf8'));
-  const redirects = [];
-  for (const [slug, postMetadata] of Object.entries(postMetadataMap)) {
-    redirects.push({
-      destination: `/posts/${slug}`,
-      source: `/s/${postMetadata.uuid}`,
-      permanent: true,
-    });
-  }
+// async function generateShortUrlRedirects() {
+//   await generatePostMetadata();
+//   const postMetadataPath = path.join(siteMetadata.tmpPath, siteMetadata.posts.postMetadataPath);
+//   /**
+//    * @type import('./libs/postDataProvider').PostMetadataMap
+//    */
+//   const postMetadataMap = JSON.parse(await fs.readFile(postMetadataPath, 'utf8'));
+//   const redirects = [];
+//   for (const [slug, postMetadata] of Object.entries(postMetadataMap)) {
+//     redirects.push({
+//       destination: `/posts/${slug}`,
+//       source: `/s/${postMetadata.uuid}`,
+//       permanent: true,
+//     });
+//   }
 
-  return redirects;
-}
+//   return redirects;
+// }
 
 /**
  * @type {import('next').NextConfig}

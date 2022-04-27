@@ -22,7 +22,7 @@ Current Version (V.5): <https://thadaw.com> (Gatsby)
 ## Start
 
 ```bash
-make npm cmd=dev
+make npm target=dev
 # or using make dev
 ```
 
