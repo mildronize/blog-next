@@ -16,7 +16,7 @@
     "coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
     "clean": "rm -rf .tmp",
     "prepare:dev": "run-s clean build:PostDataProvider",
-    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/lib/content-service -o scripts/lib/content-service"
+    "build:PostDataProvider": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/lib/content-service"
   },
   "dependencies": {
     "classnames": "2.3.1",

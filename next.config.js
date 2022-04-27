@@ -7,7 +7,7 @@ async function generateShortUrlRedirects() {
   await generatePostMetadata();
   const postMetadataPath = path.join(siteMetadata.tmpPath, siteMetadata.posts.postMetadataPath);
   /**
-   * @type import('./lib/postDataProvider').PostMetadataMap
+   * @type import('./libs/postDataProvider').PostMetadataMap
    */
   const postMetadataMap = JSON.parse(await fs.readFile(postMetadataPath, 'utf8'));
   const redirects = [];

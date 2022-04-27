@@ -20,7 +20,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/lib/*": ["lib/*"],
+      "@/libs/*": ["libs/*"],
       "@/data/*": ["data/*"],
       "@/components/*": ["components/*"],
       "@/pages/*": ["pages/*"],

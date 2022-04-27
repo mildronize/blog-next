@@ -1,5 +1,5 @@
 import siteMetadata from '@/data/siteMetadata';
-import { CMS_NAME } from '../lib/constants';
+import { CMS_NAME } from '../libs/constants';
 
 export default function Intro() {
   return (
