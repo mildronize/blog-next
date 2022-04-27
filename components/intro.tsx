@@ -1,5 +1,4 @@
 import siteMetadata from '@/data/siteMetadata';
-import { CMS_NAME } from '../libs/constants';
 
 export default function Intro() {
   return (
@@ -10,7 +9,6 @@ export default function Intro() {
         <a href="https://nextjs.org/" className="underline hover:text-success duration-200 transition-colors">
           Next.js
         </a>{' '}
-        and {CMS_NAME}.
       </h4>
     </section>
   );

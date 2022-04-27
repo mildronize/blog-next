@@ -7,7 +7,6 @@ import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../libs/content-service'
 import Head from 'next/head'
-import { CMS_NAME } from '../../libs/constants'
 import MarkdownParser from '../../libs/markdown-parser'
 
 export default function Post({ post, morePosts, preview }) {
@@ -26,7 +25,7 @@ export default function Post({ post, morePosts, preview }) {
             <article className="mb-32">
               <Head>
                 <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
+                  {post.title} | Next.js Blog Example with 
                 </title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
