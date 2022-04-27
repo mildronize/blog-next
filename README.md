@@ -19,6 +19,13 @@ Current Version (V.5): <https://thadaw.com> (Gatsby)
 - Short URL Mapping
 - Auto-refresh when markdown content changed 
 
+## Start
+
+```bash
+make npm target=dev
+# or using make dev
+```
+
 ## My Next version trial
 
 - Hugo theme with [mildronize.github.io (next branch)](https://github.com/mildronize/mildronize.github.io/tree/next)

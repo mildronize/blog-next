@@ -5,15 +5,18 @@ on:
       - main
     paths:
       - _contents/**
-      - data/**
-      - components/**
-      - pages/**
-      - lib/**
-      - public/**
-      - tests/**
-      - styles/**
+      - blog-app/data/**
+      - blog-app/components/**
+      - blog-app/pages/**
+      - blog-app/libs/**
+      - blog-app/public/**
+      - blog-app/tests/**
+      - blog-app/styles/**
 
   pull_request:
+
+env:
+  working-directory: ./blog-app
 
 jobs:
   test:
@@ -36,15 +39,19 @@ jobs:
 
       - name: Test
         run: pnpm test:ci
+        working-directory: ${{ env.working-directory }}
 
       - name: Export Next.js 
         run: pnpm export
+        working-directory: ${{ env.working-directory }}
 
       - name: Test Coverage
         run: pnpm run test:coverage
+        working-directory: ${{ env.working-directory }}
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ${{ env.working-directory }}/coverage/lcov.info
           
