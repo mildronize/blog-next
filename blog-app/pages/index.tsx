@@ -17,7 +17,7 @@ export default function Index({ allPosts }: IIndexProps) {
     <>
       <PageLayout>
         <Container>
-          <Hero {...hero} />
+          <Hero {...hero} userLinks={siteMetadata.userLinks} />
           <PostList posts={allPosts} />
         </Container>
       </PageLayout>

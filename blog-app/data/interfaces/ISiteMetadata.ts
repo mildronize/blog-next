@@ -16,9 +16,16 @@ export interface ISiteMetadata {
   components: {
     hero: IHero;
   };
+  userLinks: IUserLink[];
 }
 
 export interface IHero {
   title: string;
   tagline: string;
+}
+
+export interface IUserLink {
+  label: string;
+  url: string;
+  iconClassName: string;
 }

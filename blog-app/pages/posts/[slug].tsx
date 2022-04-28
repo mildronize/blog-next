@@ -18,7 +18,7 @@ export default function Post({ post }: IPostProps) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <PageLayout defaultTitle={siteMetadata.title} pageTitle={post.title}>
+    <PageLayout pageTitle={post.title}>
       <Container>
         {router.isFallback ? (
           <p>Loading…</p>
