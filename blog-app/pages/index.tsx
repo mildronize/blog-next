@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import Container from '@thadaw.com/components/Container';
+import { Container } from '@thadaw.com/components/layouts';
 import MoreStories from '@thadaw.com/components/more-stories';
-import Layout from '@thadaw.com/components/Layout';
+import PageLayout from '@thadaw.com/components/PageLayout';
 import { getAllPosts } from '@thadaw.com/libs/content-service';
 import Hero from '@thadaw.com/components/Hero';
 
@@ -15,12 +15,12 @@ interface IIndexProps {
 export default function Index({ allPosts }: IIndexProps) {
   return (
     <>
-      <Layout defaultTitle={siteMetadata.title}>
+      <PageLayout defaultTitle={siteMetadata.title}>
         <Container>
           <Hero {...hero} />
           <MoreStories posts={allPosts} />
         </Container>
-      </Layout>
+      </PageLayout>
     </>
   );
 }

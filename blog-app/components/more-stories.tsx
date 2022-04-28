@@ -1,4 +1,4 @@
-import PostPreview from './post-preview';
+import PostPreview from './Post/post-preview';
 
 interface IMoreStoriesProps {
   posts: {

@@ -15,7 +15,7 @@ export interface ISiteMetadata {
   tmpPath: string;
   components: {
     hero: IHero;
-  }
+  };
 }
 
 export interface IHero {

@@ -6,7 +6,7 @@ export interface IMetaProps {
 }
 
 export default function Meta({ defaultTitle, pageTitle }: IMetaProps) {
-  const title = pageTitle? `${pageTitle} | ${defaultTitle}`: defaultTitle;
+  const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle;
   return (
     <Head>
       <title>{title}</title>

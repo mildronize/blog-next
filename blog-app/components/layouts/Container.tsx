@@ -5,7 +5,7 @@ export interface IContainerProps {
   wide?: boolean;
 }
 
-export default function Container({ children, wide }: IContainerProps) {
+export function Container({ children, wide }: IContainerProps) {
   return (
     <div
       className={classnames('container mx-auto px-5', {

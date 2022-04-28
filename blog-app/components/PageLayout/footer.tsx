@@ -1,4 +1,4 @@
-import Container from './Container';
+import { Container } from '@thadaw.com/components/layouts';
 
 export default function Footer() {
   return (

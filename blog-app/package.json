@@ -14,7 +14,7 @@
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < ./coverage/lcov.info",
-    "clean": "rm -rf .tmp",
+    "clean": "rm -rf .tmp && rm -rf .next && rm -rf .out && rm -rf build",
     "typecheck": "tsc",
     "prepare:dev": "run-s clean build:content-service",
     "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service"

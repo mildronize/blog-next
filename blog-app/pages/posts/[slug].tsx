@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import Head from 'next/head';
-import Container from '@thadaw.com/components/Container';
-import PostBody from '@thadaw.com/components/post-body';
-import PostHeader from '@thadaw.com/components/post-header';
-import Layout from '@thadaw.com/components/Layout';
+import { Container } from '@thadaw.com/components/layouts';
+import PostBody from '@thadaw.com/components/Post/post-body';
+import PostHeader from '@thadaw.com/components/Post/post-header';
+import PageLayout from '@thadaw.com/components/PageLayout';
 import { getPostBySlug, getAllPosts } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
 import { siteMetadata } from '@thadaw.com/data';
@@ -19,7 +18,7 @@ export default function Post({ post }: IPostProps) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout defaultTitle={siteMetadata.title} pageTitle={post.title}>
+    <PageLayout defaultTitle={siteMetadata.title} pageTitle={post.title}>
       <Container>
         {router.isFallback ? (
           <p>Loading…</p>
@@ -37,7 +36,7 @@ export default function Post({ post }: IPostProps) {
           </>
         )}
       </Container>
-    </Layout>
+    </PageLayout>
   );
 }
 
