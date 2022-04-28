@@ -4,9 +4,10 @@ import Head from 'next/head';
 import Container from '@thadaw.com/components/Container';
 import PostBody from '@thadaw.com/components/post-body';
 import PostHeader from '@thadaw.com/components/post-header';
-import Layout from '@thadaw.com/components/layout';
+import Layout from '@thadaw.com/components/Layout';
 import { getPostBySlug, getAllPosts } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
+import { siteMetadata } from '@thadaw.com/data';
 
 interface IPostProps {
   post: any;
@@ -18,18 +19,13 @@ export default function Post({ post }: IPostProps) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout>
+    <Layout defaultTitle={siteMetadata.title} pageTitle={post.title}>
       <Container>
-        {/* <Header /> */}
         {router.isFallback ? (
           <p>Loading…</p>
         ) : (
           <>
             <article className="mb-32">
-              <Head>
-                <title>{post.title} | Next.js Blog Example with</title>
-                {/* <meta property="og:image" content={post.ogImage.url} /> */}
-              </Head>
               <PostHeader
                 title={post.title}
                 // coverImage={post.coverImage}

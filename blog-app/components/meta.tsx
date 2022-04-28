@@ -1,8 +1,15 @@
 import Head from 'next/head';
 
-export default function Meta() {
+export interface IMetaProps {
+  defaultTitle: string;
+  pageTitle?: string;
+}
+
+export default function Meta({ defaultTitle, pageTitle }: IMetaProps) {
+  const title = pageTitle? `${pageTitle} | ${defaultTitle}`: defaultTitle;
   return (
     <Head>
+      <title>{title}</title>
       <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />

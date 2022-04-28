@@ -13,4 +13,12 @@ export interface ISiteMetadata {
     postMetadataPath: string;
   };
   tmpPath: string;
+  components: {
+    hero: IHero;
+  }
+}
+
+export interface IHero {
+  title: string;
+  tagline: string;
 }

@@ -25,7 +25,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
-        thai: [ 'IBM Plex Sans Thai', ...defaultTheme.fontFamily.sans]
+        thai: [ 'IBM Plex Sans Thai', ...defaultTheme.fontFamily.sans],
+        heading: ['Inter', ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: colors.blue,
