@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Container } from '@thadaw.com/components/layouts';
-import MoreStories from '@thadaw.com/components/more-stories';
+import MoreStories from '@thadaw.com/components/MoreStories';
 import PageLayout from '@thadaw.com/components/PageLayout';
 import { getAllPosts } from '@thadaw.com/libs/content-service';
 import Hero from '@thadaw.com/components/Hero';

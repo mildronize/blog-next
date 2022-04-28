@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import { Container } from '@thadaw.com/components/layouts';
-import PostBody from '@thadaw.com/components/Post/post-body';
-import PostHeader from '@thadaw.com/components/Post/post-header';
+import PostBody from '@thadaw.com/components/Post/PostBody';
+import PostHeader from '@thadaw.com/components/Post/PostHeader';
 import PageLayout from '@thadaw.com/components/PageLayout';
 import { getPostBySlug, getAllPosts } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';

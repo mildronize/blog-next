@@ -1,4 +1,4 @@
-import DateFormatter from './date-formatter';
+import DateFormatter from './DateFormatter';
 import Link from 'next/link';
 
 interface IHeroPostProps {
