@@ -8,7 +8,7 @@ interface IMoreStoriesProps {
   }[];
 }
 
-export default function MoreStories({ posts }: IMoreStoriesProps) {
+export default function PostList({ posts }: IMoreStoriesProps) {
   return (
     <section>
       <h2 className="mb-8 text-2xl md:text-3xl font-bold tracking-tighter leading-tight font-heading">Recent Posts</h2>

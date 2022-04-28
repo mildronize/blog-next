@@ -7,10 +7,10 @@ interface ILayoutProps extends IMetaProps {
   children?: React.ReactNode;
 }
 
-export default function Layout({ children, defaultTitle, pageTitle }: ILayoutProps) {
+export default function Layout({ children, pageTitle }: ILayoutProps) {
   return (
     <>
-      <Meta defaultTitle={defaultTitle} pageTitle={pageTitle} />
+      <Meta pageTitle={pageTitle} />
       <Topbar />
       <div className="min-h-screen">
         <main>{children}</main>

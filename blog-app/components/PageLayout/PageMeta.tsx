@@ -1,11 +1,12 @@
 import Head from 'next/head';
+import { siteMetadata } from '@thadaw.com/data';
 
 export interface IMetaProps {
-  defaultTitle: string;
   pageTitle?: string;
 }
 
-export default function Meta({ defaultTitle, pageTitle }: IMetaProps) {
+export default function Meta({ pageTitle }: IMetaProps) {
+  const defaultTitle = siteMetadata.title;
   const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle;
   return (
     <Head>
