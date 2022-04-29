@@ -13,8 +13,8 @@ interface IHeroProps extends IHero {
 
 export default function Hero({ title, tagline, userLinks }: IHeroProps) {
   return (
-    <div className="pt-10 mb-24">
-      <h2 className="text-4xl font-heading leading-11 tracking-tighter md:tracking-normal text-gray-700 dark:text-gray-200">
+    <div className="md:pt-10 mb-24">
+      <h2 className="text-3xl md:text-4xl font-heading leading-11 tracking-tighter md:tracking-normal text-gray-700 dark:text-gray-200">
         {title}
         <span className="text-slate-400">
           {` `}
@@ -36,9 +36,3 @@ export default function Hero({ title, tagline, userLinks }: IHeroProps) {
     </div>
   );
 }
-
-// const Social = styled.p`
-//   margin-left: 8px;
-//   margin-top: 20px;
-//   font-size: 0.7rem;
-// `;
