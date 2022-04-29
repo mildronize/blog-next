@@ -1,16 +1,21 @@
-import classnames from 'classnames';
+import cn from 'classnames';
 
 export interface IContainerProps {
   children: React.ReactNode;
   wide?: boolean;
+  className?: string;
 }
 
-export function Container({ children, wide }: IContainerProps) {
+export function Container({ children, wide, className }: IContainerProps) {
   return (
     <div
-      className={classnames('container mx-auto px-5', {
-        'max-w-3xl': !wide,
-      })}
+      className={cn(
+        'container mx-auto px-5',
+        {
+          'max-w-3xl': !wide,
+        },
+        className
+      )}
     >
       {children}
     </div>

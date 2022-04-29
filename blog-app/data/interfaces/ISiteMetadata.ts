@@ -15,6 +15,7 @@ export interface ISiteMetadata {
   tmpPath: string;
   components: {
     hero: IHero;
+    footer: IFooter;
   };
   userLinks: IUserLink[];
 }
@@ -28,4 +29,10 @@ export interface IUserLink {
   label: string;
   url: string;
   iconClassName: string;
+}
+
+export interface IFooter {
+  sinceYear: number;
+  copyright: string;
+  tagline: string;
 }

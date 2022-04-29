@@ -21,6 +21,11 @@ const siteMetadata = {
       title: `Hi 👋 I\'m Thada, DevSecOps Engineer, welcome to my blog. `,
       tagline: `Sharing ideas, programming techniques, web technology and others.`,
     },
+    footer: {
+      sinceYear: 2015,
+      copyright: 'thadaw.com',
+      tagline: '<a href="https://github.com/mildronize/blog-next" target="_blank">v6.0.0</a> Built with ❤️ by Thada Wangthammang'
+    },
   },
   // Links to social profiles/projects you want to display in the author segment/navigation bar.
   userLinks: [
