@@ -43,7 +43,7 @@ function getPostData(postMetadataPath: string, slug: string){
   return new PostData(contentPath, fileContent);
 }
 
-export async function getPostBySlug(slug: string, fields: (keyof IPostSerializableJSON)[] = [], postData?: PostData) {
+export async function getConentBySlug(slug: string, fields: (keyof IPostSerializableJSON)[] = [], postData?: PostData) {
   // Reuse postData
   const _postData = postData? postData: getPostData(postMetadataPath, slug);
   if (!_postData) throw new Error(`postData should be assigned.`);
@@ -65,14 +65,29 @@ export async function getPostBySlug(slug: string, fields: (keyof IPostSerializab
   return filterRecord(postSerializableJSON, fields);
 }
 
-export async function getAllPosts(fields: (keyof IPostSerializableJSON)[] = []) {
+interface IQueryContentOption {
+  limit?: number;
+  orderBy?: { date: 'ASC'| 'DESC' };
+  where? : { 
+    slug?: string;
+    // tag?: string;
+    // categroy: string;
+  }
+}
+
+const test: IQueryContentOption = {
+  orderBy: { date : 'ASC'},
+  where: { slug: 'ssdfgh'}
+}
+
+export async function queryContent(fields: (keyof IPostSerializableJSON)[] = []) {
   const slugData = await generatePostMetadata();
   const posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[] = [];
 
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
     // TODO: Make it non-blocking IO
-    const post = await getPostBySlug(slug, fields, data.postData);
+    const post = await getConentBySlug(slug, fields, data.postData);
     posts.push(post);
   }
   const sortedPosts = posts.sort((post1, post2) => (post1.date && post2.date ? (post1.date > post2.date ? -1 : 1) : 1));

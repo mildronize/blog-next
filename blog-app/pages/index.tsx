@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Container } from '@thadaw.com/components/layouts';
 import PostList from '@thadaw.com/components/PostList';
 import PageLayout from '@thadaw.com/components/PageLayout';
-import { getAllPosts } from '@thadaw.com/libs/content-service';
+import { queryContent } from '@thadaw.com/libs/content-service';
 import Hero from '@thadaw.com/components/Hero';
 
 import { siteMetadata } from '@thadaw.com/data';
@@ -27,7 +27,7 @@ export default function Index({ allPosts }: IIndexProps) {
 }
 
 export async function getStaticProps() {
-  const allPosts = await getAllPosts(['title', 'date', 'slug']);
+  const allPosts = await queryContent(['title', 'date', 'slug']);
   // console.log(allPosts)
   // allPosts[0].t
   return {
