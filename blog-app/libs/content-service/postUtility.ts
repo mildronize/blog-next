@@ -35,7 +35,7 @@ export interface IPostSerializableJSON {
 
 export type PostMetadataMap = Record<string, IPostMetadata>;
 
-function getPostData(postMetadataPath: string, slug: string){
+function getPostData(postMetadataPath: string, slug: string) {
   // TODO: validate JSON format
   const postMetadataMap: PostMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, defaultUnicode));
   const contentPath = postMetadataMap[slug].path;
@@ -43,9 +43,13 @@ function getPostData(postMetadataPath: string, slug: string){
   return new PostData(contentPath, fileContent);
 }
 
-export async function getConentBySlug(slug: string, fields: (keyof IPostSerializableJSON)[] = [], postData?: PostData) {
+export async function getContentBySlug(
+  slug: string,
+  fields: (keyof IPostSerializableJSON)[] = [],
+  postData?: PostData
+) {
   // Reuse postData
-  const _postData = postData? postData: getPostData(postMetadataPath, slug);
+  const _postData = postData ? postData : getPostData(postMetadataPath, slug);
   if (!_postData) throw new Error(`postData should be assigned.`);
 
   // inject uuid if no uuid
@@ -65,33 +69,83 @@ export async function getConentBySlug(slug: string, fields: (keyof IPostSerializ
   return filterRecord(postSerializableJSON, fields);
 }
 
+type OrderBy = 'ASC' | 'DESC';
+type Where = {
+  slug?: string;
+  // tag?: string;
+  // categroy: string;
+};
+
 interface IQueryContentOption {
+  offset?: number;
   limit?: number;
-  orderBy?: { date: 'ASC'| 'DESC' };
-  where? : { 
-    slug?: string;
-    // tag?: string;
-    // categroy: string;
-  }
+  orderBy?: { date: OrderBy };
+  where?: Where;
 }
 
-const test: IQueryContentOption = {
-  orderBy: { date : 'ASC'},
-  where: { slug: 'ssdfgh'}
-}
-
-export async function queryContent(fields: (keyof IPostSerializableJSON)[] = []) {
+export async function getAllContents(fields: (keyof IPostSerializableJSON)[] = []) {
   const slugData = await generatePostMetadata();
   const posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[] = [];
 
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
     // TODO: Make it non-blocking IO
-    const post = await getConentBySlug(slug, fields, data.postData);
+    const post = await getContentBySlug(slug, fields, data.postData);
     posts.push(post);
   }
-  const sortedPosts = posts.sort((post1, post2) => (post1.date && post2.date ? (post1.date > post2.date ? -1 : 1) : 1));
-  return sortedPosts;
+  return posts;
+}
+
+
+export async function queryContent(fields: (keyof IPostSerializableJSON)[] = [], options?: IQueryContentOption) {
+  let posts = await getAllContents(fields);
+  if (!options) return posts;
+  // 1: WHERE
+  if (options?.where) {
+    posts = whereContent(posts, fields, options.where);
+  }
+  // 2: ORDER
+  if (options?.orderBy?.date) {
+    posts = orderContentByDate(posts, fields, options.orderBy?.date);
+  }
+  // 3: LIMIT
+  if (options?.limit) {
+    const offset = options?.offset ? options?.offset : 0;
+    posts = posts.slice(offset, options?.limit + offset);
+  }
+  return posts;
+}
+
+function whereContent(
+  posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[],
+  fields: (keyof IPostSerializableJSON)[] = [],
+  where: Where
+) {
+  if (fields.indexOf('slug') < 0) throw new Error('Slug is requre for using where option');
+  return posts.filter(post => {
+    if (post.slug === where?.slug) {
+      return post;
+    }
+  });
+}
+
+function orderContentByDate(
+  posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[],
+  fields: (keyof IPostSerializableJSON)[] = [],
+  orderBy: OrderBy
+) {
+  if (fields.indexOf('date') < 0) throw new Error('Using sorting by date is requried field date');
+  const sortCondition: Record<OrderBy, { true: number; false: number }> = {
+    ASC: { true: 1, false: -1 },
+    DESC: { true: -1, false: 1 },
+  };
+  return posts.sort((post1, post2) =>
+    post1.date && post2.date
+      ? post1.date > post2.date
+        ? sortCondition[orderBy].true
+        : sortCondition[orderBy].false
+      : 1
+  );
 }
 
 export async function getAllMarkdownPaths() {

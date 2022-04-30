@@ -23,11 +23,17 @@ export default function Index({ allPosts }: IIndexProps) {
 }
 
 export async function getStaticProps() {
-  const allPosts = await queryContent(['title', 'date', 'slug']);
+  const allPosts = await queryContent(['title', 'date', 'slug'], {
+    orderBy: { date: 'DESC' },
+  });
 
-  const yearSet = new Set();
-  let yearGroup = [];
-  allPosts.forEach(post => {});
+
+  // allPosts[0].
+  // const yearSet = new Set();
+  // let yearGroup = [];
+  // allPosts.forEach(post => {
+  //   post.
+  // });
 
   return {
     props: { allPosts },

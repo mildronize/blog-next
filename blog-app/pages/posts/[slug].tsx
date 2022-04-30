@@ -4,9 +4,8 @@ import { Container } from '@thadaw.com/components/layouts';
 import PostBody from '@thadaw.com/components/Post/PostBody';
 import PostHeader from '@thadaw.com/components/Post/PostHeader';
 import PageLayout from '@thadaw.com/components/PageLayout';
-import { getConentBySlug, queryContent } from '@thadaw.com/libs/content-service';
+import { queryContent, getContentBySlug } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
-import { siteMetadata } from '@thadaw.com/data';
 
 interface IPostProps {
   post: any;
@@ -41,11 +40,12 @@ export default function Post({ post }: IPostProps) {
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = await getConentBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content']);
-
+  const post = await getContentBySlug(params.slug, ['date', 'slug', 'path', 'content']);
   const markdownParserOption = {
     relativePath: post.path,
   };
+
+  // post.
 
   const content = await new MarkdownParser(post.content || '', markdownParserOption).toHtml();
 

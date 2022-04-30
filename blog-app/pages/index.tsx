@@ -13,13 +13,12 @@ interface IIndexProps {
 }
 
 export default function Index({ allPosts }: IIndexProps) {
-  const recentPosts = allPosts.slice(0, 4);
   return (
     <>
       <PageLayout>
         <Container>
           <Hero {...hero} userLinks={siteMetadata.userLinks} />
-          <PostList posts={recentPosts} />
+          <PostList posts={allPosts} />
         </Container>
       </PageLayout>
     </>
@@ -27,9 +26,10 @@ export default function Index({ allPosts }: IIndexProps) {
 }
 
 export async function getStaticProps() {
-  const allPosts = await queryContent(['title', 'date', 'slug']);
-  // console.log(allPosts)
-  // allPosts[0].t
+  const allPosts = await queryContent(['title', 'date', 'slug'], {
+    orderBy: { date: 'DESC' },
+    limit: 4,
+  });
   return {
     props: { allPosts },
   };
