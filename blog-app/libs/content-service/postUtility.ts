@@ -85,17 +85,15 @@ interface IQueryContentOption {
 
 export async function getAllContents(fields: (keyof IPostSerializableJSON)[] = []) {
   const slugData = await generatePostMetadata();
-  const posts: IPostSerializableJSON[] = [];
 
+  const postWorkers = [];
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
-    // TODO: Make it non-blocking IO
-    const post = await getContentBySlug(slug, fields, data.postData);
-    posts.push(post);
+    postWorkers.push(getContentBySlug(slug, fields, data.postData));
   }
+  const posts = await Promise.all(postWorkers);
   return posts;
 }
-
 
 export async function queryContent(fields: (keyof IPostSerializableJSON)[] = [], options?: IQueryContentOption) {
   let posts = await getAllContents(fields);
