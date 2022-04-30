@@ -7,7 +7,6 @@ import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData from './PostData';
 import { PostMetadataMap, getAllMarkdownPaths } from './postUtility';
 
-const glob = promisify(_glob);
 const defaultUnicode = 'utf8';
 
 const tmpPath = siteMetadata.tmpPath;
@@ -27,7 +26,7 @@ async function generatePostMetadata() {
     // TODO: use Async
     const fileContents = fs.readFileSync(mdPath, defaultUnicode);
     const postData = new PostData(mdPath, fileContents);
-    const slug = postData.slug;
+    const slug = postData.field.slug;
     postMetadataMap[slug] = {
       path: mdPath,
       postData,

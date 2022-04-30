@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import PageLayout from '@thadaw.com/components/PageLayout';
 
 function TalkPage() {
-
   return (
     <PageLayout pageTitle="Talks">
       <h1>My Talks</h1>

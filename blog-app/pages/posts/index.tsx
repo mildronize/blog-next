@@ -1,5 +1,5 @@
 import { Container } from '@thadaw.com/components/layouts';
-import PostList from '@thadaw.com/components/PostList';
+import PostListByYear from '@thadaw.com/components/PostListByYear';
 import PageLayout from '@thadaw.com/components/PageLayout';
 import { getAllPosts } from '@thadaw.com/libs/content-service';
 
@@ -15,7 +15,7 @@ export default function Index({ allPosts }: IIndexProps) {
     <>
       <PageLayout>
         <Container>
-          <PostList posts={allPosts} />
+          <PostListByYear posts={allPosts} />
         </Container>
       </PageLayout>
     </>
@@ -24,6 +24,10 @@ export default function Index({ allPosts }: IIndexProps) {
 
 export async function getStaticProps() {
   const allPosts = await getAllPosts(['title', 'date', 'slug']);
+
+  const yearSet = new Set();
+  let yearGroup = [];
+  allPosts.forEach(post => {});
 
   return {
     props: { allPosts },

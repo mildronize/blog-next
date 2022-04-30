@@ -14,7 +14,7 @@ interface IHeroProps extends IHero {
 export default function Hero({ title, tagline, userLinks }: IHeroProps) {
   return (
     <div className="md:pt-10 mb-24">
-      <h2 className="text-3xl md:text-4xl font-heading leading-11 tracking-tighter md:tracking-normal text-gray-700 dark:text-gray-200">
+      <h2 className="text-2xl md:text-4xl font-heading leading-11 tracking-tighter md:tracking-normal text-gray-700 dark:text-gray-200">
         {title}
         <span className="text-slate-400">
           {` `}
@@ -22,10 +22,14 @@ export default function Hero({ title, tagline, userLinks }: IHeroProps) {
         </span>
       </h2>
       <div className="mt-10">
-        <Button className="font-bold mr-3" href="/about">
+        <Button className="font-bold mr-3 text-gray-600 dark:text-gray-400" href="/about">
           👤&nbsp; About Me
         </Button>
-        <Button className="font-bold" href="https://bit.ly/mildthada-notion-cv-v3" target="_blank">
+        <Button
+          className="font-bold text-gray-600 dark:text-gray-400"
+          href="https://bit.ly/mildthada-notion-cv-v3"
+          target="_blank"
+        >
           📄&nbsp; Resume
         </Button>
         <div className="mt-8">

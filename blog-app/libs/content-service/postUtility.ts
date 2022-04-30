@@ -19,11 +19,25 @@ export interface IPostMetadata {
   postData?: PostData;
 }
 
+/**
+ *  Data which export to API should be Serializable to JSON passing following Next.js function:
+ *  getStaticProps, getServerSideProps, or getInitialProps
+ */
+
+//  type IncludesRouteParams<Par extends string> =
+//  | `${string}/:${Par}`
+//  | `${string}/:${Par}/${string}`;
+
+export interface IPostSerializableJSON extends Record<string, any> {
+  slug: string;
+  date: string | null;
+  title?: string;
+  path: string;
+}
+
 export type PostMetadataMap = Record<string, IPostMetadata>;
 
-// export type PostMetadata = Record<string, string>;
-
-export async function getPostBySlug(slug: string, fields: string[] = [], postData?: PostData) {
+export async function getPostBySlug(slug: string, fields: string[] = [], postData?: PostData): Promise<any> {
   // Reuse postData
   let _postData = postData;
   if (!postData) {
@@ -38,32 +52,29 @@ export async function getPostBySlug(slug: string, fields: string[] = [], postDat
   // inject uuid if no uuid
   await _postData.injectUUID();
 
-  const items: Record<string, any> = {};
+  // Load PostData to Serializable JSON which supported by Next.js API
+  const postSerializableJSON: IPostSerializableJSON = {
+    title: _postData.frontmatter.title,
+    date: _postData.field.date?.toISOString() || null,
+    slug: _postData.field.slug,
+    path: _postData.field.path,
+    content: _postData.content,
+  };
 
   // Ensure only the minimal needed data is exposed
+  // https://nextjs.org/docs/messages/large-page-data
+  const result: Record<string, any> = {};
   fields.forEach(field => {
-    if (field === 'slug') {
-      items[field] = slug;
-    } else if (field === 'content') {
-      items[field] = _postData?.content;
-    } else if (field === 'date') {
-      // error - Error: Error serializing `.allPosts[5].date` returned from `getStaticProps` in "/".
-      // Reason: `undefined` cannot be serialized as JSON. Please use `null` or omit this value.
-      // JSON cannot be undefined !!
-      items[field] = _postData?.date ? _postData?.date?.toISOString() : null;
-    } else if (field === 'path') {
-      items[field] = _postData?.path;
-    } else if (typeof _postData?.frontmatter[field] !== 'undefined') {
-      items[field] = _postData?.frontmatter[field];
+    if (typeof postSerializableJSON[field] !== 'undefined') {
+      result[field] = postSerializableJSON[field];
     }
   });
-
-  return items;
+  return result;
 }
 
-export async function getAllPosts(fields: string[] = []): Promise<any[]> {
+export async function getAllPosts(fields: string[] = []): Promise<IPostSerializableJSON[]> {
   const slugData = await generatePostMetadata();
-  const posts: any[] = [];
+  const posts: IPostSerializableJSON[] = [];
 
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
@@ -71,8 +82,8 @@ export async function getAllPosts(fields: string[] = []): Promise<any[]> {
     const post = await getPostBySlug(slug, fields, data.postData);
     posts.push(post);
   }
-
-  return posts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  const sortedPosts = posts.sort((post1, post2) => (post1.date && post2.date ? (post1.date > post2.date ? -1 : 1) : 1));
+  return sortedPosts;
 }
 
 export async function getAllMarkdownPaths() {
