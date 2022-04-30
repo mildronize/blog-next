@@ -17,7 +17,7 @@ export default function Topbar() {
           </div>
         </Container>
       </section>
-      <div className="mb-32"></div>
+      <div className="mb-24 md:mb-32"></div>
     </>
   );
 }
