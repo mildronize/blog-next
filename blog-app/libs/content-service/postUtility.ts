@@ -148,8 +148,8 @@ function orderContentByDate(
 
 export async function getAllContentOnlySlug() {
   const postMetadataMap = await getPostMetadataMap();
-  // Fallback to original method
-  if (postMetadataMap === {}) return await queryContent(['slug']);
+  // Fallback to original method if no metadata file
+  if (Object.keys(postMetadataMap).length === 0) return await queryContent(['slug']);
   const posts: IPostSerializableJSON[] = [];
   for (const slug of Object.keys(postMetadataMap)) {
     posts.push({
