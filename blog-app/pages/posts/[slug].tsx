@@ -40,12 +40,10 @@ export default function Post({ post }: IPostProps) {
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = await getContentBySlug(params.slug, ['date', 'slug', 'path', 'content']);
+  const post = await getContentBySlug(params.slug, ['title','date', 'slug', 'path', 'content']);
   const markdownParserOption = {
     relativePath: post.path,
   };
-
-  // post.
 
   const content = await new MarkdownParser(post.content || '', markdownParserOption).toHtml();
 

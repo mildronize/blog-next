@@ -6,7 +6,7 @@ import _glob from 'glob';
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData from './PostData';
 import generatePostMetadata from './generatePostMetadata';
-import { filterRecord, FilterRecord } from './utility';
+import { filterRecord } from './utility';
 
 const glob = promisify(_glob);
 const defaultUnicode = 'utf8';
@@ -85,7 +85,7 @@ interface IQueryContentOption {
 
 export async function getAllContents(fields: (keyof IPostSerializableJSON)[] = []) {
   const slugData = await generatePostMetadata();
-  const posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[] = [];
+  const posts: IPostSerializableJSON[] = [];
 
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
@@ -117,7 +117,7 @@ export async function queryContent(fields: (keyof IPostSerializableJSON)[] = [],
 }
 
 function whereContent(
-  posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[],
+  posts: IPostSerializableJSON[],
   fields: (keyof IPostSerializableJSON)[] = [],
   where: Where
 ) {
@@ -130,7 +130,7 @@ function whereContent(
 }
 
 function orderContentByDate(
-  posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[],
+  posts: IPostSerializableJSON[],
   fields: (keyof IPostSerializableJSON)[] = [],
   orderBy: OrderBy
 ) {
