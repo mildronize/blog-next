@@ -5,7 +5,7 @@ import _glob from 'glob';
 
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData from './PostData';
-import generatePostMetadata from './generatePostMetadata';
+import generatePostMetadata, { getPostMetadataMap } from './generatePostMetadata';
 import { filterRecord } from './utility';
 
 const glob = promisify(_glob);
@@ -114,12 +114,8 @@ export async function queryContent(fields: (keyof IPostSerializableJSON)[] = [],
   return posts;
 }
 
-function whereContent(
-  posts: IPostSerializableJSON[],
-  fields: (keyof IPostSerializableJSON)[] = [],
-  where: Where
-) {
-  if (fields.indexOf('slug') < 0) throw new Error('Slug is requre for using where option');
+function whereContent(posts: IPostSerializableJSON[], fields: (keyof IPostSerializableJSON)[] = [], where: Where) {
+  if (fields.indexOf('slug') < 0) throw new Error('Slug is require for using where option');
   return posts.filter(post => {
     if (post.slug === where?.slug) {
       return post;
@@ -144,6 +140,23 @@ function orderContentByDate(
         : sortCondition[orderBy].false
       : 1
   );
+}
+
+/**
+ * Better performance than using queryContent(['slug']);
+ */
+
+export async function getAllContentOnlySlug() {
+  const postMetadataMap = await getPostMetadataMap();
+  // Fallback to original method
+  if (postMetadataMap === {}) return await queryContent(['slug']);
+  const posts: IPostSerializableJSON[] = [];
+  for (const slug of Object.keys(postMetadataMap)) {
+    posts.push({
+      slug,
+    });
+  }
+  return posts;
 }
 
 export async function getAllMarkdownPaths() {

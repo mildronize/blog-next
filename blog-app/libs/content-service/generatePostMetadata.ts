@@ -8,10 +8,9 @@ import { PostMetadataMap, getAllMarkdownPaths } from './postUtility';
 const defaultUnicode = 'utf8';
 
 const tmpPath = siteMetadata.tmpPath;
-const postMetadataPath = path.join(tmpPath, '.posts.metadata.json');
+const postMetadataPath = path.join(tmpPath, siteMetadata.posts.postMetadataPath);
 
-async function generatePostMetadata() {
-  const mdPaths = await getAllMarkdownPaths();
+export async function getPostMetadataMap() {
   let postMetadataMap: PostMetadataMap = {};
   try {
     // Make dev mode work when the slug name is changed
@@ -20,6 +19,13 @@ async function generatePostMetadata() {
   } catch (e) {
     console.debug(`No exisitng "${postMetadataPath}" file.`);
   }
+  return postMetadataMap;
+}
+
+async function generatePostMetadata() {
+  const mdPaths = await getAllMarkdownPaths();
+  let postMetadataMap: PostMetadataMap = await getPostMetadataMap();
+
   for (const mdPath of mdPaths) {
     // TODO: use Async
     const fileContents = fs.readFileSync(mdPath, defaultUnicode);

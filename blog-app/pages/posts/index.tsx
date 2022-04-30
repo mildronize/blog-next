@@ -27,7 +27,6 @@ export async function getStaticProps() {
     orderBy: { date: 'DESC' },
   });
 
-
   // allPosts[0].
   // const yearSet = new Set();
   // let yearGroup = [];
