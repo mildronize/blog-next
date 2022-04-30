@@ -29,7 +29,7 @@ export default function Index({ allPosts }: IIndexProps) {
 export async function getStaticProps() {
   const allPosts = await getAllPosts(['title', 'date', 'slug']);
   // console.log(allPosts)
-
+  // allPosts[0].t
   return {
     props: { allPosts },
   };

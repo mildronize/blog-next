@@ -6,6 +6,7 @@ import _glob from 'glob';
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData from './PostData';
 import generatePostMetadata from './generatePostMetadata';
+import { filterRecord, FilterRecord } from './utility';
 
 const glob = promisify(_glob);
 const defaultUnicode = 'utf8';
@@ -24,31 +25,29 @@ export interface IPostMetadata {
  *  getStaticProps, getServerSideProps, or getInitialProps
  */
 
-//  type IncludesRouteParams<Par extends string> =
-//  | `${string}/:${Par}`
-//  | `${string}/:${Par}/${string}`;
-
-export interface IPostSerializableJSON extends Record<string, any> {
-  slug: string;
-  date: string | null;
+export interface IPostSerializableJSON {
+  slug?: string;
+  date?: string | null;
   title?: string;
-  path: string;
+  path?: string;
+  content?: string;
 }
 
 export type PostMetadataMap = Record<string, IPostMetadata>;
 
-export async function getPostBySlug(slug: string, fields: string[] = [], postData?: PostData): Promise<any> {
-  // Reuse postData
-  let _postData = postData;
-  if (!postData) {
-    // TODO: validate JSON format
-    const postMetadataMap: PostMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, defaultUnicode));
-    const contentPath = postMetadataMap[slug].path;
-    const fileContent = fs.readFileSync(contentPath, defaultUnicode);
-    _postData = new PostData(contentPath, fileContent);
-  }
+function getPostData(postMetadataPath: string, slug: string){
+  // TODO: validate JSON format
+  const postMetadataMap: PostMetadataMap = JSON.parse(fs.readFileSync(postMetadataPath, defaultUnicode));
+  const contentPath = postMetadataMap[slug].path;
+  const fileContent = fs.readFileSync(contentPath, defaultUnicode);
+  return new PostData(contentPath, fileContent);
+}
 
+export async function getPostBySlug(slug: string, fields: (keyof IPostSerializableJSON)[] = [], postData?: PostData) {
+  // Reuse postData
+  const _postData = postData? postData: getPostData(postMetadataPath, slug);
   if (!_postData) throw new Error(`postData should be assigned.`);
+
   // inject uuid if no uuid
   await _postData.injectUUID();
 
@@ -63,18 +62,12 @@ export async function getPostBySlug(slug: string, fields: string[] = [], postDat
 
   // Ensure only the minimal needed data is exposed
   // https://nextjs.org/docs/messages/large-page-data
-  const result: Record<string, any> = {};
-  fields.forEach(field => {
-    if (typeof postSerializableJSON[field] !== 'undefined') {
-      result[field] = postSerializableJSON[field];
-    }
-  });
-  return result;
+  return filterRecord(postSerializableJSON, fields);
 }
 
-export async function getAllPosts(fields: string[] = []): Promise<IPostSerializableJSON[]> {
+export async function getAllPosts(fields: (keyof IPostSerializableJSON)[] = []) {
   const slugData = await generatePostMetadata();
-  const posts: IPostSerializableJSON[] = [];
+  const posts: FilterRecord<IPostSerializableJSON, keyof IPostSerializableJSON>[] = [];
 
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
