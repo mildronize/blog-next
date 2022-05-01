@@ -15,6 +15,9 @@ export default function Index({ allPosts }: IIndexProps) {
     <>
       <PageLayout>
         <Container>
+          <h2 className="mb-8 text-2xl md:text-3xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
+            Recent Posts
+          </h2>
           <PostListByYear posts={allPosts} />
         </Container>
       </PageLayout>
@@ -26,13 +29,6 @@ export async function getStaticProps() {
   const allPosts = await queryContent(['title', 'date', 'slug'], {
     orderBy: { date: 'DESC' },
   });
-
-  // allPosts[0].
-  // const yearSet = new Set();
-  // let yearGroup = [];
-  // allPosts.forEach(post => {
-  //   post.
-  // });
 
   return {
     props: { allPosts },

@@ -1,4 +1,4 @@
-import DateFormatter from './DateFormatter';
+import DateFormatter from '../DateFormatter';
 
 interface IPostHeaderProps {
   title: string;
