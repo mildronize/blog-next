@@ -17,6 +17,9 @@ module.exports = {
       spacing: {
         '9/16': '56.25%',
       },
+      scale: {
+        102: '102%'
+      },
       lineHeight: {
         11: '2.75rem',
         12: '3rem',

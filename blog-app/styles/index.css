@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-    body{
-        @apply transition-colors duration-200 ease-linear font-thai font-light;
-    }
+  body {
+    @apply transition-colors duration-200 ease-linear font-thai font-light;
+  }
 
-    h1,h2,h3 {
-        /* @apply font-heading; */
-        @apply font-bold
-    }
+  h1,
+  h2,
+  h3 {
+    /* @apply font-heading; */
+    @apply font-bold;
+  }
+}
+
+@layer components {
+
+.truncate-none {
+  overflow: auto;
+  text-overflow: none;
+  white-space: normal;
+}
 }
 
 /* :root {

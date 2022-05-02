@@ -1,6 +1,11 @@
-import { parseISO, format, isValid } from 'date-fns';
+import { parseISO, format as dateFormat, isValid } from 'date-fns';
 
-export default function DateFormatter({ dateString }: { dateString: string }) {
+interface IDateFormatter {
+  dateString: string;
+  format?: string;
+}
+
+export default function DateFormatter({ dateString, format = 'MMM	d, yyyy' }: IDateFormatter) {
   const date = parseISO(dateString);
-  return <time dateTime={dateString}>{isValid(date) ? format(date, 'LLLL	d, yyyy') : ``}</time>;
+  return <time dateTime={dateString}>{isValid(date) ? dateFormat(date, format) : ``}</time>;
 }
