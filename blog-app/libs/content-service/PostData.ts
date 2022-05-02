@@ -7,6 +7,22 @@ import siteMetadata from '@thadaw.com/data/siteMetadata';
 import _ from 'lodash';
 const { posts } = siteMetadata;
 
+/**
+ *  Data which export to API should be Serializable to JSON passing following Next.js function:
+ *  getStaticProps, getServerSideProps, or getInitialProps
+ */
+
+ export interface IPostSerializableJSON {
+  slug?: string;
+  /**
+   * Date should be string
+   */
+  date?: string | null;
+  title?: string;
+  path?: string;
+  content?: string;
+}
+
 // export type Frontmatter = Record<string, any>;
 export interface IFrontmatter {
   title?: string;
@@ -29,14 +45,10 @@ export default class PostData {
 
   constructor(relativePath: string, markdown: string) {
     const { data, content } = matter(markdown);
-    // this.path = relativePath;
     const filename = getActualFilename(posts.postDirectory, relativePath);
-    // this.filenameSlug = extractFilenameSlug(filename);
     // TODO: Validate object when load from string
     this.frontmatter = this.importFrontmatter(data);
     this.content = content;
-    // this.slug= this.generateSlug(),
-    // const date = extractDate(filename);
     this.field = {
       slug: this.generateSlug(),
       date: extractDate(filename),
@@ -76,5 +88,19 @@ export default class PostData {
       this.frontmatter.uuid = uuid;
       await fs.writeFile(this.field.path, matter.stringify(this.content, this.frontmatter), defaultUnicode);
     }
+  } 
+
+  /**
+   * @returns Export to Serializable JSON which supported by Next.js API
+   */
+
+  public toJSON(): IPostSerializableJSON {
+    return {
+      title: this.frontmatter.title,
+      date: this.field.date?.toISOString() || null,
+      slug: this.field.slug,
+      path: this.field.path,
+      content: this.content,
+    };
   }
 }

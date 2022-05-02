@@ -1,6 +1,6 @@
 // import PostPreview from './Post/PostPreview';
 import Link from 'next/link';
-import { parseISO, format, isValid } from 'date-fns';
+import { parseISO, format, isValid, getYear } from 'date-fns';
 import DateFormatter from './DateFormatter';
 import { IPostSerializableJSON } from '@thadaw.com/libs/content-service';
 
@@ -8,18 +8,11 @@ interface IPostListByYearProps {
   posts: IPostSerializableJSON[];
 }
 
-export default function PostListByYear({ posts }: IPostListByYearProps) {
-  const yearSet = new Set<number>();
-  posts.forEach(post => {
-    if (post.date) {
-      yearSet.add(parseInt(format(parseISO(post.date), 'yyyy')));
-    }
-  });
-  const yearGroup = Array.from(yearSet).sort((a, b) => b - a);
 
+export default function PostListByYear({ posts }: IPostListByYearProps) {
   return (
     <section>
-      {yearGroup.map(year => (
+      {getYearGroup(posts).map(year => (
         <div key={year}>
           <h2 className="mb-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
             {year}
@@ -64,4 +57,14 @@ function PostPreview({ title, date, slug }: IPostSerializableJSON) {
       <div className="text-sm mb-4">{date && <DateFormatter dateString={date} />}</div>
     </div>
   );
+}
+
+function getYearGroup(posts: IPostSerializableJSON[]){
+  const yearSet = new Set<number>();
+  posts.forEach(post => {
+    if (post.date) {
+      yearSet.add(parseInt(format(parseISO(post.date), 'yyyy')));
+    }
+  });
+  return Array.from(yearSet).sort((a, b) => b - a);
 }

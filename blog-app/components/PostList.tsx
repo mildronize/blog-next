@@ -1,11 +1,8 @@
+import { IPostSerializableJSON } from '@thadaw.com/libs/content-service';
 import PostPreview from './Post/PostPreview';
 
 interface IMoreStoriesProps {
-  posts: {
-    slug: string;
-    title: string;
-    date: string;
-  }[];
+  posts: IPostSerializableJSON[];
 }
 
 export default function PostList({ posts }: IMoreStoriesProps) {
@@ -16,7 +13,7 @@ export default function PostList({ posts }: IMoreStoriesProps) {
       </h2>
       <div className="">
         {posts.map(post => (
-          <PostPreview key={post.slug} title={post.title} date={post.date} slug={post.slug} />
+          <PostPreview key={post.slug} title={post.title || ''} date={post.date || ''} slug={post.slug || ''} />
         ))}
       </div>
     </section>

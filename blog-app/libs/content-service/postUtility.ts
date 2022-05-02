@@ -4,7 +4,7 @@ import { promisify } from 'util';
 import _glob from 'glob';
 
 import siteMetadata from '@thadaw.com/data/siteMetadata';
-import PostData from './PostData';
+import PostData, { IPostSerializableJSON } from './PostData';
 import generatePostMetadata, { getPostMetadataMap } from './generatePostMetadata';
 import { filterRecord } from './utility';
 
@@ -18,19 +18,6 @@ export interface IPostMetadata {
   path: string;
   uuid?: string;
   postData?: PostData;
-}
-
-/**
- *  Data which export to API should be Serializable to JSON passing following Next.js function:
- *  getStaticProps, getServerSideProps, or getInitialProps
- */
-
-export interface IPostSerializableJSON {
-  slug?: string;
-  date?: string | null;
-  title?: string;
-  path?: string;
-  content?: string;
 }
 
 export type PostMetadataMap = Record<string, IPostMetadata>;
@@ -56,30 +43,27 @@ export async function getContentBySlug(
   await _postData.injectUUID();
 
   // Load PostData to Serializable JSON which supported by Next.js API
-  const postSerializableJSON: IPostSerializableJSON = {
-    title: _postData.frontmatter.title,
-    date: _postData.field.date?.toISOString() || null,
-    slug: _postData.field.slug,
-    path: _postData.field.path,
-    content: _postData.content,
-  };
-
+  const postSerializableJSON = _postData.toJSON();
+  
   // Ensure only the minimal needed data is exposed
   // https://nextjs.org/docs/messages/large-page-data
   return filterRecord(postSerializableJSON, fields);
 }
 
-type OrderBy = 'ASC' | 'DESC';
+type OrderType = 'ASC' | 'DESC';
 type Where = {
   slug?: string;
   // tag?: string;
   // categroy: string;
 };
+type OrderBy = {
+  date: OrderType;
+}
 
 interface IQueryContentOption {
   offset?: number;
   limit?: number;
-  orderBy?: { date: OrderBy };
+  orderBy?: OrderBy;
   where?: Where;
 }
 
@@ -126,10 +110,10 @@ function whereContent(posts: IPostSerializableJSON[], fields: (keyof IPostSerial
 function orderContentByDate(
   posts: IPostSerializableJSON[],
   fields: (keyof IPostSerializableJSON)[] = [],
-  orderBy: OrderBy
+  orderBy: OrderType
 ) {
   if (fields.indexOf('date') < 0) throw new Error('Using sorting by date is requried field date');
-  const sortCondition: Record<OrderBy, { true: number; false: number }> = {
+  const sortCondition: Record<OrderType, { true: number; false: number }> = {
     ASC: { true: 1, false: -1 },
     DESC: { true: -1, false: 1 },
   };
