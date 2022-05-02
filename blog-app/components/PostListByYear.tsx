@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { parseISO, format, isValid, getYear } from 'date-fns';
 import DateFormatter from './DateFormatter';
 import { IPostSerializableJSON } from '@thadaw.com/libs/content-service';
+import { postPath } from '@thadaw.com/libs/utility';
 
 interface IPostListByYearProps {
   posts: IPostSerializableJSON[];
@@ -14,7 +15,7 @@ export default function PostListByYear({ posts }: IPostListByYearProps) {
     <section>
       {getYearGroup(posts).map(year => (
         <div key={year}>
-          <h2 className="mb-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
+          <h2 className="my-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
             {year}
           </h2>
           <PostList posts={posts} year={year} />
@@ -37,7 +38,7 @@ function PostList({ posts, year }: IPostListProps) {
         {posts.map(
           post =>
             parseYear(post) === year && (
-              <PostPreview key={post.slug} title={post.title || ''} date={post.date || ''} slug={post.slug || ''} />
+              <PostItem key={post.slug} title={post.title || ''} date={post.date || ''} slug={post.slug || ''} />
             )
         )}
       </div>
@@ -45,17 +46,19 @@ function PostList({ posts, year }: IPostListProps) {
   );
 }
 
-function PostPreview({ title, date, slug }: IPostSerializableJSON) {
+function PostItem({ title, date, slug }: IPostSerializableJSON) {
   return (
-    <div>
+    <>
       <div className="mb-10"></div>
-      <h3 className="text-xl mb-3 leading-snug  tracking-tighter md:tracking-normal">
-        <Link href={`/posts/${slug}`}>
-          <a className="hover:underline">{title}</a>
-        </Link>
-      </h3>
-      <div className="text-sm mb-4">{date && <DateFormatter dateString={date} />}</div>
-    </div>
+      <div className='flex-row flex  justify-between'>
+        <h3 className="text-md mb-3 leading-snug  tracking-tighter md:tracking-normal">
+          <Link href={postPath(slug || '')}>
+            <a className="hover:underline">{title}</a>
+          </Link>
+        </h3>
+        <div className="text-sm mb-4">{date && <DateFormatter dateString={date} />}</div>
+      </div>
+    </>
   );
 }
 

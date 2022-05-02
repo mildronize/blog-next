@@ -22,7 +22,7 @@ export async function getPostMetadataMap() {
   return postMetadataMap;
 }
 
-async function generatePostMetadata() {
+export default async function generatePostMetadata() {
   const mdPaths = await getAllMarkdownPaths();
   let postMetadataMap: PostMetadataMap = await getPostMetadataMap();
 
@@ -53,5 +53,3 @@ async function generatePostMetadata() {
   console.debug(`Writing... "${postMetadataPath}" file.`);
   return postMetadataMap;
 }
-
-export default generatePostMetadata;
