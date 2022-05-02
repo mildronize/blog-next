@@ -7,15 +7,64 @@
 // TODO: Check path is valid before start app
 
 const siteMetadata = {
-  title: 'Blog. Next',
+  title: 'Thada W.',
   theme: 'system',
   posts: {
     contentDirectory: '../contents',
     postDirectory: '../contents/posts',
     assetsPublicPath: '/',
-    postMetadataPath: '.posts.metadata.json'
+    postMetadataPath: '.posts.metadata.json',
   },
-  tmpPath: '.tmp'
+  tmpPath: '.tmp',
+  components: {
+    hero: {
+      title: `Hi 👋 I\'m Thada, DevSecOps Engineer, welcome to my blog. `,
+      tagline: `Sharing ideas, programming techniques, web technology and others.`,
+    },
+    footer: {
+      sinceYear: 2015,
+      copyright: 'thadaw.com',
+      tagline: '<a href="https://github.com/mildronize/blog-next" target="_blank">v6.0.0</a> Built with ❤️ by Thada Wangthammang'
+    },
+  },
+  // Links to social profiles/projects you want to display in the author segment/navigation bar.
+  userLinks: [
+    {
+      label: 'GitHub',
+      url: 'https://github.com/mildronize',
+      iconClassName: 'fab fa-github',
+    },
+    {
+      label: 'Facebook',
+      url: 'https://www.facebook.com/mildronize/',
+      iconClassName: 'fab fa-facebook',
+    },
+    {
+      label: 'Twitter',
+      url: 'https://twitter.com/mildronize',
+      iconClassName: 'fab fa-twitter',
+    },
+    {
+      label: 'Email',
+      url: 'mailto:thada.wth@gmail.com',
+      iconClassName: 'fas fa-envelope',
+    },
+    {
+      label: 'Linkedin',
+      url: 'https://www.linkedin.com/in/thada-wangthammang-281894a6/',
+      iconClassName: 'fab fa-linkedin',
+    },
+    {
+      label: 'Medium',
+      url: 'https://thadaw.medium.com/',
+      iconClassName: 'fab fa-medium',
+    },
+    {
+      label: 'RSS',
+      url: '/rss',
+      iconClassName: 'fas fa-rss',
+    },
+  ],
 };
 
-module.exports =  siteMetadata;
+module.exports = siteMetadata;

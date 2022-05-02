@@ -10,13 +10,15 @@
     "export:posts-assets": "node scripts/copy-assets.js",
     "export": "run-s build export:next export:posts-assets",
     "format": "prettier --config .prettierrc '**/*.+(ts|tsx)' --write",
-    "test": "jest  --watch",
+    "test": "run-p typecheck test:ci export --print-label && run-s clean:all",
+    "test:watch": "jest --watch",
     "test:ci": "jest --ci",
     "test:coverage": "jest --coverage",
     "coveralls": "npm run test:coverage && coveralls < ./coverage/lcov.info",
     "clean": "rm -rf .tmp",
+    "clean:all": "run-s clean && rm -rf .next && rm -rf out && rm -rf build",
     "typecheck": "tsc",
-    "prepare:dev": "run-s clean build:content-service",
+    "prepare:dev": "run-s clean:all build:content-service",
     "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service"
   },
   "dependencies": {

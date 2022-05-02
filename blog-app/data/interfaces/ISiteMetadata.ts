@@ -13,4 +13,26 @@ export interface ISiteMetadata {
     postMetadataPath: string;
   };
   tmpPath: string;
+  components: {
+    hero: IHero;
+    footer: IFooter;
+  };
+  userLinks: IUserLink[];
+}
+
+export interface IHero {
+  title: string;
+  tagline: string;
+}
+
+export interface IUserLink {
+  label: string;
+  url: string;
+  iconClassName: string;
+}
+
+export interface IFooter {
+  sinceYear: number;
+  copyright: string;
+  tagline: string;
 }

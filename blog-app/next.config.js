@@ -26,9 +26,13 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  // Using trailing to prevent ERR_TOO_MANY_REDIRECTS when path is /posts
+  trailingSlash: true,
   exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
-      //   "/": { page: "/" },
+      '/posts': { page: '/posts' },
+      '/about': { page: '/about' },
+      '/talks': { page: '/talks' },
     };
   },
   // Note == rewrites, redirects, and headers are not applied when exporting your application, detected (redirects). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes

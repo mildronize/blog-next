@@ -1,6 +1,6 @@
 import '@thadaw.com/styles/index.css';
 import '@thadaw.com/styles/prism-template.css';
-import { ClientReload } from '@thadaw.com/components/ClientReload';
+import ClientReload from '@thadaw.com/components/PageLayout/ClientReload';
 import { ThemeProvider } from 'next-themes';
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 

@@ -1,5 +1,4 @@
-import siteMetadata from '@thadaw.com/data/siteMetadata';
-import Container from './Container';
+import { Container } from '@thadaw.com/components/layouts';
 import ThemeSwitch from './ThemeSwitch';
 import Link from 'next/link';
 
@@ -11,14 +10,14 @@ export default function Topbar() {
           <div className="flex-row flex items-center justify-between">
             <Logo />
             <div className="flex-row flex items-center">
-              <Menu href="#">Posts</Menu>
-              <Menu href="#">Talks</Menu>
+              <Menu href="/posts">Posts</Menu>
+              <Menu href="/talks">Talks</Menu>
               <ThemeSwitch />
             </div>
           </div>
         </Container>
       </section>
-      <div className="mb-32"></div>
+      <div className="mb-24 md:mb-32"></div>
     </>
   );
 }
@@ -40,12 +39,10 @@ interface IMenuProps {
 
 function Menu({ href, children }: IMenuProps) {
   return (
-    // <div className="-mt-3 mx-2">
     <Link href={href}>
-      <a className="font-sans hover:bg-slate-100 hover:text-slate-900 dark:hover:text-slate-50 dark:hover:bg-gray-800 px-4 py-2 rounded-md text-md font-medium">
+      <a className="font-sans hover:bg-gray-50 hover:text-gray-900 dark:hover:text-gray-50 dark:hover:bg-gray-800 px-4 py-2 rounded-md text-md font-medium">
         {children}
       </a>
     </Link>
-    // </div>
   );
 }

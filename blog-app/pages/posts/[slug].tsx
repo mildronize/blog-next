@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
-import Head from 'next/head';
-import Container from '@thadaw.com/components/Container';
-import PostBody from '@thadaw.com/components/post-body';
-import PostHeader from '@thadaw.com/components/post-header';
-import Layout from '@thadaw.com/components/layout';
-import { getPostBySlug, getAllPosts } from '@thadaw.com/libs/content-service';
+import { Container } from '@thadaw.com/components/layouts';
+import PostBody from '@thadaw.com/components/Post/PostBody';
+import PostHeader from '@thadaw.com/components/Post/PostHeader';
+import PageLayout from '@thadaw.com/components/PageLayout';
+import { getContentBySlug, getAllContentOnlySlug } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
 
 interface IPostProps {
@@ -18,18 +17,13 @@ export default function Post({ post }: IPostProps) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout>
+    <PageLayout pageTitle={post.title}>
       <Container>
-        {/* <Header /> */}
         {router.isFallback ? (
           <p>Loading…</p>
         ) : (
           <>
             <article className="mb-32">
-              <Head>
-                <title>{post.title} | Next.js Blog Example with</title>
-                {/* <meta property="og:image" content={post.ogImage.url} /> */}
-              </Head>
               <PostHeader
                 title={post.title}
                 // coverImage={post.coverImage}
@@ -41,13 +35,12 @@ export default function Post({ post }: IPostProps) {
           </>
         )}
       </Container>
-    </Layout>
+    </PageLayout>
   );
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = await getPostBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content']);
-
+  const post = await getContentBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content']);
   const markdownParserOption = {
     relativePath: post.path,
   };
@@ -65,7 +58,7 @@ export async function getStaticProps({ params }: any) {
 }
 
 export async function getStaticPaths() {
-  const posts = await getAllPosts(['slug']);
+  const posts = await getAllContentOnlySlug();
 
   return {
     paths: posts.map(post => {

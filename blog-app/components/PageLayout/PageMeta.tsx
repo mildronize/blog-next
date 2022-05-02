@@ -1,8 +1,16 @@
 import Head from 'next/head';
+import { siteMetadata } from '@thadaw.com/data';
 
-export default function Meta() {
+export interface IMetaProps {
+  pageTitle?: string;
+}
+
+export default function Meta({ pageTitle }: IMetaProps) {
+  const defaultTitle = siteMetadata.title;
+  const title = pageTitle ? `${pageTitle} | ${defaultTitle}` : defaultTitle;
   return (
     <Head>
+      <title>{title}</title>
       <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />

@@ -17,6 +17,9 @@ module.exports = {
       spacing: {
         '9/16': '56.25%',
       },
+      scale: {
+        102: '102%'
+      },
       lineHeight: {
         11: '2.75rem',
         12: '3rem',
@@ -25,7 +28,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
-        thai: [ 'IBM Plex Sans Thai', ...defaultTheme.fontFamily.sans]
+        thai: [ 'IBM Plex Sans Thai', ...defaultTheme.fontFamily.sans],
+        heading: ['Inter', ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: colors.blue,
