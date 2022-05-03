@@ -6,24 +6,22 @@ import { getAllMarkdownPaths } from './postUtility';
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import _ from 'lodash';
 const { posts } = siteMetadata;
+const defaultUnicode = 'utf8';
 
+// Merge type
+interface IPostData extends IFrontmatter, IField {}
+// Remove non-serializable fields
+type SerializablePostData = Partial<Omit<IPostData, 'actualDate'>>;
 /**
  *  Data which export to API should be Serializable to JSON passing following Next.js function:
  *  getStaticProps, getServerSideProps, or getInitialProps
  */
 
- export interface IPostSerializableJSON {
-  slug?: string;
-  /**
-   * Date should be string
-   */
+export interface IPostSerializableJSON extends SerializablePostData {
   date?: string | null;
-  title?: string;
-  path?: string;
   content?: string;
 }
 
-// export type Frontmatter = Record<string, any>;
 export interface IFrontmatter {
   title?: string;
   uuid?: string;
@@ -31,12 +29,10 @@ export interface IFrontmatter {
 
 export interface IField {
   slug: string;
-  date: Date | null;
+  actualDate: Date | null;
   path: string;
   filenameSlug: string;
 }
-
-const defaultUnicode = 'utf8';
 
 export default class PostData {
   public frontmatter: IFrontmatter;
@@ -48,10 +44,11 @@ export default class PostData {
     const filename = getActualFilename(posts.postDirectory, relativePath);
     // TODO: Validate object when load from string
     this.frontmatter = this.importFrontmatter(data);
+    const date = extractDate(filename);
     this.content = content;
     this.field = {
       slug: this.generateSlug(),
-      date: extractDate(filename),
+      actualDate: date,
       path: relativePath,
       filenameSlug: extractFilenameSlug(filename),
     };
@@ -88,7 +85,7 @@ export default class PostData {
       this.frontmatter.uuid = uuid;
       await fs.writeFile(this.field.path, matter.stringify(this.content, this.frontmatter), defaultUnicode);
     }
-  } 
+  }
 
   /**
    * @returns Export to Serializable JSON which supported by Next.js API
@@ -97,7 +94,7 @@ export default class PostData {
   public toJSON(): IPostSerializableJSON {
     return {
       title: this.frontmatter.title,
-      date: this.field.date?.toISOString() || null,
+      date: this.field.actualDate?.toISOString() || null,
       slug: this.field.slug,
       path: this.field.path,
       content: this.content,
