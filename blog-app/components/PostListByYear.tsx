@@ -47,19 +47,21 @@ function PostList({ posts, year }: IPostListProps) {
 function PostItem({ title, date, slug }: IPostSerializableJSON) {
   return (
     <>
-      <div className='flex-row flex  justify-between flex-nowrap'>
+      <div className="flex-row flex  justify-between flex-nowrap">
         <h3 className="text-md mb-10 sm:mb-3 pr-8 leading-snug  tracking-tighter md:tracking-normal md:truncate hover:truncate-none hover:scale-102 transition-transform font-sans font-normal">
           <Link href={postPath(slug || '')}>
             <a className="dark:hover:text-blue-300 hover:text-blue-800">{title}</a>
           </Link>
         </h3>
-        <div className="text-sm mb-4 min-w-fit text-gray-500 dark:text-gray-400 font-bold">{date && <DateFormatter dateString={date} format='MM-dd' />}</div>
+        <div className="text-sm mb-4 min-w-fit text-gray-500 dark:text-gray-400 font-bold">
+          {date && <DateFormatter dateString={date} format="MM-dd" />}
+        </div>
       </div>
     </>
   );
 }
 
-function getYearGroup(posts: IPostSerializableJSON[]){
+function getYearGroup(posts: IPostSerializableJSON[]) {
   const yearSet = new Set<number>();
   posts.forEach(post => {
     if (post.date) {

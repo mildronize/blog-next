@@ -30,7 +30,7 @@ function getPostData(postMetadataPath: string, slug: string) {
   return new PostData(contentPath, fileContent);
 }
 
-// Using Generic type `U extends keyof IPostSerializableJSON` for return only 
+// Using Generic type `U extends keyof IPostSerializableJSON` for return only
 // field that selects
 export async function getContentBySlug<U extends keyof IPostSerializableJSON>(
   slug: string,
@@ -69,10 +69,12 @@ interface IQueryContentOption {
   where?: Where;
 }
 
-export async function getAllContents<U extends keyof IPostSerializableJSON>(fields: U[] = []) : Promise<FilterRecord<IPostSerializableJSON, U>[]> {
+export async function getAllContents<U extends keyof IPostSerializableJSON>(
+  fields: U[] = []
+): Promise<FilterRecord<IPostSerializableJSON, U>[]> {
   const slugData = await generatePostMetadata();
 
-  const postWorkers : Promise<FilterRecord<IPostSerializableJSON, U>>[] = [];
+  const postWorkers: Promise<FilterRecord<IPostSerializableJSON, U>>[] = [];
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
     postWorkers.push(getContentBySlug(slug, fields, data.postData));
@@ -83,7 +85,10 @@ export async function getAllContents<U extends keyof IPostSerializableJSON>(fiel
 
 // // @ts-expect-error
 
-export async function queryContent<U extends keyof IPostSerializableJSON>(fields: U[] = [], options?: IQueryContentOption) {
+export async function queryContent<U extends keyof IPostSerializableJSON>(
+  fields: U[] = [],
+  options?: IQueryContentOption
+) {
   let posts = await getAllContents(fields);
   if (!options) return posts;
   // 1: WHERE
@@ -102,7 +107,7 @@ export async function queryContent<U extends keyof IPostSerializableJSON>(fields
   return posts;
 }
 
-function whereContent(posts: IPostSerializableJSON[], fields: ( keyof IPostSerializableJSON)[] = [], where: Where) {
+function whereContent(posts: IPostSerializableJSON[], fields: (keyof IPostSerializableJSON)[] = [], where: Where) {
   if (fields.indexOf('slug') < 0) throw new Error('Slug is require for using where option');
   return posts.filter(post => {
     if (post.slug === where?.slug) {

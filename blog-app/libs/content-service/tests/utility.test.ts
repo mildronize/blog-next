@@ -1,4 +1,4 @@
-import { filterRecord } from "../utility";
+import { filterRecord } from '../utility';
 
 describe('filterRecord', () => {
   type Case = {
@@ -8,10 +8,10 @@ describe('filterRecord', () => {
   };
 
   const cases: Case[] = [
-    { object: { title: 'test', slug: 'test-slug' }, keys: ['slug'], expected: { slug: 'test-slug' } }
+    { object: { title: 'test', slug: 'test-slug' }, keys: ['slug'], expected: { slug: 'test-slug' } },
   ];
 
-  test.each(cases)(`filterRecord(%s, %s) should be %s`, ({ object, keys,expected }) => {
+  test.each(cases)(`filterRecord(%s, %s) should be %s`, ({ object, keys, expected }) => {
     expect(filterRecord(object, keys)).toEqual(expected);
   });
 });
