@@ -16,13 +16,17 @@
 }
 
 @layer components {
+  .truncate-none {
+    overflow: auto;
+    text-overflow: none;
+    white-space: normal;
+  }
+}
 
-.truncate-none {
-  overflow: auto;
-  text-overflow: none;
-  white-space: normal;
-}
-}
+/* Work with remarkAddUrlClass */
+/* a.url {
+  word-break: break-all;
+} */
 
 /* :root {
       Pallate: https://blog.maximeheckel.com/ 

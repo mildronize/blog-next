@@ -10,3 +10,8 @@ This package uses  the downgrade version of npm to support npm:
 - remark-gfm@v1.0.0
 
 Note: Due jest run in common js by defualt. I cannot setup Jest to Support ESM.
+
+
+## More Resource
+
+- Basic Remark.js https://www.ryanfiller.com/blog/remark-and-rehype-plugins

@@ -6,7 +6,7 @@ import _glob from 'glob';
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import PostData, { IPostSerializableJSON } from './PostData';
 import generatePostMetadata, { getPostMetadataMap } from './generatePostMetadata';
-import { filterRecord } from './utility';
+import { FilterRecord, filterRecord } from './utility';
 
 const glob = promisify(_glob);
 const defaultUnicode = 'utf8';
@@ -30,9 +30,11 @@ function getPostData(postMetadataPath: string, slug: string) {
   return new PostData(contentPath, fileContent);
 }
 
-export async function getContentBySlug(
+// Using Generic type `U extends keyof IPostSerializableJSON` for return only
+// field that selects
+export async function getContentBySlug<U extends keyof IPostSerializableJSON>(
   slug: string,
-  fields: (keyof IPostSerializableJSON)[] = [],
+  fields: U[] = [],
   postData?: PostData
 ) {
   // Reuse postData
@@ -44,7 +46,7 @@ export async function getContentBySlug(
 
   // Load PostData to Serializable JSON which supported by Next.js API
   const postSerializableJSON = _postData.toJSON();
-  
+
   // Ensure only the minimal needed data is exposed
   // https://nextjs.org/docs/messages/large-page-data
   return filterRecord(postSerializableJSON, fields);
@@ -58,7 +60,7 @@ type Where = {
 };
 type OrderBy = {
   date: OrderType;
-}
+};
 
 interface IQueryContentOption {
   offset?: number;
@@ -67,10 +69,12 @@ interface IQueryContentOption {
   where?: Where;
 }
 
-export async function getAllContents(fields: (keyof IPostSerializableJSON)[] = []) {
+export async function getAllContents<U extends keyof IPostSerializableJSON>(
+  fields: U[] = []
+): Promise<FilterRecord<IPostSerializableJSON, U>[]> {
   const slugData = await generatePostMetadata();
 
-  const postWorkers = [];
+  const postWorkers: Promise<FilterRecord<IPostSerializableJSON, U>>[] = [];
   for (const slug of Object.keys(slugData)) {
     const data = slugData[slug];
     postWorkers.push(getContentBySlug(slug, fields, data.postData));
@@ -79,7 +83,12 @@ export async function getAllContents(fields: (keyof IPostSerializableJSON)[] = [
   return posts;
 }
 
-export async function queryContent(fields: (keyof IPostSerializableJSON)[] = [], options?: IQueryContentOption) {
+// // @ts-expect-error
+
+export async function queryContent<U extends keyof IPostSerializableJSON>(
+  fields: U[] = [],
+  options?: IQueryContentOption
+) {
   let posts = await getAllContents(fields);
   if (!options) return posts;
   // 1: WHERE
@@ -130,11 +139,11 @@ function orderContentByDate(
  * Better performance than using queryContent(['slug']);
  */
 
-export async function getAllContentOnlySlug() {
+export async function getAllContentOnlySlug(): Promise<Pick<IPostSerializableJSON, 'slug'>[]> {
   const postMetadataMap = await getPostMetadataMap();
   // Fallback to original method if no metadata file
   if (Object.keys(postMetadataMap).length === 0) return await queryContent(['slug']);
-  const posts: IPostSerializableJSON[] = [];
+  const posts: Pick<IPostSerializableJSON, 'slug'>[] = [];
   for (const slug of Object.keys(postMetadataMap)) {
     posts.push({
       slug,
