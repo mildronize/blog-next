@@ -5,7 +5,7 @@ import html from 'remark-html'; // Downgrade to 13.0.2
 
 import prism from 'remark-prism';
 import path from 'path';
-import remarkAddUrlClass from './remark-plugins/remark-add-url-class';
+// import remarkAddUrlClass from './remark-plugins/remark-add-url-class';
 
 import siteMetadata from '@thadaw.com/data/siteMetadata';
 import remarkImageLink from './remark-plugins/remark-image-links';
@@ -31,7 +31,7 @@ export default class MarkdownParser {
     const result = await remark()
       .use(remarkGfm)
       .use(remarkImageLink, { path: path.join(assetsPublicPath, _postDirectory) })
-      .use(remarkAddUrlClass)
+      // .use(remarkAddUrlClass)
       // Ref: https://github.com/leerob/nextjs-prism-markdown/blob/main/lib/markdown.js
       // https://github.com/sergioramos/remark-prism/issues/265
       // This plugin is useful when you want to turn markdown into HTML. It’s a shortcut for .use(remarkRehype).use(rehypeStringify).

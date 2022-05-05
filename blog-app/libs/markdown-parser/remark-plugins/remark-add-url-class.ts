@@ -1,5 +1,4 @@
 import visit from 'unist-util-visit'; // Downgrade to v2.0.3 for supporting common js
-import path from 'path';
 
 interface IRemarkAddUrlClassOption {
     className?: string;
