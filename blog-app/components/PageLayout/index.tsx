@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from './PageFooter';
-import Meta, { IMetaProps } from './PageMeta';
+import Footer from './Footer';
+import Meta, { IMetaProps } from './Meta';
 import Topbar from './Topbar';
 
 interface ILayoutProps extends IMetaProps {
