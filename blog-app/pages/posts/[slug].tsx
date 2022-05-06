@@ -17,7 +17,7 @@ export default function Post({ post }: IPostProps) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <PageLayout pageTitle={post.title}>
+    <PageLayout pageTitle={post.title} postNode={post} postSEO>
       <Container>
         {router.isFallback ? (
           <p>Loading…</p>
@@ -40,7 +40,19 @@ export default function Post({ post }: IPostProps) {
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = await getContentBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content']);
+  const post = await getContentBySlug(params.slug, [
+    'title',
+    'date',
+    'slug',
+    'path',
+    'content',
+    // For Page Meta
+    'description', 
+    'excerpt',
+    'cover',
+    'shortURL',
+    'unsplashImgCoverId',
+  ]);
   const markdownParserOption = {
     relativePath: post.path,
   };

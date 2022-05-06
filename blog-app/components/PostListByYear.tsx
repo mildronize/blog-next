@@ -4,7 +4,7 @@ import DateFormatter from './DateFormatter';
 import { IPostSerializableJSON } from '@thadaw.com/libs/content-service';
 import { postPath } from '@thadaw.com/libs/utility';
 
-type PostListByYear = Pick<IPostSerializableJSON, 'slug' | 'title' | 'date'>
+type PostListByYear = Pick<IPostSerializableJSON, 'slug' | 'title' | 'date'>;
 
 interface IPostListByYearProps {
   posts: PostListByYear[];

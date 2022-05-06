@@ -5,12 +5,20 @@ import remarkAddUrlClass from '../remark-add-url-class';
 describe('remarkAddUrlClass', () => {
   const cases = [
     ['[](cover.jpg)', '', '<p><a href="cover.jpg"></a></p>'],
-    ['[https://thadaw.com](https://thadaw.com)', '', '<p><a href="https://thadaw.com" class="url">https://thadaw.com</a></p>'],
+    [
+      '[https://thadaw.com](https://thadaw.com)',
+      '',
+      '<p><a href="https://thadaw.com" class="url">https://thadaw.com</a></p>',
+    ],
     ['[](https://thadaw.com)', '', '<p><a href="https://thadaw.com"></a></p>'],
     ['[](http://thadaw.com)', '', '<p><a href="http://thadaw.com"></a></p>'],
     ['[](www.thadaw.com)', '', '<p><a href="www.thadaw.com"></a></p>'],
     // Custom Class name
-    ['[https://thadaw.com](https://thadaw.com)', 'my-url', '<p><a href="https://thadaw.com" class="my-url">https://thadaw.com</a></p>'],
+    [
+      '[https://thadaw.com](https://thadaw.com)',
+      'my-url',
+      '<p><a href="https://thadaw.com" class="my-url">https://thadaw.com</a></p>',
+    ],
   ];
 
   test.each(cases)(`remarkAddUrlClass(%s,{className='%s'}) should be %s`, async (markdown, className, expected) => {

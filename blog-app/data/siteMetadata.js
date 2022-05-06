@@ -9,6 +9,21 @@
 const siteMetadata = {
   title: 'Thada W.',
   theme: 'system',
+  site: {
+    siteUrl: 'https://v6.thadaw.com',
+    siteTitleAlt: "Thada W.",
+    pathPrefix: '/',
+    siteDescription: 'You can find almost stuff about me: sharing ideas, programming techniques, web technology and others.',
+    siteLogo: '/logos/android-chrome-512x512.png',
+    siteFBAppID: "487836291329244",
+  },
+  author: {
+    userName: "Thada Wangthammang", // Username to display in the author segment.
+    userEmail: "thada.wth@gmail.com", // Email used for RSS feed's author segment
+    userGithub: "mildronize",
+    userTwitter: "mildronize",
+    userLocation: "Songkhla, Thailand", // User location to display in the author segment.
+  },
   posts: {
     contentDirectory: '../contents',
     postDirectory: '../contents/posts',
