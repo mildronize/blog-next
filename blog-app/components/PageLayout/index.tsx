@@ -1,19 +1,19 @@
 import React from 'react';
-import Footer from './PageFooter';
-import Meta, { IMetaProps } from './PageMeta';
+import Footer from './Footer';
+import Meta, { IMetaProps } from './Meta';
 import Topbar from './Topbar';
 
 interface ILayoutProps extends IMetaProps {
   children?: React.ReactNode;
 }
 
-export default function Layout({ children, pageTitle }: ILayoutProps) {
+export default function Layout(props: ILayoutProps) {
   return (
     <>
-      <Meta pageTitle={pageTitle} />
+      <Meta {...props} />
       <Topbar />
       <div className="min-h-screen">
-        <main>{children}</main>
+        <main>{props.children}</main>
       </div>
       <Footer />
     </>

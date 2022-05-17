@@ -1,5 +1,6 @@
 import matter from 'gray-matter';
 import fs from 'fs/promises';
+import excerptHtml from 'excerpt-html';
 import { getActualFilename, extractDate, extractFilenameSlug } from './pathUtility';
 import { retryNewUuid, getUuidStore, generateUUID } from './Uuid';
 import { getAllMarkdownPaths } from './postUtility';
@@ -25,6 +26,9 @@ export interface IPostSerializableJSON extends SerializablePostData {
 export interface IFrontmatter {
   title?: string;
   uuid?: string;
+  cover?: string;
+  description?: string;
+  unsplashImgCoverId?: string;
 }
 
 export interface IField {
@@ -32,6 +36,8 @@ export interface IField {
   actualDate: Date | null;
   path: string;
   filenameSlug: string;
+  excerpt: string;
+  shortURL: string | null;
 }
 
 export default class PostData {
@@ -51,13 +57,18 @@ export default class PostData {
       actualDate: date,
       path: relativePath,
       filenameSlug: extractFilenameSlug(filename),
+      excerpt: this.convertHtmlToExcerpt(content),
+      shortURL: this.getShortURL(),
     };
   }
 
-  private importFrontmatter(data: Record<string, any>) {
+  private importFrontmatter({ title, uuid, cover, description, unsplashImgCoverId }: Record<string, any>) {
     const result: IFrontmatter = {
-      title: data.title,
-      uuid: data.uuid,
+      title,
+      uuid,
+      cover,
+      description,
+      unsplashImgCoverId,
     };
     return result;
   }
@@ -75,6 +86,20 @@ export default class PostData {
     return `${readableSlug}-${uuid}`;
   }
 
+  private convertHtmlToExcerpt(htmlCode: string) {
+    // 140 chars for thai, 55 for eng
+    return excerptHtml(htmlCode, {
+      stripTags: true, // Set to false to get html code
+      pruneLength: 140, // Amount of characters that the excerpt should contain
+      pruneString: '…', // Character that will be added to the pruned string
+      pruneSeparator: ' ', // Separator to be used to separate words
+    });
+  }
+
+  private getShortURL() {
+    return this.frontmatter.uuid ? `/s/${this.frontmatter.uuid}` : null;
+  }
+
   public async injectUUID() {
     let uuid = '';
     if (!('uuid' in this.frontmatter)) {
@@ -85,6 +110,7 @@ export default class PostData {
       this.frontmatter.uuid = uuid;
       await fs.writeFile(this.field.path, matter.stringify(this.content, this.frontmatter), defaultUnicode);
     }
+    return uuid;
   }
 
   /**
