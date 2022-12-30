@@ -25,7 +25,7 @@ export default function PostHeader({ title, date }: IPostHeaderProps) {
 
 function PostTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h1 className="text-2xl lg:text-3xl leading-tight leading-11 lg:leading-12 mb-12 text-left">
+    <h1 className="text-2xl lg:text-3xl leading-tight leading-11 lg:leading-12 mb-12 text-left font-thai">
       {children}
     </h1>
   );
