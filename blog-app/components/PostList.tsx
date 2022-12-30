@@ -8,7 +8,7 @@ interface IMoreStoriesProps {
 export default function PostList({ posts }: IMoreStoriesProps) {
   return (
     <section>
-      <h2 className="mb-8 text-2xl md:text-3xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
+      <h2 className="mb-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
         Recent Posts
       </h2>
       <div className="">

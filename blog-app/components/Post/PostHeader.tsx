@@ -15,7 +15,7 @@ export default function PostHeader({ title, date }: IPostHeaderProps) {
       </div>
       <div className="mx-auto -mt-10">
         <div className="block md:hidden mb-6">{/* <Avatar name={author.name} picture={author.picture} /> */}</div>
-        <div className="mb-12 sm:text-md text-sm">
+        <div className="mb-12 sm:text-md text-sm text-slate-500">
           <DateFormatter dateString={date} />
         </div>
       </div>
