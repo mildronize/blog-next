@@ -19,6 +19,9 @@ export default function Index({ allPosts }: IIndexProps) {
       <PageLayout>
         <Container>
           <Hero {...hero} userLinks={siteMetadata.userLinks} />
+          <h2 className="mb-8 text-md font-bold font-heading">
+            Recent Posts
+          </h2>
           <PostListByYear posts={allPosts} />
         </Container>
       </PageLayout>
