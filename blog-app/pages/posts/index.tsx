@@ -15,7 +15,7 @@ export default function Index({ allPosts }: IIndexProps) {
     <>
       <PageLayout>
         <Container>
-          <h2 className="mb-8 text-2xl md:text-3xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
+          <h2 className="mb-8 text-2xl md:text-3xl font-bold tracking-tighter md:tracking-normal leading-tight font-thai">
             All Posts
           </h2>
           <PostListByYear posts={allPosts} />

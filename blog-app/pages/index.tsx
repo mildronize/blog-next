@@ -6,6 +6,7 @@ import { queryContent } from '@thadaw.com/libs/content-service';
 import Hero from '@thadaw.com/components/Hero';
 
 import { siteMetadata } from '@thadaw.com/data';
+import PostListByYear from '@thadaw.com/components/PostListByYear';
 const { hero } = siteMetadata.components;
 
 interface IIndexProps {
@@ -18,7 +19,7 @@ export default function Index({ allPosts }: IIndexProps) {
       <PageLayout>
         <Container>
           <Hero {...hero} userLinks={siteMetadata.userLinks} />
-          <PostList posts={allPosts} />
+          <PostListByYear posts={allPosts} />
         </Container>
       </PageLayout>
     </>
@@ -28,7 +29,7 @@ export default function Index({ allPosts }: IIndexProps) {
 export async function getStaticProps() {
   const allPosts = await queryContent(['title', 'date', 'slug'], {
     orderBy: { date: 'DESC' },
-    limit: 4,
+    // limit: 4,
   });
   return {
     props: { allPosts },

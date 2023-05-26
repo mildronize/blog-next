@@ -18,8 +18,8 @@ const siteMetadata = {
   tmpPath: '.tmp',
   components: {
     hero: {
-      title: `Hi 👋 I\'m Thada, DevSecOps Engineer, welcome to my blog. `,
-      tagline: `Sharing ideas, programming techniques, web technology and others.`,
+      title: `Hi 👋 I\'m Thada, DevOps & SRE Lead, welcome to my blog. `,
+      tagline: `TypeScript, Azure, Creator of Nammatham, Serverless.`,
     },
     footer: {
       sinceYear: 2015,

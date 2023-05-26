@@ -10,7 +10,7 @@ export default function Topbar() {
           <div className="flex-row flex items-center justify-between">
             <Logo />
             <div className="flex-row flex items-center">
-              <Menu href="/posts">Posts</Menu>
+              {/* <Menu href="/posts">Posts</Menu> */}
               <Menu href="/talks">Talks</Menu>
               <ThemeSwitch />
             </div>

@@ -15,7 +15,7 @@ export default function PostListByYear({ posts }: IPostListByYearProps) {
     <section>
       {getYearGroup(posts).map(year => (
         <div key={year}>
-          <h2 className="my-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-heading">
+          <h2 className="my-8 text-xl md:text-2xl font-bold tracking-tighter md:tracking-normal leading-tight font-thai">
             {year}
           </h2>
           <PostList posts={posts} year={year} />
@@ -50,7 +50,7 @@ function PostItem({ title, date, slug }: PostListByYear) {
   return (
     <>
       <div className="flex-row flex  justify-between flex-nowrap">
-        <h3 className="text-md mb-10 sm:mb-3 pr-8 leading-snug  tracking-tighter md:tracking-normal md:truncate hover:truncate-none hover:scale-102 transition-transform font-sans font-normal">
+        <h3 className="text-md mb-10 sm:mb-3 pr-8 leading-snug   md:truncate hover:truncate-none hover:scale-102 transition-transform font-sans font-normal">
           <Link href={postPath(slug || '')}>
             <a className="dark:hover:text-blue-300 hover:text-blue-800">{title}</a>
           </Link>
