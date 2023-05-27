@@ -18,7 +18,7 @@ export default class MyDocument extends Document {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <body className="bg-white dark:bg-slate-900">
+        <body className="bg-white dark:bg-gray-800">
           <Main />
           <NextScript />
         </body>

@@ -139,7 +139,7 @@ module.exports = {
             },
             code: {
               color: theme('colors.gray.100'),
-              backgroundColor: theme('colors.gray.800'),
+              backgroundColor: theme('colors.slate.900'),
             },
             details: {
               backgroundColor: theme('colors.gray.800'),
