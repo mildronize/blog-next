@@ -13,6 +13,7 @@ html pre[class*='language-'] {
   word-wrap: normal;
   line-height: 1.5;
   -moz-tab-size: 4;
+  font-size: 0.8rem;
   -o-tab-size: 4;
   tab-size: 4;
   -webkit-hyphens: none;
@@ -52,10 +53,10 @@ html code[class*='language-'] ::selection {
 }
 html.light pre[class*='language-'],
 html pre[class*='language-'] {
-  padding: 1em;
+  padding: 2em;
   margin: 0.5em 0;
   overflow: auto;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 html.light :not(pre) > code[class*='language-'],
 html :not(pre) > code[class*='language-'],
@@ -63,14 +64,14 @@ html.light pre[class*='language-'],
 html pre[class*='language-'] {
   color: white;
   background: #fbfbfb;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 html.light :not(pre) > code[class*='language-'],
 html :not(pre) > code[class*='language-'] {
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 html.light .token.comment,
 html .token.comment,
@@ -212,7 +213,7 @@ html.dark code[class*='language-'] ::selection {
   }
 }
 html.dark pre[class*='language-'] {
-  padding: 1em;
+  /* padding: 2em; */
   margin: 0.5em 0;
   overflow: auto;
 }
@@ -220,13 +221,13 @@ html.dark :not(pre) > code[class*='language-'],
 html.dark pre[class*='language-'] {
   color: white;
   background: #011627;
-  border: 1px solid #001e36;
+  /* border: 1px solid #001e36; */
 }
 html.dark :not(pre) > code[class*='language-'] {
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
-  border: 1px solid #001e36;
+  /* border: 1px solid #001e36; */
 }
 html.dark .token.comment,
 html.dark .token.prolog,
