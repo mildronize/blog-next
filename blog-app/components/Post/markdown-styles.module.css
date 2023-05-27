@@ -3,6 +3,17 @@
 	@apply break-words ;
 }
 
+.markdown {
+  @apply text-lg md:text-base leading-relaxed md:leading-loose;
+}
+
+.markdown ol > li, .markdown ul > li {
+	margin: 7px 0;
+}
+.markdown ol > li > p {
+	margin: 10px 0;
+}
+
 /* .markdown {
   @apply text-lg leading-relaxed;
 }
@@ -49,12 +60,7 @@
  .markdown p {
 	 margin: 25px 0;
 }
- .markdown ol > li, .markdown ul > li {
-	 margin: 7px 0;
-}
- .markdown ol > li > p {
-	 margin: 10px 0;
-}
+
  .markdown p > code {
 	 margin-left: 2px;
 	 margin-right: 2px;

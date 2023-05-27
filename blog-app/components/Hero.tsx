@@ -14,7 +14,7 @@ interface IHeroProps extends IHero {
 export default function Hero({ title, tagline, userLinks }: IHeroProps) {
   return (
     <div className="md:pt-10 mb-24">
-      <h2 className="text-3xl md:text-4xl font-heading leading-10 lg:leading-normal md:tracking-normal text-gray-700 dark:text-gray-200">
+      <h2 className="text-3xl md:text-4xl font-heading leading-10 lg:leading-normal tracking-tight text-gray-700 dark:text-gray-200">
         {title}
         <span className="text-slate-400">
           {` `}
