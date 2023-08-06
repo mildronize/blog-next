@@ -19,7 +19,8 @@
     "clean:all": "run-s clean && rm -rf .next && rm -rf out && rm -rf build",
     "typecheck": "tsc",
     "prepare:dev": "run-s clean:all build:content-service",
-    "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service"
+    "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service",
+    "deploy:prod": "swa deploy ./out --env production -n thadaw-main-site-v6"
   },
   "dependencies": {
     "classnames": "2.3.1",
@@ -38,6 +39,7 @@
     "unist-util-visit": "^2.0.3"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^1.1.4",
     "@tailwindcss/forms": "^0.4.0",
     "@tailwindcss/typography": "^0.5.2",
     "@testing-library/jest-dom": "^5.16.4",
