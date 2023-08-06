@@ -98,6 +98,7 @@ export default class PostData {
       slug: this.field.slug,
       path: this.field.path,
       content: this.content,
+      uuid: this.frontmatter.uuid,
     };
   }
 }

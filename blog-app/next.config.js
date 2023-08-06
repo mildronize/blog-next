@@ -31,8 +31,10 @@ const nextConfig = {
   exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
       '/posts': { page: '/posts' },
+      '/s': { page: '/s' },
       '/about': { page: '/about' },
       '/talks': { page: '/talks' },
+      '/404': { page: '/404' },
     };
   },
   // Note == rewrites, redirects, and headers are not applied when exporting your application, detected (redirects). See more info here: https://nextjs.org/docs/messages/export-no-custom-routes

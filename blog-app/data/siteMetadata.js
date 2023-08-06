@@ -13,7 +13,7 @@ const siteMetadata = {
     contentDirectory: '../contents',
     postDirectory: '../contents/posts',
     assetsPublicPath: '/',
-    postMetadataPath: '.posts.metadata.json',
+    postMetadataPath: '.posts.metadata.json'
   },
   tmpPath: '.tmp',
   components: {

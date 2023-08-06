@@ -6,9 +6,9 @@
     "build": "run-s clean && next build",
     "lint": "next lint",
     "analyze": "cross-env ANALYZE=true next build",
-    "export:next": "next export",
+    "export:next": "run-s build && next export",
     "export:posts-assets": "node scripts/copy-assets.js",
-    "export": "run-s build export:next export:posts-assets",
+    "export": "run-p export:next export:posts-assets",
     "format": "prettier --config .prettierrc '**/*.+(ts|tsx)' --write",
     "test": "run-p typecheck test:ci export --print-label && run-s clean:all",
     "test:watch": "jest --watch",
@@ -20,7 +20,8 @@
     "typecheck": "tsc",
     "prepare:dev": "run-s clean:all build:content-service",
     "build:content-service": "tsc --project ./scripts/tsconfig.build.json && ncc build -m ./build/libs/content-service -o scripts/libs/content-service",
-    "deploy:prod": "swa deploy ./out --env production -n thadaw-main-site-v6"
+    "deploy:prod": "swa deploy ./out --env production -n thadaw-main-site-v6",
+    "deploy:preview": "swa deploy ./out --env preview -n thadaw-main-site-v6"
   },
   "dependencies": {
     "classnames": "2.3.1",
