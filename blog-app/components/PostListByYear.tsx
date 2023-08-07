@@ -50,7 +50,7 @@ function PostItem({ title, date, slug }: PostListByYear) {
   return (
     <>
       <div className="flex-row flex  justify-between flex-nowrap">
-        <h3 className="font-thai text-lg mb-8 sm:mb-5 pr-8 leading-snug   md:truncate hover:truncate-none hover:scale-102 transition-transform font-sans font-normal">
+        <h3 className="font-thai text-lg mb-8 sm:mb-5 pr-8 leading-snug font-sans font-normal">
           <Link href={postPath(slug || '')}>
             <a className="dark:hover:text-blue-300 hover:text-blue-800">{title}</a>
           </Link>
