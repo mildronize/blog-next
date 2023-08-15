@@ -5,9 +5,9 @@ import { Container } from '@thadaw.com/components/layouts';
 import { userLinks } from '@thadaw.com/data/siteMetadata';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
 import { ReturnTypeGetStaticProps } from '@thadaw.com/types';
-import classNames from 'classnames';
 
 const markdown = `
+# About
 Hi, I'm Mild, Thada, Software Engineer & DevSecOps, Based in Hatyai, Thailand,  👨‍💻 Work Remotely
 
 **Key Expertise**
@@ -36,7 +36,6 @@ export default function AboutPage({ htmlContent }: ReturnTypeGetStaticProps<type
   return (
     <PageLayout pageTitle="About">
       <Container>
-        <h1>About</h1>
         <div className="mb-10">
           <PostBody content={htmlContent} />
         </div>
