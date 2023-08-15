@@ -25,6 +25,7 @@ export interface IPostSerializableJSON extends SerializablePostData {
 export interface IFrontmatter {
   title?: string;
   uuid?: string;
+  tags?: string[];
 }
 
 export interface IField {
@@ -58,6 +59,7 @@ export default class PostData {
     const result: IFrontmatter = {
       title: data.title,
       uuid: data.uuid,
+      tags: data.tags,
     };
     return result;
   }
@@ -99,6 +101,7 @@ export default class PostData {
       path: this.field.path,
       content: this.content,
       uuid: this.frontmatter.uuid,
+      tags: this.frontmatter.tags,
     };
   }
 }
