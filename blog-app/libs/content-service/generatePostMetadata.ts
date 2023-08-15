@@ -52,9 +52,10 @@ export default async function generatePostMetadata() {
   /**
    * In development mode, we build the post metadata map in the server side.
    */
-  if (process.env.SOCKET === 'true' || !fs.existsSync(postMetadataPath)) {
+  // || !fs.existsSync(postMetadataPath)
+  // if (process.env.SOCKET === 'true' ) {
     fs.writeFileSync(postMetadataPath, JSON.stringify(minifiedPostMetadataMap, null, 2), defaultUnicode);
     console.debug(`Writing... "${postMetadataPath}" file.`);
-  }
+  // }
   return postMetadataMap;
 }

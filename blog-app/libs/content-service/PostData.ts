@@ -77,7 +77,7 @@ export default class PostData {
 
   public async injectUUID() {
     let uuid = '';
-    if (!('uuid' in this.frontmatter)) {
+    if (this.frontmatter.uuid === undefined) {
       const markdownPaths = await getAllMarkdownPaths();
       console.log(markdownPaths);
       const { uuidStore } = await getUuidStore(markdownPaths);

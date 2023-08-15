@@ -1,4 +1,5 @@
 import { queryContent } from '@thadaw.com/libs/content-service';
+import { ReturnTypeGetStaticProps } from '@thadaw.com/types';
 import { useEffect } from 'react';
 
 function removeTrailingSlash(str: string) {
@@ -21,7 +22,7 @@ function findRenderedPathname(
   return '';
 }
 
-export default function Post({ posts }: Awaited<ReturnType<typeof getStaticProps>>['props']) {
+export default function Post({ posts }: ReturnTypeGetStaticProps<typeof getStaticProps>) {
   useEffect(() => {
     if (window) {
       const targetUrl = findRenderedPathname(window.location.pathname, posts);

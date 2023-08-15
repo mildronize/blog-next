@@ -6,12 +6,9 @@ import PostHeader from '@thadaw.com/components/Post/PostHeader';
 import PageLayout from '@thadaw.com/components/PageLayout';
 import { getContentBySlug, getAllContentOnlySlug } from '@thadaw.com/libs/content-service';
 import MarkdownParser from '@thadaw.com/libs/markdown-parser';
+import { ReturnTypeGetStaticProps } from '@thadaw.com/types';
 
-interface IPostProps {
-  post: any;
-}
-
-export default function Post({ post }: IPostProps) {
+export default function Post({ post }: ReturnTypeGetStaticProps<typeof getStaticProps>) {
   const router = useRouter();
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -25,9 +22,9 @@ export default function Post({ post }: IPostProps) {
           <>
             <article className="mb-32">
               <PostHeader
-                title={post.title}
+                title={post.title || ''}
                 // coverImage={post.coverImage}
-                date={post.date}
+                date={post.date || ''}
                 // author={post.author}
               />
               <PostBody content={post.content} />

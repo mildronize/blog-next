@@ -21,7 +21,7 @@ export default class MarkdownParser {
   markdown: string;
   options?: IOption;
 
-  constructor(markdown: string, options: IOption) {
+  constructor(markdown: string, options?: IOption) {
     this.markdown = markdown;
     this.options = options;
   }
@@ -41,4 +41,5 @@ export default class MarkdownParser {
       .process(this.markdown);
     return result.toString();
   }
+
 }
