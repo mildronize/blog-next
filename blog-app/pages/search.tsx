@@ -25,7 +25,7 @@ export default function SearchBar({ searchList }: ReturnTypeGetStaticProps<typeo
   const fuse = useMemo(
     () =>
       new Fuse(searchList, {
-        keys: ['title', 'content'],
+        keys: ['title', 'tags'],
         // keys: ['title', 'description', 'tags'],
         includeMatches: true,
         minMatchCharLength: 2,
@@ -72,9 +72,9 @@ export default function SearchBar({ searchList }: ReturnTypeGetStaticProps<typeo
           <label className="">
             <input
               className="w-full rounded-lg border border-skin-fill 
-        border-opacity-40  py-3 pl-10 bg-slate-100 dark:bg-slate-500
-        pr-3 placeholder:italic placeholder:text-opacity-75 
-        focus:border-skin-accent focus:outline-none"
+              border-opacity-40  py-3 pl-10 bg-slate-100 dark:bg-slate-500
+              pr-3 placeholder:italic 
+              focus:border-skin-accent focus:outline-none"
               placeholder="Search for anything..."
               type="text"
               name="search"
@@ -106,12 +106,12 @@ export default function SearchBar({ searchList }: ReturnTypeGetStaticProps<typeo
 }
 
 export async function getStaticProps() {
-  const allPosts = await queryContent(['title', 'date', 'slug', 'content'], {
+  const allPosts = await queryContent(['title', 'date', 'slug', 'tags'], {
     orderBy: { date: 'DESC' },
   });
   return {
     props: {
-      searchList: allPosts,
+      searchList: allPosts
     },
   };
 }

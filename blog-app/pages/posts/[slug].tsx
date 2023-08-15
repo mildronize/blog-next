@@ -20,6 +20,7 @@ export default function Post({ post }: ReturnTypeGetStaticProps<typeof getStatic
           <p>Loading…</p>
         ) : (
           <>
+           {/* tags {JSON.stringify(post.tags)} */}
             <article className="mb-32">
               <PostHeader
                 title={post.title || ''}
@@ -28,6 +29,7 @@ export default function Post({ post }: ReturnTypeGetStaticProps<typeof getStatic
                 // author={post.author}
               />
               <PostBody content={post.content} />
+             
             </article>
           </>
         )}
@@ -37,7 +39,7 @@ export default function Post({ post }: ReturnTypeGetStaticProps<typeof getStatic
 }
 
 export async function getStaticProps({ params }: any) {
-  const post = await getContentBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content']);
+  const post = await getContentBySlug(params.slug, ['title', 'date', 'slug', 'path', 'content', 'tags']);
   const markdownParserOption = {
     relativePath: post.path,
   };

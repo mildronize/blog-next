@@ -12,7 +12,7 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter }: Props) {
-  const { title, date, slug } = frontmatter;
+  const { title, date } = frontmatter;
   return (
     <li className="my-6">
       <a
@@ -35,7 +35,7 @@ export default function Card({ href, frontmatter }: Props) {
 
           <DateFormatter dateString={date || ''} />
         </div>
-      {/* <p>{description}</p> */}
+      {/* <p>{content}</p> */}
     </li>
   );
 }

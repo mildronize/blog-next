@@ -8,7 +8,7 @@ const markdown = `
 # Talks
 ### Upcoming
 - Aug 26, 2023 - ***Serverless Container on Microsoft Azure***
-  - Event: Azure Developer Day 2023 at Seven Peaks Software (Thailand)
+  - Event: zure Developer Day 2023 at Seven Peaks Software (Thailand)
 
 ### 2023
 
