@@ -1,15 +1,13 @@
-
 .markdown p, .markdown h2, .markdown h3, .markdown h4  {
 	@apply break-words ;
 }
 
 .markdown {
-  @apply text-lg md:text-base leading-7 font-thai;
+  @apply text-lg md:text-base leading-relaxed md:leading-loose font-thai;
 }
 
 .markdown ol > li, .markdown ul > li {
-	margin: 0.2em 0;
-	/* line-height: 1.6; */
+	margin: 7px 0;
 }
 .markdown ol > li > p {
 	margin: 10px 0;
