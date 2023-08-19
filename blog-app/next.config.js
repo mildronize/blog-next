@@ -34,6 +34,7 @@ const nextConfig = {
       '/s': { page: '/s' },
       '/about': { page: '/about' },
       '/talks': { page: '/talks' },
+      '/preview': { page: '/preview' },
       '/404': { page: '/404' },
     };
   },
