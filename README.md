@@ -1,8 +1,8 @@
-# My Next Version of my site
+# My Site
 
 [![.github/workflows/test.yaml](https://github.com/mildronize/blog-next/actions/workflows/test.yaml/badge.svg)](https://github.com/mildronize/blog-next/actions/workflows/test.yaml) [![Coverage Status](https://coveralls.io/repos/github/mildronize/blog-next/badge.svg?branch=main)](https://coveralls.io/github/mildronize/blog-next?branch=main)
 
-Current Version (V.5): <https://thadaw.com> (Gatsby)
+Current Version (V.6): <https://thadaw.com> (Gatsby)
 
 ## Philosophy
 - Using React & TypeScript
@@ -18,6 +18,10 @@ Current Version (V.5): <https://thadaw.com> (Gatsby)
 - Auto Generate UUID (in dev mode)
 - Short URL Mapping
 - Auto-refresh when markdown content changed 
+
+## Branch
+- `main` for content only
+- `preview` for next version of blog (new release)
 
 ## Start
 
