@@ -2,6 +2,8 @@
 import remark from 'remark'; // Downgrade to v13.0.0
 import remarkGfm from 'remark-gfm'; // Downgrade to v1.0.0
 import html from 'remark-html'; // Downgrade to 13.0.2
+import remarkToc from 'remark-toc'; // Downgrade to 7.2.0
+import remarkSlug from 'remark-slug'; // Downgrade to 6.1.0
 
 import prism from 'remark-prism';
 import path from 'path';
@@ -29,6 +31,7 @@ export default class MarkdownParser {
   public async toHtml() {
     const _postDirectory = getPostDirectory(contentDirectory, this.options?.relativePath);
     const result = await remark()
+      .use(remarkSlug)
       .use(remarkGfm)
       .use(remarkImageLink, { path: path.join(assetsPublicPath, _postDirectory) })
       // .use(remarkAddUrlClass)
@@ -37,9 +40,9 @@ export default class MarkdownParser {
       // This plugin is useful when you want to turn markdown into HTML. It’s a shortcut for .use(remarkRehype).use(rehypeStringify).
       .use(html, { sanitize: false })
       .use(prism)
+      .use(remarkToc)
       // using `.parse('')` to export to AST JSON (for debug)
       .process(this.markdown);
     return result.toString();
   }
-
 }
