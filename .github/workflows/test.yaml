@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - preview
     paths:
       - .github/workflows/test.yaml
       - _contents/**
