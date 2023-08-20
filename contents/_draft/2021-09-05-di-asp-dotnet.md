@@ -51,4 +51,4 @@ public class HomeController : Controller
 
 Dependency Injection engine will automatically inject `ILogger` instance inside `HomeController`, so this will break dependency between them, and can make unit testing easier.
 
-I've implemented Dependency Injection tool in typescript (Node.Js)  from scratch: https://github.com/SukreepCode/mildjs-di and it've been used in https://github.com/SukreepCode/mildjs-mild that is the simple framework that inspired from Nest.Js
+I've implemented Dependency Injection tool in typescript (Node.Js)  from scratch: https://github.com/mildronize/mildjs-di and it've been used in https://github.com/mildronize/mildjs-mild that is the simple framework that inspired from Nest.Js

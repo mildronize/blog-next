@@ -1,15 +1,18 @@
 ---
 title: วิธีการ Import Terraform State ใน Terraform Cloud
 uuid: hye03ea
+tags:
+  - Terraform
+  - Terraform Cloud
 ---
 
 > Terraform v1.5.2
 
-# ปัญหา 
+## ปัญหา 
 
 เวลาเราใช้งาน Terraform Cloud มันจะมีประเด็นอยู่คือ Terraform ไม่ให้เรา Import Resource ใหม่ถ้าเราใช้ Variable ที่เป็น Secret ที่อยู่บน Terraform Cloud 
 
-# วิธีแก้เบื้องต้น
+## วิธีแก้เบื้องต้น
 
 1. รันคำสั่ง เพื่อดึง State ที่อยู่บน Cloud ลงมาที่ local ก่อน
    ```bash
