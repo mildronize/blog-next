@@ -11,7 +11,8 @@ unsplashImgCoverId: VUBAE-Bmugk
 ---
 
 
-![](github-action.png)
+No need to use publish po[]\
+
 
 ```yml
 name: Build and deploy ASP app to Azure Web App
@@ -34,7 +35,7 @@ jobs:
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
-
+  qwertyuogp[]\
     - name: Restore NuGet packages
       run: nuget restore
 
@@ -57,7 +58,7 @@ jobs:
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v2
-      with:
+      with:qw ertyuiogrtyuiop[]\
         name: ASP-app
 
     - name: Deploy to Azure Web App
@@ -68,6 +69,8 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
         package: .
 ```
-
+![](github-action.png)
 
 Ref: https://timheuer.com/blog/building-net-framework-apps-using-github-actions/
+
+
