@@ -20,10 +20,8 @@ export default function Button({ children, href, target, className }: IButtonPro
       </a>
     );
   return (
-    <Link href={href}>
-      <a target={target} className={_className}>
-        {children}
-      </a>
+    <Link href={href} target={target} className={_className}>
+      {children}
     </Link>
   );
 }

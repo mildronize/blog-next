@@ -19,6 +19,7 @@ const path = require('path')
 const { parse } = require('url')
 
 const siteMetadata = require('../data/siteMetadata');
+
 const pkg = require('../package.json')
 
 const defaultWatchEvent = 'change'
@@ -38,10 +39,19 @@ program
 
 const shell = process.env.SHELL
 const app = next({ dev: true, dir: program.root || process.cwd() })
-const port = parseInt(process.env.PORT, 10) || 3000
+const port = parseInt(process.env.PORT, 10) || 4000
 const handle = app.getRequestHandler()
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
+
+  console.log(app)
+
+  const appServer = app.server || await app.getServer();
+  
+  if(!('hotReloader' in appServer)) {
+    console.error('Hot reloader not found in app server. Aborting.')
+    process.exit(1)
+  }
   // if directories are provided, watch them for changes and trigger reload
   if (program.args.length > 0) {
     chokidar
@@ -49,7 +59,7 @@ app.prepare().then(() => {
       .on(program.event, async (filePathContext, eventContext = defaultWatchEvent) => {
         // Emit changes via socketio
         io.sockets.emit('reload', filePathContext)
-        app.server.hotReloader.send('building')
+        appServer.hotReloader.send('building')
 
         if (program.command) {
           // Use spawn here so that we can pipe stdio from the command without buffering
@@ -84,7 +94,7 @@ app.prepare().then(() => {
           }
         }
 
-        app.server.hotReloader.send('reloadPage')
+        appServer.hotReloader.send('reloadPage')
       })
   }
 
@@ -105,8 +115,8 @@ app.prepare().then(() => {
     msg && console.log(color ? chalk[color](msg) : msg)
 
     // reload the nextjs app
-    app.server.hotReloader.send('building')
-    app.server.hotReloader.send('reloadPage')
+    appServer.hotReloader.send('building')
+    appServer.hotReloader.send('reloadPage')
     res.end('Reload initiated')
   })
 

@@ -13,8 +13,8 @@ export default function PostPreview({ title, date, slug }: IPostPreviewProps) {
     <div>
       <div className="mb-10"></div>
       <h3 className="text-xl mb-3 leading-snug font-thai">
-        <Link href={postPath(slug)}>
-          <a className="hover:underline">{title}</a>
+        <Link href={postPath(slug)} className="hover:underline">
+          {title}
         </Link>
       </h3>
       <div className="text-sm mb-4">

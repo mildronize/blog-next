@@ -30,8 +30,8 @@ export default function Topbar() {
 function Logo() {
   return (
     <div className="font-bold text-xl text-blue-600 dark:text-blue-500 font-sans">
-      <Link href="/">
-        <a className="hover:text-blue-500 dark:hover:text-blue-600">Thada W.</a>
+      <Link href="/" className="hover:text-blue-500 dark:hover:text-blue-600">
+        Thada W.
       </Link>
     </div>
   );
@@ -44,10 +44,11 @@ interface IMenuProps {
 
 function Menu({ href, children }: IMenuProps) {
   return (
-    <Link href={href}>
-      <a className="font-sans hover:bg-gray-50 hover:text-gray-900 dark:hover:text-gray-50 dark:hover:bg-gray-800 px-4 py-2 rounded-md text-md font-medium">
-        {children}
-      </a>
+    <Link
+      href={href}
+      className="font-sans hover:bg-gray-50 hover:text-gray-900 dark:hover:text-gray-50 dark:hover:bg-gray-800 px-4 py-2 rounded-md text-md font-medium"
+    >
+      {children}
     </Link>
   );
 }

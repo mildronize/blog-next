@@ -4,7 +4,7 @@ import DateFormatter from './DateFormatter';
 import { IPostSerializableJSON } from '@thadaw.com/libs/content-service';
 import { postPath } from '@thadaw.com/libs/utility';
 
-type PostListByYear = Pick<IPostSerializableJSON, 'slug' | 'title' | 'date'>
+type PostListByYear = Pick<IPostSerializableJSON, 'slug' | 'title' | 'date'>;
 
 interface IPostListByYearProps {
   posts: PostListByYear[];
@@ -51,8 +51,8 @@ function PostItem({ title, date, slug }: PostListByYear) {
     <>
       <div className="flex-row flex  justify-between flex-nowrap">
         <h3 className="font-thai text-lg mb-8 sm:mb-5 pr-8 leading-snug font-sans font-normal">
-          <Link href={postPath(slug || '')}>
-            <a className="dark:hover:text-blue-300 hover:text-blue-800">{title}</a>
+          <Link href={postPath(slug || '')} className="dark:hover:text-blue-300 hover:text-blue-800">
+            {title}
           </Link>
         </h3>
         <div className="text-sm mb-4 min-w-fit text-gray-500 dark:text-gray-400 font-bold">
