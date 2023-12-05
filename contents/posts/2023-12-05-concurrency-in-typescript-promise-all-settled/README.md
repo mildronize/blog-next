@@ -131,3 +131,39 @@ function longRunningTask(
 ผลลัพธ์จะแสดงข้อความเกี่ยวกับการทำงานที่รันนานและผลลัพธ์ของแต่ละงานที่สำเร็จหรือไม่สำเร็จ
 
 ด้วยการใช้ `Promise.allSettled` ใน TypeScript เราสามารถทำงาน concurrency ได้อย่างมีประสิทธิภาพและปรับให้เหมาะกับลำดับการทำงานที่ต้องการในแต่ละบล็อกของโปรแกรมของเราได้อย่างง่ายดาย
+
+## ตัวอย่างการทำงานของโปรแกรม
+
+```log
+Task 1 started, will take 4 seconds
+Task 2 started, will take 4 seconds
+Task 3 started, will take 5 seconds
+Task 4 started, will take 4 seconds
+Task 5 started, will take 2 seconds
+Task 1 in progress, current time: 1 seconds
+Task 2 in progress, current time: 1 seconds
+Task 3 in progress, current time: 1 seconds
+Task 4 in progress, current time: 1 seconds
+Task 5 in progress, current time: 1 seconds
+Task 5 failed
+Task 1 in progress, current time: 2 seconds
+Task 2 in progress, current time: 2 seconds
+Task 3 in progress, current time: 2 seconds
+Task 4 in progress, current time: 2 seconds
+Task 1 in progress, current time: 3 seconds
+Task 2 in progress, current time: 3 seconds
+Task 3 in progress, current time: 3 seconds
+Task 4 in progress, current time: 3 seconds
+Task 1 finished
+Task 2 finished
+Task 4 failed
+Task 3 in progress, current time: 4 seconds
+Task 3 failed
+--------------------------------------------------
+All tasks finished
+Task 1 took 4 seconds
+Task 2 took 4 seconds
+Task 3 failed with error: Task 3 failed
+Task 4 failed with error: Task 4 failed
+Task 5 failed with error: Task 5 failed
+```
