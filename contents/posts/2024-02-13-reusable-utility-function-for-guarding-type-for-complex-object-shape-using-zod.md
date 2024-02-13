@@ -93,5 +93,5 @@ Until next time,
 Thada
 
 ## Reference
-- Example Code from: https://typescript-th.thadaw.com/docs/basic/narrowing-type
-- Original Code from [ecyrbedev](https://twitter.com/ecyrbedev): https://twitter.com/ecyrbedev/status/1757318655799414830
+- Basic Typenarrowing (Thai) from: https://typescript-th.thadaw.com/docs/basic/narrowing-type
+- Solution Code from [ecyrbedev](https://twitter.com/ecyrbedev/status/1757318655799414830)
