@@ -95,3 +95,34 @@ Thada
 ## Reference
 - Basic Typenarrowing (Thai) from: https://typescript-th.thadaw.com/docs/basic/narrowing-type
 - Solution Code from [ecyrbedev](https://twitter.com/ecyrbedev/status/1757318655799414830)
+
+---
+
+## Q&A
+
+We've received some insightful questions from our readers, [Thiti Baipad and Surapus Moonjaras](https://www.facebook.com/photo?fbid=885491666913829&set=a.486562490140084). Thank you both for your valuable inquiries! Let's address them one by one.
+
+### Question 1: Why not directly use zod.parse instead of just using type guards?
+In a quick response, when writing the blog, I didn't really dwell on this aspect much. I must admit, I was slightly distracted during the meeting.
+
+A fresh perspective on this is that separating the function out adds to readability. As for dependencies, it still depends on what you both prefer.
+
+If we were to write something like:
+
+```typescript
+if(z.array(z.number)).safeParse(data).success) {
+  // do something 
+}
+```
+
+It might be a bit hard to read and doesn't carry the same meaning as a sentence. We'd have to interpret it.
+
+### Question 2: What's the reason behind applying Zod Schema type in the utility function?
+The reason for this lies in the example function provided, which specifies the internal type of the Zod object. Admittedly, I'm not extensively knowledgeable about this, but understanding such aspects allows for flexibility and application in various scenarios.
+
+### Question 3: Why remove Zod dependency from the is function?
+I've previously written an article on a generic TypeScript Validation Tool without relying solely on Zod, which [you can find here](https://www.thadaw.com/s/z8daujr/) (The article in Thai). Hence, it's possible to extend this concept to remove the Zod dependency from the is function.
+
+However, it doesn't mean that every solution must adhere to my recommendations. It's crucial to understand that we have various options and can apply them flexibly in different situations.
+
+Thank you once again for your questions!
