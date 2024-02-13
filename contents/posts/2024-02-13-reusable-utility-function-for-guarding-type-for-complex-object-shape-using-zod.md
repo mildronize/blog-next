@@ -37,6 +37,8 @@ if (isNumberArray(unknownValue)) {
 }
 ```
 
+[Playground](https://www.typescriptlang.org/play?#code/GYVwdgxgLglg9mABDAzgORAWwEYFMBOAgvvgIYCeAFAG6kA2IuAXIuANZhwDuYAlC7Qa5kKRGCx58AbQC6iAN4AoRIny4oIfEkrKViYmXIA6VAYo16jXogBkNxIMZHc1AlVx1cmXGCiIAvAB8iFDkAA64cMCIHl4+fv6JiABE4jgEyby6vADcigC+iooQCCh+7Jw8AGqWzKxgHNxI-ohSAIwArAA0iABMAMw9ABw9ACxjvT1tAGwyeYow0ZSoGOlEJOYVTTVCvNZKKgD0h4gA6jBQABYwSFeoiNhkkJc9AAZb1bWviJekoqERRCvNKSWSvLq6Y6IFBwRBcYQQUhIFBhNSkAAmIUuwhBBFEf0QpHwAHMsPF-rDXgBZUhXIyYUgAD1euhKYDKiAZjICiBpdK5lCMQo+YB2VjyKjZMM8RjocGJlC5uQKQA)
+
 Validating complex object shapes can be challenging with traditional type guards. Therefore, let's explore using Zod for type guarding complex objects.
 
 Now, let's narrow down and validate a Record Type using the Zod data validation library.
@@ -56,6 +58,8 @@ function findLength(object: unknown): number {
   throw new Error(`Input object doesn't support type`);
 }
 ```
+
+[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAbzgLzgXzgMyhEcDkyEAJvgNwBQFmArgHYDGMwEdcwAzgEoCmD0xABQQARgCs+MAFxx6AazoQA7nQCUM0RKbsOcXvyjEAPBxhRgdAOYAaWXQXK6APkQU4cfnVNwofAQGUGAAseEABDOABeFAA6XwMhZBj5RRVBVVVKd18YGig2eIDg0LCYjjDMHgAFMKgOHmFxSVUymgYGHg4OSjQqWkZmViwLYgAZHisYIMataTsHFXU4OhoQER4oV3dgTDhBTn0BGebVLfcfHlz8uAB5JqYYuR4ATw5jphaAGwnLKaz0NxwKY4JTLHiggCiUBwUEEAAMAJJ0MA0eCaSRwYgQTp0fDwDg0MCQWBA55gHhwzIUNBAA)
  
 However, writing custom functions everywhere for such validations can lead to code duplication. Thus, we can create a utility function to streamline the process.
 
@@ -77,7 +81,7 @@ if(is(test,z.array(z.instanceof(File)).nonempty())) {
 }
 ```
 
-Playground: <https://tsplay.dev/wRepEW>
+[Playground](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAbzgLzgXzgMyhEcDkyEAJvgNwBQFAxhAHYDO8wDcAvHADwAqcApgA8YfOsVbIAdAC0S3AJ5g+APgAUANwCGAGwCufAFxwddANZ0IAdzoAaOA2oALPiA2HuASkObdfOCxQSEDowYME8SuwRCBRwsXBQfDA6UHR2js4aEgwamHwAChpQDHzq2nruWTrU1HwMDJRoVLSM8MJM+sZmlqkcANoAupTAmCosKm0w1pKFUBpyKpLALRp0NRAjAGLAWnzuFeZ0zmAw83vuiDFxE5exAPS3AHoA-BSNQA)
 
 ## Summary
 In this blog post, we've explored the concept of narrowing types in TypeScript and how it enables us to validate unknown values against complex object shapes. We've also seen how Zod, a powerful data validation library, can streamline the process of type guarding. By leveraging reusable utility functions, we can write cleaner and more efficient code, reducing the risk of errors and enhancing code maintainability.
