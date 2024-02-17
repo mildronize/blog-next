@@ -18,7 +18,7 @@ In the realm of TypeScript testing, the concept of table-driven tests shines as 
 Table-driven tests involve structuring test cases in a tabular format, empowering developers to manage and execute tests with remarkable efficiency. This approach proves invaluable, especially when dealing with functions that demand testing across various input-output permutations.
 
 ## Unveiling the Power of Table-Driven Tests
-Consider the following example to grasp the essence of table-driven testing in TypeScript:
+Let's dive into a practical example utilizing Jest/Vitest, a versatile testing framework widely adopted in the JavaScript and TypeScript communities:
 
 ```typescript
 describe('Test getPostDirectory', () => {
