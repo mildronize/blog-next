@@ -13,6 +13,8 @@
     /* @apply font-heading; */
     @apply font-bold;
   }
+
+
 }
 
 @layer components {

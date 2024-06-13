@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - preview
-
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - preview
 env:
   working-directory: "blog-app"
 

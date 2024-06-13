@@ -32,6 +32,9 @@ remote-state-api      alpine-unused  12b08b0bfc1f   8 seconds ago     77.8MB
 
 โดยสรุปลดจาก 2.64 GB เหลือ 77.8 MB โดยลดไปประมาณ 97%
 
+## Table of contents
+
+
 ## Stack ที่ใช้
 
 - [Prisma](https://www.prisma.io/) 4.8.0
@@ -58,14 +61,14 @@ du -sh ./node_modules
     - อีกข้อดีและข้อเสีย ก็คือการที่มี package.json ที่เดียวในตำแหน่ง root ของ repo เท่านั้น ซึ่งข้อดีก็คือทำให้เราจัดการ package version ไม่ซ้ำซ้อนกัน เช่น Library ที่ใช้งานร่วมกันก็ควรมี dependencies ที่มี version เดียวกัน ดังนั้นการเปลี่ยน version ทุก project จึงเป็นเรื่องไม่ค่อยอยากทำ ส่วนข้อเสียก็คือ เวลาเราจะ deploy หรือ publish บาง project ขนาดของ node_modules จะอ้วนมากๆ
     - ตัวอย่าง Template ที่ Nx มีให้ใช้ก็เยอะมากๆ หลักๆ คือ React, Angular, Vue, Nestjs และพวก Library Project ต่างๆ ดู plugin ทั้งหมดได้ใน [Nx Packages](https://nx.dev/packages)
 
-### จากมีมที่เค้าชอบแซวๆ กันใน node_modules
+**จากมีมที่เค้าชอบแซวๆ กันใน node_modules**
 
 ใน Project นี้เราจะจึง Stack ที่มีแต่ทำให้ node_modules บวมๆ ขึ้นมากๆ
 
 ![Ref: https://tsh.io/blog/reduce-node-modules-for-better-performance/](node-modules-too-big.png)
 
 
-## ต่อๆ
+<!-- ## ต่อๆ -->
 
 ดังนั้นผมจึงเลือก Integrated Repos ของ Nx มาใช้ในงานนี้ อย่างที่บอกไปว่า Nx แบบ Integrated Repos นั้น ทำให้มี node_modules บางตัวที่ไม่ได้ใช้งาน การที่เราจะ Deploy หรือ Publish ทำให้ขนาดของแอพใหญ่ขึ้นมากๆ [nrwl/nx Issues#177](https://github.com/nrwl/nx/issues/1777)
 
@@ -272,7 +275,7 @@ remote-state-api      alpine-bundle  022a0feda515   4 days ago    376MB
 ```
 
 
-## ตัวอย่าง Dockerfile
+### ตัวอย่าง Dockerfile
 
 custom esbuild config
 
@@ -561,19 +564,19 @@ remote-state-api      alpine-unused  12b08b0bfc1f   8 seconds ago     77.8MB
 
 ## แหล่งอ้างอิง
 
-### Docker
+**Docker**
 
 - Multi-Stage: https://www.tomray.dev/nestjs-docker-production
 - Best Practice: https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/
 - Reduce File Size Node.js: https://medium.com/trendyol-tech/how-we-reduce-node-docker-image-size-in-3-steps-ff2762b51d5a
 - Honey, I shrunk the node_modules! ...and improved app’s performance in the process. On node module size: https://tsh.io/blog/reduce-node-modules-for-better-performance/
 
-### Docker Read more
+**Docker Read more**
 - https://medium.com/swlh/nx-nestjs-react-docker-deploys-928a55fc19fd
 - https://www.codefeetime.com/post/using-docker-compose-with-nx-monorepo-for-multi-apps-development/
 
-### Kube
+**Kube**
 - https://creotip.io/posts/nx-monorepo-running-microservices-locally-with-docker-kubernetes
 
-### BFF
+**BFF**
 - https://github.com/mildronize/bff-demo
