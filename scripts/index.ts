@@ -127,6 +127,7 @@ async function processFiles(sourceDirs: string[], targetDir: string) {
           data['date'] = extractDateFromFilename(path.basename(file)) ?? data['date'];
           const frontmatter = processFrontmatter(data);
 
+          // const output = `---\n${yaml.stringify(frontmatter)}---\n${body}`;
           const output = `+++\n${toml.stringify(frontmatter)}+++\n${body}`;
 
           if(frontmatter.taxonomies && !frontmatter.taxonomies.categories) {
@@ -155,8 +156,8 @@ async function processFiles(sourceDirs: string[], targetDir: string) {
 
 // Example usage
 const sourceDirectories = ["../contents/posts"];
-const targetDirectory = "../../blog-v8/content/posts";
-// const targetDirectory = "./output";
-// await fs.remove(targetDirectory);
+// const targetDirectory = "../../blog-v8/content/posts";
+const targetDirectory = "./output";
+await fs.remove(targetDirectory);
 processFiles(sourceDirectories, targetDirectory);
 
