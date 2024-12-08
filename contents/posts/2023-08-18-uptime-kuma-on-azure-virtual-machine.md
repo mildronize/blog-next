@@ -1,5 +1,11 @@
 ---
 title: วิธีการตั้งค่า Uptime Kuma บน Azure Virtual Machine
+tags:
+  - Azure
+  - Uptime Kuma
+  - Docker
+  - Virtual Machine
+  - HTTPS
 uuid: h4uaaip
 ---
 

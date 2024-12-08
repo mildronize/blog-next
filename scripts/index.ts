@@ -129,8 +129,15 @@ async function processFiles(sourceDirs: string[], targetDir: string) {
 
           const output = `+++\n${toml.stringify(frontmatter)}+++\n${body}`;
 
+          if(frontmatter.taxonomies && !frontmatter.taxonomies.categories) {
+            console.log(`No categories: ${targetPath}, `);
+          }
+          if(!frontmatter.taxonomies) {
+            console.log(`No taxonomies: ${targetPath}, `);
+          }
+
           await fs.writeFile(targetPath, output, 'utf8');
-          console.log(`Processed (${markdownType} Markdown (${JSON.stringify(frontmatter.taxonomies)})): ${file} -> ${targetPath}`);
+          console.log(`Processed (${markdownType} Markdown): ${file} -> ${targetPath}`);
         } else {
           // Copy other file types
           await fs.copyFile(file, targetPath);
