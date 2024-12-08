@@ -13,7 +13,6 @@
     "@iarna/toml": "^2.2.5",
     "fs-extra": "^11.2.0",
     "gray-matter": "^4.0.3",
-    "tiny-glob": "^0.2.9",
-    "toml": "^3.0.0"
+    "tiny-glob": "^0.2.9"
   }
 }
